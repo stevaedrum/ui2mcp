@@ -41,6 +41,9 @@
 		<Unit filename="CHANGELOG.md" />
 		<Unit filename="README.md" />
 		<Unit filename="TODO.md" />
+		<Unit filename="includes/version.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
