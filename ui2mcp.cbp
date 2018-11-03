@@ -39,6 +39,7 @@
 			<Add library="../../../../../usr/lib/arm-linux-gnueabihf/libasound.so" />
 		</Linker>
 		<Unit filename="CHANGELOG.md" />
+		<Unit filename="Helps" />
 		<Unit filename="README.md" />
 		<Unit filename="TODO.md" />
 		<Unit filename="includes/version.h">

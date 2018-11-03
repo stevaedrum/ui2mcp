@@ -13,7 +13,7 @@
 	//Standard Version Type
 	static const long MAJOR = 0;
 	static const long MINOR = 9;
-	static const long BUILD = 50;
+	static const long BUILD = 52;
 	static const long REVISION = 1000;
 
 	//Miscellaneous Version Types
