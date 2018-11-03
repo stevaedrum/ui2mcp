@@ -52,3 +52,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Bug when the message is truncate in the buffer [STX].
   Put in memory the rest of the message and concat with the next message.
+
+  -------------------------------------------------------------------------------------------------------------------------------------------------
+## [0.9.53] - 2018-11-03
+
+### Changed
+- Update print message to Log Trace for several function.
+
+### Added
+- Load name of channel in char.
+

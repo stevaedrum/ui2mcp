@@ -244,6 +244,7 @@ int main(int argc, char *argv[]) {
 	int DimMaster;				                    		// Value for Dim Master
 	double PanMidi[UIChannel];		            	// Pan //MidiTable = Pan potentiometer 0=left 0.5=center 1=right
 	double MixMidi[UIChannel];		            	// Mix //MidiTable = Fader potentiometer 0 to 1
+	char NameChannel[UIChannel][256];                    // Name of the channel on UIx for Midi LCD pannel.
     //int i_OrMuteMaskMute[UIChannel];
 
 	// Parameter of MIDI device
@@ -575,8 +576,11 @@ do {
 						send(sock , command, strlen(command) , 0 );
 					}
 				}
-
 				if(strstr(UIMessage, "RTA^"))
+				{
+					// Actually nothing... futur VuMeter message to LCD MIDI Controler
+				}
+				if(strstr(UIMessage, "VU2^"))
 				{
 					// Actually nothing... futur VuMeter message to LCD MIDI Controler
 				}
@@ -585,7 +589,9 @@ do {
 					//SETS^var.currentShow^Studio Stephan
 
 					UICommand = strtok(strstr(UIMessage,"currentShow^"), "\r\n");
-					printf("Recu [%s]\n",UICommand);
+
+                    sprintf(sa_LogMessage, "UI2MCP  <--  UI : Current Show : %s\n", UICommand);
+                    LogTrace(hfErr, debug, sa_LogMessage);
 
 					SplitArrayComa=split(UICommand,"^",1);
 					strcat(UIShow, SplitArrayComa[1]);
@@ -593,7 +599,9 @@ do {
 
 					char CmdSnapShot[256];
 					sprintf(CmdSnapShot,"SNAPSHOTLIST^%s\n", UIShow);
-					printf("Send command : %s\n", CmdSnapShot);
+
+                    sprintf(sa_LogMessage, "UI2MCP  -->  UI : Send command : %s\n", CmdSnapShot);
+                    LogTrace(hfErr, debug, sa_LogMessage);
 					send(sock , CmdSnapShot, strlen(CmdSnapShot) , 0 );
 
 				}
@@ -602,19 +610,23 @@ do {
 					//3:::SETS^var.currentSnapshot^Snailz
 
 					UICommand = strtok(strstr(UIMessage,"currentSnapshot^"), "\r\n");
-					printf("Recu [%s]\n",UICommand);
+					//printf("Recu [%s]\n",UICommand);
 
 					SplitArrayComa=split(UICommand,"^",1);
                     strcat(SnapShotCurrent, SplitArrayComa[1]);
 					free(SplitArrayComa);
-					printf("Recu [%s]\n",SnapShotCurrent);
+
+                    sprintf(sa_LogMessage, "UI2MCP  <--  UI : Current SnapShot [%s]\n", SnapShotCurrent);
+                    LogTrace(hfErr, debug, sa_LogMessage);
 
 				}
 				if(strstr(UIMessage, "SNAPSHOTLIST^"))
 				{
 
 					UICommand = strtok(strstr(UIMessage,"SNAPSHOTLIST^"), "\r\n");
-					printf("Recu [%s]\n",UICommand);
+
+                    sprintf(sa_LogMessage, "UI2MCP  <--  UI : SnapShotList [%s]\n", UICommand);
+                    LogTrace(hfErr, debug, sa_LogMessage);
 
 					SplitArrayComa=split(UICommand,"^",1);
 					//affichage du resultat
@@ -630,13 +642,17 @@ do {
 						}
 					}
 					free(SplitArrayComa);
-					printf("SnapShotIndex [%i]\n",SnapShotIndex);
+
+                    sprintf(sa_LogMessage, "UI2MCP  <--  UI : SnapShotIndex [%i]\n",SnapShotIndex);
+                    LogTrace(hfErr, debug, sa_LogMessage);
 
 				}
-				if(strstr(UIMessage, "MODEL^"))
-				{
+				if(strstr(UIMessage, "MODEL^")){
 					UIModel = strtok(strstr(UIMessage,"MODEL^"), "\r\n");
-					printf("Soundcraft Model [%s]\n",UIModel);
+
+                    sprintf(sa_LogMessage, "UI2MCP  <--  UI : Soundcraft Model [%s]\n",UIModel);
+                    LogTrace(hfErr, debug, sa_LogMessage);
+
 					if(strstr(UIModel,"ui12")){
 						UIChannel = 12;
 					}else if (strstr(UIModel,"ui16")){
@@ -647,8 +663,7 @@ do {
 						printf("Sorry not supported.\n");
 					}
 				}
-				if(strstr(UIMessage, "SETD^"))
-				{
+				if(strstr(UIMessage, "SETD^") || strstr(UIMessage, "SETS^")){
 
 					//------------------------------------------------------------------------------------------------------------------------
 					// Split de la chaine recu via websocket
@@ -681,18 +696,22 @@ do {
 					if( strcmp(UIfunc,"bpm") == 0 ){
 						//------------------------------------------------------------------------------------------------------------------------
 						// Reception SETD - TAP
-						printf( "UIbpm = %f\n", atof(UIval));
+
 						UIBpm = atof(UIval);
+
+                        sprintf(sa_LogMessage, "UI2MCP  <--  UI : UIbpm = %f\n", atof(UIval));
+                        LogTrace(hfErr, debug, sa_LogMessage);
+
 					}
 					else if( strcmp(UIio,"mgmask") == 0 || strcmp(UIfunc,"mgmask") == 0){
 
 						if( strcmp(UIio,"mgmask") == 0 )
 						{
-                            sprintf(sa_LogMessage,"UI2MCP <-- UI : %s\n", UIMessage);
-                            LogTrace(hfErr, debug, sa_LogMessage);
 
 							strcat(UIMuteMask, UIval);
-							printf("Mute Mask : %i\n", atoi(UIMuteMask));
+
+                            sprintf(sa_LogMessage,"UI2MCP <-- UI : %s : Mute Mask : %i\n", UIMessage, atoi(UIMuteMask));
+                            LogTrace(hfErr, debug, sa_LogMessage);
 
 							unsigned bit;
 							for (bit = 0; bit < 6; bit++)
@@ -735,7 +754,10 @@ do {
                             LogTrace(hfErr, debug, sa_LogMessage);
 
 							Canal = atoi(UIchan);
-							printf("Type IO: %s Channel: %i Function: %s Value: %i\n", UIio, atoi(UIchan),UIfunc,atoi(UIval));
+
+                            sprintf(sa_LogMessage,"UI2MCP <-- UI : Mgmask : Type IO: %s Channel: %i Function: %s Value: %i\n", UIio, atoi(UIchan),UIfunc,atoi(UIval));
+                            LogTrace(hfErr, debug, sa_LogMessage);
+
 							if( debug == 1){
 								printf("(GroupMaskMute[0]=%i,Value=%i)\n", GroupMaskMute[0], atoi(UIval) & (1u << 0));
 								printf("(GroupMaskMute[1]=%i,Value=%i)\n", GroupMaskMute[1], atoi(UIval) & (1u << 1));
@@ -889,6 +911,22 @@ do {
 						}
 						//printf( "Canal %i AddrRec %02x NbMidiFader %02x AddrMidiTrack %i ValueRec %i\n", Canal, AddrMidiRec, NbMidiFader, AddrMidiTrack, v);
 					}
+					else if( strcmp(UIio,"i") == 0 && strcmp(UIfunc,"name") == 0 ){
+
+						Canal = atoi(UIchan);
+                        strcpy(NameChannel[Canal], UIval);
+
+                        sprintf(sa_LogMessage, "UI2MCP  <--  UI : Name %i: %s\n", Canal, NameChannel[Canal]);
+                        LogTrace(hfErr, debug, sa_LogMessage);
+
+						/* To developp the uodate of MIDI LCD */
+
+						//if(Canal >= NbMidiFader*AddrMidiTrack && Canal <= (NbMidiFader*AddrMidiTrack)+NbMidiFader-1){
+						//	char MidiArray[3] = {AddrMidiMix+Canal-(NbMidiFader*AddrMidiTrack) , MidiValue, MidiValue};
+                        //    SendMidiOut(midiout, MidiArray);
+						//}
+						//printf( "Canal %i AddrRec %02x NbMidiFader %02x AddrMidiTrack %i ValueRec %i\n", Canal, AddrMidiRec, NbMidiFader, AddrMidiTrack, v);
+					}
 					else if( strcmp(UIio,"i") == 0 && strcmp(UIfunc,"solo") == 0 ){
 
 						int d,v;
@@ -916,7 +954,9 @@ do {
                         int MidiValue = 0;
                         //float unit = 0.0078740157480315;
 						MidiValue = (127 * MixMidi[Canal]);
-						printf("Fader %i: %f %i\n", Canal, MixMidi[Canal], MidiValue);
+
+                        sprintf(sa_LogMessage, "UI2MCP  <--  UI : Fader %i: %f %i\n", Canal, MixMidi[Canal], MidiValue);
+                        LogTrace(hfErr, debug, sa_LogMessage);
 
 						if(Canal >= NbMidiFader*AddrMidiTrack && Canal <= (NbMidiFader*AddrMidiTrack)+NbMidiFader-1){
 							char MidiArray[3] = {AddrMidiMix+Canal-(NbMidiFader*AddrMidiTrack) , MidiValue, MidiValue};
@@ -951,6 +991,13 @@ do {
 			if(MidiCC == MidiValue){
 				//------------------------------------------------------------------------------------------------------------------------
 				// Clear Midibuffer
+
+                /* Test for SYNC UI */
+                char sendui[256];
+                ////sprintf(sendui,"CC2 CH3 i.%i.mix sync:Stevae,%i\n", Canal, Canal);
+                //sprintf(sendui,"SETD^i.%i.mix sync:Stevae,%i\n", Canal, Canal);
+                //send(sock , sendui, strlen(sendui) , 0 );
+
 				int fs;
 				float db;
 				float unit = 0.0078740157480315;
@@ -967,6 +1014,9 @@ do {
 						char sendui[256];
 						sprintf(sendui,"SETD^i.%d.mix^%.10f\n", Canal, db);
 						send(sock , sendui, strlen(sendui) , 0 );
+
+
+
 					}
 				}
 			}

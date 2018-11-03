@@ -12,19 +12,26 @@
 			<Cursor1 position="1569" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="CHANGELOG.md" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="main.c" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="2126" topLine="36" />
+			<Cursor1 position="43904" topLine="834" />
 		</Cursor>
+		<Folding>
+			<Collapse line="695" />
+			<Collapse line="797" />
+			<Collapse line="881" />
+			<Collapse line="901" />
+			<Collapse line="913" />
+		</Folding>
 	</File>
 	<File name="TODO.md" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="523" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="main.c" open="1" top="1" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="CHANGELOG.md" open="1" top="1" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="18947" topLine="504" />
+			<Cursor1 position="2416" topLine="46" />
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>
