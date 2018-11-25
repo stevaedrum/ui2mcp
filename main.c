@@ -476,136 +476,95 @@ int main(int argc, char *argv[]) {
 	//int MidiValueOff = 0x00;
 
     struct config ControlerConfig;
-
     ControlerConfig = get_config(FILENAME);
 
-    /* Struct members */
-    printf("%s",ControlerConfig.ControlerName);
-    printf("%s",ControlerConfig.ControlerMode);
-    printf("%s",ControlerConfig.Lcd);
-    printf("%s",ControlerConfig.NbMidiFader);
-    printf("%s",ControlerConfig.AddrMidiMix);
-    printf("%s",ControlerConfig.AddrMidiEncoderPan);
-    printf("%s",ControlerConfig.AddrMidiPan);
-    printf("%s",ControlerConfig.AddrMidiButtonLed);
-    printf("%s",ControlerConfig.AddrMidiRec);
-    printf("%s",ControlerConfig.AddrMidiMute);
-    printf("%s",ControlerConfig.AddrMidiSolo);
-    printf("%s",ControlerConfig.AddrMidiTouch);
-    printf("%s",ControlerConfig.IdTrackPrev);
-    printf("%s",ControlerConfig.IdTrackNext);
-    printf("%s",ControlerConfig.IdLoop);
-    printf("%s",ControlerConfig.IdMarkerSet);
-    printf("%s",ControlerConfig.IdMarkerLeft);
-    printf("%s",ControlerConfig.IdMarkerRight);
-    printf("%s",ControlerConfig.IdRewind);
-    printf("%s",ControlerConfig.IdForward);
-    printf("%s",ControlerConfig.IdStop);
-    printf("%s",ControlerConfig.IdPlay);
-    printf("%s",ControlerConfig.IdRec);
-    printf("%s",ControlerConfig.AddrMidiBar);
-    printf("%s",ControlerConfig.AddrMidiValueBar);
-    printf("%s",ControlerConfig.SysExHdr);
-    printf("%s",ControlerConfig.i_Tap);
-    printf("%s",ControlerConfig.i_Dim);
-    printf("%s",ControlerConfig.i_SnapShotNavUp);
-    printf("%s",ControlerConfig.i_SnapShotNavDown);
-
-
-
-#ifdef KORG
-	// Parameter of MIDI device "Korg nanoKONTROL 2
-	char *ControlerName = "Korg nanoKONTROL 2";
-	char *ControlerMode = "MCP";
-	int Lcd = 0;
-	int NbMidiFader = 8;
+	// Parameter of MIDI device
+	char *ControlerName = ControlerConfig.ControlerName;
+	char *ControlerMode = ControlerConfig.ControlerMode;
+	int Lcd = atoi(ControlerConfig.Lcd);
+	int NbMidiFader = atoi(ControlerConfig.NbMidiFader);
 	int NbMidiTrack = UIChannel/NbMidiFader;   // Number by modulo of number of Midi channel
 	//mapping midi controler to UI for fader 0
 
 	// Fader = Ex ll hh
-	int AddrMidiMix = 0xE0;
+	int AddrMidiMix = 0;
+    sscanf(ControlerConfig.AddrMidiMix, "%x", &AddrMidiMix);
 
 	// Encoder = B0 10 xx
-	int AddrMidiEncoderPan = 0xB0;
-        int AddrMidiPan = 0x10;
+	int AddrMidiEncoderPan = 0; //0xB0;
+    sscanf(ControlerConfig.AddrMidiEncoderPan, "%x", &AddrMidiEncoderPan);
+        int AddrMidiPan = 0; //0x10;
+        sscanf(ControlerConfig.AddrMidiPan, "%x", &AddrMidiPan);
 
 	// Button/Led 90 ID CC
-	int AddrMidiButtonLed = 0x90;
-        int AddrMidiRec = 0x00;
-        int AddrMidiMute = 0x10;
-        int AddrMidiSolo = 0x08;
+	int AddrMidiButtonLed = 0; //0x90;
+    sscanf(ControlerConfig.AddrMidiButtonLed, "%x", &AddrMidiButtonLed);
+        int AddrMidiRec = 0; //0x00;
+        sscanf(ControlerConfig.AddrMidiRec, "%x", &AddrMidiRec);
+        int AddrMidiMute = 0; //0x10;
+        sscanf(ControlerConfig.AddrMidiMute, "%x", &AddrMidiMute);
+        int AddrMidiSolo = 0; //0x08;
+        sscanf(ControlerConfig.AddrMidiSolo, "%x", &AddrMidiSolo);
 
-        int AddrMidiTouch = 0x68;
+        int AddrMidiTouch = 0;// = 0x68;
+        sscanf(ControlerConfig.AddrMidiTouch, "%x", &AddrMidiTouch);
 
-        int IdTrackPrev= 0x2E;                           /*  Generic ID  */
-        int IdTrackNext = 0x2F;                          /*  Generic ID  */
-        int IdLoop = 0x56;                                   /*  Generic ID  */
-        int IdMarkerSet = 0x59;
-        int IdMarkerLeft = 0x58;
-        int IdMarkerRight = 0x5A;
-        int IdRewind = 0x5B;                               /*  Generic ID  */
-        int IdForward = 0x5C;                             /*  Generic ID  */
-        int IdStop = 0x5D;                                   /*  Generic ID  */
-        int IdPlay = 0x5E;                                    /*  Generic ID  */
-        int IdRec = 0x5F;                                     /*  Generic ID  */
+        //printf("%02X\n",AddrMidiButtonLed);
+
+        int IdTrackPrev = 0; //0x2E;                           /*  Generic ID  */
+        sscanf(ControlerConfig.IdTrackPrev, "%x", &IdTrackPrev);
+        int IdTrackNext = 0; //0x2F;                          /*  Generic ID  */
+        sscanf(ControlerConfig.IdTrackNext, "%x", &IdTrackNext);
+        int IdLoop = 0; //0x56;                                   /*  Generic ID  */
+        sscanf(ControlerConfig.IdLoop, "%x", &IdLoop);
+        int IdMarkerSet = 0; //0x59;
+        sscanf(ControlerConfig.IdMarkerSet, "%x", &IdMarkerSet);
+        int IdMarkerLeft = 0; //0x58;
+        sscanf(ControlerConfig.IdMarkerLeft, "%x", &IdMarkerLeft);
+        int IdMarkerRight = 0; //0x5A;
+        sscanf(ControlerConfig.IdMarkerRight, "%x", &IdMarkerRight);
+        int IdRewind = 0; //0x5B;                               /*  Generic ID  */
+        sscanf(ControlerConfig.IdRewind, "%x", &IdRewind);
+        int IdForward = 0; //0x5C;                             /*  Generic ID  */
+        sscanf(ControlerConfig.IdForward, "%x", &IdForward);
+        int IdStop = 0; //0x5D;                                   /*  Generic ID  */
+        sscanf(ControlerConfig.IdStop, "%x", &IdStop);
+        int IdPlay = 0; //0x5E;                                    /*  Generic ID  */
+        sscanf(ControlerConfig.IdPlay, "%x", &IdPlay);
+        int IdRec = 0; //0x5F;                                     /*  Generic ID  */
+        sscanf(ControlerConfig.IdRec, "%x", &IdRec);
 
 	// Value Bar for FaderPort
-	int AddrMidiBar = 0xB0;
-	int AddrMidiValueBar = 0x30;
+	int AddrMidiBar = 0; //0xB0;
+    sscanf(ControlerConfig.AddrMidiBar, "%x", &AddrMidiBar);
+	int AddrMidiValueBar = 0; //0x30;
+    sscanf(ControlerConfig.AddrMidiValueBar, "%x", &AddrMidiValueBar);
 
 	// SysExHdr for FaderPort
-	char SysExHdr[11] = "F000010602";
+	char SysExHdr[11] = "";
+	strcpy(SysExHdr, ControlerConfig.SysExHdr);
+
+//    printf("%s",ControlerConfig.i_Tap);
+//    printf("%s",ControlerConfig.i_Dim);
+//    printf("%s",ControlerConfig.i_SnapShotNavUp);
+//    printf("%s",ControlerConfig.i_SnapShotNavDown);
+//    printf("\n");
 
     /*  Link between button & led and ID  */
-    int i_Tap = IdLoop;
-    int i_Dim = IdMarkerSet;
-    int i_SnapShotNavUp = IdMarkerLeft;
-    int i_SnapShotNavDown = IdMarkerRight;
-    int i_StopUI2Mcp = IdRewind;
-    int i_ConfirmStopUI2Mcp = IdForward;
+    int i_Tap = 0; //IdLoop;
+    sscanf(ControlerConfig.i_Tap, "%x", &i_Tap);
+    int i_Dim = 0; //IdMarkerSet;
+    sscanf(ControlerConfig.i_Dim, "%x", &i_Dim);
+    int i_SnapShotNavUp = 0; //IdMarkerLeft;
+    sscanf(ControlerConfig.i_SnapShotNavUp, "%x", &i_SnapShotNavUp);
+    int i_SnapShotNavDown = 0; //IdMarkerRight;
+    sscanf(ControlerConfig.i_SnapShotNavDown, "%x", &i_SnapShotNavDown);
+    int i_StopUI2Mcp = 0; //IdRewind;
+    sscanf(ControlerConfig.i_StopUI2Mcp, "%x", &i_StopUI2Mcp);
+    int i_ConfirmStopUI2Mcp = 0; //IdForward;
+    sscanf(ControlerConfig.i_ConfirmStopUI2Mcp, "%x", &i_ConfirmStopUI2Mcp);
 
-#endif
-
-#ifdef PRESONUS
-	// Parameter of MIDI device "Presonus Fader Port 8"
-	char *ControlerName = "Presonus Fader Port 8";
-	char *ControlerMode = "MCP";
-	int Lcd = 1;
-	int NbMidiFader = 8;
-	int NbMidiTrack = UIChannel/NbMidiFader;   // Number by modulo of number of Midi channel
-	//mapping midi controler to UI for fader 0
-
-	// Fader = Ex ll hh
-	int AddrMidiMix = 0xE0;
-
-	// Encoder = B0 10 xx
-	// Encoder = B0 3C xx  --> Transport FaderPort
-	int AddrMidiEncoderPan = 0xB0;
-	int AddrMidiPan = 0x10;
-
-	// Button/Led 90 ID CC
-	// Button/Led 91 ID CC  --> Transport FaderPort Red
-	// Button/Led 92 ID CC  --> Transport FaderPort Green
-	// Button/Led 93 ID CC  --> Transport FaderPort Blue
-	int AddrMidiButtonLed = 0x90;
-	int AddrMidiRec = 0x00;
-	int AddrMidiMute = 0x10;
-	int AddrMidiSolo = 0x08;
-
-	int AddrMidiTouch = 0x68;
-
-	// Value Bar for FaderPort
-	int AddrMidiBar = 0xB0;
-	int AddrMidiValueBar = 0x30;
-
-	// SysExHdr for FaderPort
-    char SysExHdr[11] = "F000010602";
-
-#endif
-
-	/**********************************************************
-	MISE EN PLACE DE LA GESTION DU SIGNAL CONTROL^C (SIGINT)
-	**********************************************************/
+	/*  Control the handle signal  CONTROL^C (SIGINT)  */
 	//Structure pour l'enregistrement d'une action déclenchée lors de la reception d'un signal.
 	struct sigaction action, oldAction;
 
@@ -621,7 +580,6 @@ int main(int argc, char *argv[]) {
 
 	//Mise en place de l'action pour le signal SIGINT, l'ancienne action est sauvegardé dans oldAction
 	sigaction(SIGINT, &action, &oldAction);
-	/*********************************************************/
 
 	if ((argc > 1) && (strncmp("hw:", argv[1], 3) == 0)){
       portname = argv[1];

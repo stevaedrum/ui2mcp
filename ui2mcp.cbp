@@ -39,22 +39,35 @@
 			<Add library="../../../../../usr/lib/arm-linux-gnueabihf/libasound.so" />
 		</Linker>
 		<Unit filename="CHANGELOG.md" />
-		<Unit filename="Helps" />
 		<Unit filename="README.md" />
 		<Unit filename="TODO.md" />
+		<Unit filename="config.conf" />
+		<Unit filename="config.faderport8.conf" />
+		<Unit filename="config.nanokontrol2.conf" />
 		<Unit filename="decode.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="docs/Helps" />
+		<Unit filename="functions" />
+		<Unit filename="functions.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="includes/about.h" />
 		<Unit filename="includes/b64.h" />
 		<Unit filename="includes/controler.h" />
+		<Unit filename="includes/readconfig.h" />
 		<Unit filename="includes/ui.h" />
 		<Unit filename="includes/version.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="readconfig.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Extensions>
 			<code_completion />
 			<debugger />
+			<envvars />
 		</Extensions>
 	</Project>
 </CodeBlocks_project_file>

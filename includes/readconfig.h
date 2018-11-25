@@ -35,6 +35,8 @@ struct config
    char i_Dim[MAXBUF];
    char i_SnapShotNavUp[MAXBUF];
    char i_SnapShotNavDown[MAXBUF];
+   char i_StopUI2Mcp[MAXBUF];
+   char i_ConfirmStopUI2Mcp[MAXBUF];
 };
 
 /**
