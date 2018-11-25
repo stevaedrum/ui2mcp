@@ -16,6 +16,7 @@ struct config
    char AddrMidiRec[MAXBUF];
    char AddrMidiMute[MAXBUF];
    char AddrMidiSolo[MAXBUF];
+   char AddrMidiSelect[MAXBUF];
    char AddrMidiTouch[MAXBUF];
    char IdTrackPrev[MAXBUF];
    char IdTrackNext[MAXBUF];

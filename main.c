@@ -505,6 +505,8 @@ int main(int argc, char *argv[]) {
         sscanf(ControlerConfig.AddrMidiMute, "%x", &AddrMidiMute);
         int AddrMidiSolo = 0; //0x08;
         sscanf(ControlerConfig.AddrMidiSolo, "%x", &AddrMidiSolo);
+        int AddrMidiSelect = 0; //0x18;
+        sscanf(ControlerConfig.AddrMidiSelect, "%x", &AddrMidiSelect);
 
         int AddrMidiTouch = 0;// = 0x68;
         sscanf(ControlerConfig.AddrMidiTouch, "%x", &AddrMidiTouch);
@@ -1430,6 +1432,128 @@ do {
                             strcat(Cmd, c_Canal);
                             strcat(Cmd, "0000");
 							SendSysExTextOut(midiout, SysExHdr, Cmd, NameChannel[Canal]);
+						}
+					}
+					else if( strcmp(UIio,"i") == 0 && strcmp(UIfunc,"color") == 0 ){
+
+						Canal = atoi(UIchan);
+                        //strcpy(ui_i[Canal].Color, UIval);
+                        ui_i[Canal].Color = atoi(UIval);
+
+                        sprintf(sa_LogMessage, "UI2MCP  <--  UI : Color %i: %i\n", Canal, ui_i[Canal].Color);
+                        LogTrace(hfErr, debug, sa_LogMessage);
+
+                        /*  Light On SELECT button with color to MIDI LCD  */
+						if(Canal >= NbMidiFader*AddrMidiTrack && Canal <= (NbMidiFader*AddrMidiTrack)+NbMidiFader-1){
+                            if(ui_i[Canal].Color == 0){
+                                char MidiArrayOn[3] = {AddrMidiButtonLed, AddrMidiSelect+Canal-(NbMidiFader*AddrMidiTrack) , 0x00};
+                                SendMidiOut(midiout, MidiArrayOn);
+                                char MidiArrayR[3] = {AddrMidiButtonLed, AddrMidiSelect+Canal-(NbMidiFader*AddrMidiTrack) , floor((127/255)*0)};
+                                SendMidiOut(midiout, MidiArrayR);
+                                char MidiArrayG[3] = {AddrMidiButtonLed, AddrMidiSelect+Canal-(NbMidiFader*AddrMidiTrack) , floor((127/255)*0)};
+                                SendMidiOut(midiout, MidiArrayG);
+                                char MidiArrayB[3] = {AddrMidiButtonLed, AddrMidiSelect+Canal-(NbMidiFader*AddrMidiTrack) , floor((127/255)*0)};
+                                SendMidiOut(midiout, MidiArrayB);
+                            }else if(ui_i[Canal].Color == 1){
+                                char MidiArrayOn[3] = {AddrMidiButtonLed, AddrMidiSelect+Canal-(NbMidiFader*AddrMidiTrack) , 0x00};
+                                SendMidiOut(midiout, MidiArrayOn);
+                                char MidiArrayR[3] = {AddrMidiButtonLed, AddrMidiSelect+Canal-(NbMidiFader*AddrMidiTrack) , floor((127/255)*10)};
+                                SendMidiOut(midiout, MidiArrayR);
+                                char MidiArrayG[3] = {AddrMidiButtonLed, AddrMidiSelect+Canal-(NbMidiFader*AddrMidiTrack) , floor((127/255)*10)};
+                                SendMidiOut(midiout, MidiArrayG);
+                                char MidiArrayB[3] = {AddrMidiButtonLed, AddrMidiSelect+Canal-(NbMidiFader*AddrMidiTrack) , floor((127/255)*10)};
+                                SendMidiOut(midiout, MidiArrayB);
+                            }else if(ui_i[Canal].Color == 2){
+                                char MidiArrayOn[3] = {AddrMidiButtonLed, AddrMidiSelect+Canal-(NbMidiFader*AddrMidiTrack) , 0x7F};
+                                SendMidiOut(midiout, MidiArrayOn);
+                                char MidiArrayR[3] = {AddrMidiButtonLed, AddrMidiSelect+Canal-(NbMidiFader*AddrMidiTrack) , floor((127/255)*139)};
+                                SendMidiOut(midiout, MidiArrayR);
+                                char MidiArrayG[3] = {AddrMidiButtonLed, AddrMidiSelect+Canal-(NbMidiFader*AddrMidiTrack) , floor((127/255)*0)};
+                                SendMidiOut(midiout, MidiArrayG);
+                                char MidiArrayB[3] = {AddrMidiButtonLed, AddrMidiSelect+Canal-(NbMidiFader*AddrMidiTrack) , floor((127/255)*0)};
+                                SendMidiOut(midiout, MidiArrayB);
+                            }else if(ui_i[Canal].Color == 3){
+                                char MidiArrayOn[3] = {AddrMidiButtonLed, AddrMidiSelect+Canal-(NbMidiFader*AddrMidiTrack) , 0x7F};
+                                SendMidiOut(midiout, MidiArrayOn);
+                                char MidiArrayR[3] = {AddrMidiButtonLed, AddrMidiSelect+Canal-(NbMidiFader*AddrMidiTrack) , floor((127/255)*255)};
+                                SendMidiOut(midiout, MidiArrayR);
+                                char MidiArrayG[3] = {AddrMidiButtonLed, AddrMidiSelect+Canal-(NbMidiFader*AddrMidiTrack) , floor((127/255)*0)};
+                                SendMidiOut(midiout, MidiArrayG);
+                                char MidiArrayB[3] = {AddrMidiButtonLed, AddrMidiSelect+Canal-(NbMidiFader*AddrMidiTrack) , floor((127/255)*0)};
+                                SendMidiOut(midiout, MidiArrayB);
+                            }else if(ui_i[Canal].Color == 4){
+                                char MidiArrayOn[3] = {AddrMidiButtonLed, AddrMidiSelect+Canal-(NbMidiFader*AddrMidiTrack) , 0x7F};
+                                SendMidiOut(midiout, MidiArrayOn);
+                                char MidiArrayR[3] = {AddrMidiButtonLed, AddrMidiSelect+Canal-(NbMidiFader*AddrMidiTrack) , floor((127/255)*255)};
+                                SendMidiOut(midiout, MidiArrayR);
+                                char MidiArrayG[3] = {AddrMidiButtonLed, AddrMidiSelect+Canal-(NbMidiFader*AddrMidiTrack) , floor((127/255)*165)};
+                                SendMidiOut(midiout, MidiArrayG);
+                                char MidiArrayB[3] = {AddrMidiButtonLed, AddrMidiSelect+Canal-(NbMidiFader*AddrMidiTrack) , floor((127/255)*0)};
+                                SendMidiOut(midiout, MidiArrayB);
+                            }else if(ui_i[Canal].Color == 5){
+                                char MidiArrayOn[3] = {AddrMidiButtonLed, AddrMidiSelect+Canal-(NbMidiFader*AddrMidiTrack) , 0x7F};
+                                SendMidiOut(midiout, MidiArrayOn);
+                                char MidiArrayR[3] = {AddrMidiButtonLed, AddrMidiSelect+Canal-(NbMidiFader*AddrMidiTrack) , floor((127/255)*255)};
+                                SendMidiOut(midiout, MidiArrayR);
+                                char MidiArrayG[3] = {AddrMidiButtonLed, AddrMidiSelect+Canal-(NbMidiFader*AddrMidiTrack) , floor((127/255)*255)};
+                                SendMidiOut(midiout, MidiArrayG);
+                                char MidiArrayB[3] = {AddrMidiButtonLed, AddrMidiSelect+Canal-(NbMidiFader*AddrMidiTrack) , floor((127/255)*0)};
+                                SendMidiOut(midiout, MidiArrayB);
+                            }else if(ui_i[Canal].Color == 6){
+                                char MidiArrayOn[3] = {AddrMidiButtonLed, AddrMidiSelect+Canal-(NbMidiFader*AddrMidiTrack) , 0x7F};
+                                SendMidiOut(midiout, MidiArrayOn);
+                                char MidiArrayR[3] = {AddrMidiButtonLed, AddrMidiSelect+Canal-(NbMidiFader*AddrMidiTrack) , floor((127/255)*86)};
+                                SendMidiOut(midiout, MidiArrayR);
+                                char MidiArrayG[3] = {AddrMidiButtonLed, AddrMidiSelect+Canal-(NbMidiFader*AddrMidiTrack) , floor((127/255)*222)};
+                                SendMidiOut(midiout, MidiArrayG);
+                                char MidiArrayB[3] = {AddrMidiButtonLed, AddrMidiSelect+Canal-(NbMidiFader*AddrMidiTrack) , floor((127/255)*67)};
+                                SendMidiOut(midiout, MidiArrayB);
+                            }else if(ui_i[Canal].Color == 7){
+                                char MidiArrayOn[3] = {AddrMidiButtonLed, AddrMidiSelect+Canal-(NbMidiFader*AddrMidiTrack) , 0x7F};
+                                SendMidiOut(midiout, MidiArrayOn);
+                                char MidiArrayR[3] = {AddrMidiButtonLed, AddrMidiSelect+Canal-(NbMidiFader*AddrMidiTrack) , floor((127/255)*0)};
+                                SendMidiOut(midiout, MidiArrayR);
+                                char MidiArrayG[3] = {AddrMidiButtonLed, AddrMidiSelect+Canal-(NbMidiFader*AddrMidiTrack) , floor((127/255)*145)};
+                                SendMidiOut(midiout, MidiArrayG);
+                                char MidiArrayB[3] = {AddrMidiButtonLed, AddrMidiSelect+Canal-(NbMidiFader*AddrMidiTrack) , floor((127/255)*194)};
+                                SendMidiOut(midiout, MidiArrayB);
+                            }else if(ui_i[Canal].Color == 8){
+                                char MidiArrayOn[3] = {AddrMidiButtonLed, AddrMidiSelect+Canal-(NbMidiFader*AddrMidiTrack) , 0x7F};
+                                SendMidiOut(midiout, MidiArrayOn);
+                                char MidiArrayR[3] = {AddrMidiButtonLed, AddrMidiSelect+Canal-(NbMidiFader*AddrMidiTrack) , floor((127/255)*148)};
+                                SendMidiOut(midiout, MidiArrayR);
+                                char MidiArrayG[3] = {AddrMidiButtonLed, AddrMidiSelect+Canal-(NbMidiFader*AddrMidiTrack) , floor((127/255)*0)};
+                                SendMidiOut(midiout, MidiArrayG);
+                                char MidiArrayB[3] = {AddrMidiButtonLed, AddrMidiSelect+Canal-(NbMidiFader*AddrMidiTrack) , floor((127/255)*211)};
+                                SendMidiOut(midiout, MidiArrayB);
+                            }else if(ui_i[Canal].Color == 9){
+                                char MidiArrayOn[3] = {AddrMidiButtonLed, AddrMidiSelect+Canal-(NbMidiFader*AddrMidiTrack) , 0x7F};
+                                SendMidiOut(midiout, MidiArrayOn);
+                                char MidiArrayR[3] = {AddrMidiButtonLed, AddrMidiSelect+Canal-(NbMidiFader*AddrMidiTrack) , floor((127/255)*128)};
+                                SendMidiOut(midiout, MidiArrayR);
+                                char MidiArrayG[3] = {AddrMidiButtonLed, AddrMidiSelect+Canal-(NbMidiFader*AddrMidiTrack) , floor((127/255)*128)};
+                                SendMidiOut(midiout, MidiArrayG);
+                                char MidiArrayB[3] = {AddrMidiButtonLed, AddrMidiSelect+Canal-(NbMidiFader*AddrMidiTrack) , floor((127/255)*128)};
+                                SendMidiOut(midiout, MidiArrayB);
+                            }else if(ui_i[Canal].Color == 10){
+                                char MidiArrayOn[3] = {AddrMidiButtonLed, AddrMidiSelect+Canal-(NbMidiFader*AddrMidiTrack) , 0x7F};
+                                SendMidiOut(midiout, MidiArrayOn);
+                                char MidiArrayR[3] = {AddrMidiButtonLed, AddrMidiSelect+Canal-(NbMidiFader*AddrMidiTrack) , floor((127/255)*255)};
+                                SendMidiOut(midiout, MidiArrayR);
+                                char MidiArrayG[3] = {AddrMidiButtonLed, AddrMidiSelect+Canal-(NbMidiFader*AddrMidiTrack) , floor((127/255)*255)};
+                                SendMidiOut(midiout, MidiArrayG);
+                                char MidiArrayB[3] = {AddrMidiButtonLed, AddrMidiSelect+Canal-(NbMidiFader*AddrMidiTrack) , floor((127/255)*255)};
+                                SendMidiOut(midiout, MidiArrayB);
+                            }else if(ui_i[Canal].Color == 11){
+                                char MidiArrayOn[3] = {AddrMidiButtonLed, AddrMidiSelect+Canal-(NbMidiFader*AddrMidiTrack) , 0x7F};
+                                SendMidiOut(midiout, MidiArrayOn);
+                                char MidiArrayR[3] = {AddrMidiButtonLed, AddrMidiSelect+Canal-(NbMidiFader*AddrMidiTrack) , floor((127/255)*255)};
+                                SendMidiOut(midiout, MidiArrayR);
+                                char MidiArrayG[3] = {AddrMidiButtonLed, AddrMidiSelect+Canal-(NbMidiFader*AddrMidiTrack) , floor((127/255)*20)};
+                                SendMidiOut(midiout, MidiArrayG);
+                                char MidiArrayB[3] = {AddrMidiButtonLed, AddrMidiSelect+Canal-(NbMidiFader*AddrMidiTrack) , floor((127/255)*147)};
+                                SendMidiOut(midiout, MidiArrayB);
+                            }
 						}
 					}
 					else if( strcmp(UIio,"i") == 0 && strcmp(UIfunc,"solo") == 0 ){
