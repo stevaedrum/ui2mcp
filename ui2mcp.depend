@@ -28,3 +28,94 @@
 
 1541254163 /home/pi/UI24r-Midi/ui2mcp/includes/version.h
 
+1541943537 source:/home/pi/UI24r-Midi/ui2mcp.0.9.55/main.c
+	<unistd.h>
+	<time.h>
+	<stdio.h>
+	<signal.h>
+	<stdlib.h>
+	<string.h>
+	<math.h>
+	<ctype.h>
+	<sys/socket.h>
+	<sys/time.h>
+	<alsa/asoundlib.h>
+	<netinet/in.h>
+	<arpa/inet.h>
+	"includes/version.h"
+
+1541362321 /home/pi/UI24r-Midi/ui2mcp.0.9.55/includes/version.h
+
+1543057335 source:/home/pi/UI24r-Midi/ui2mcp.0.9.60/decode.c
+	<stdio.h>
+	<stdlib.h>
+	<ctype.h>
+	"includes/b64.h"
+
+1543056928 /home/pi/UI24r-Midi/ui2mcp.0.9.60/includes/b64.h
+
+1543059828 source:/home/pi/UI24r-Midi/ui2mcp.0.9.60/main.c
+	<unistd.h>
+	<time.h>
+	<stdio.h>
+	<signal.h>
+	<stdlib.h>
+	<string.h>
+	<math.h>
+	<ctype.h>
+	<sys/socket.h>
+	<sys/time.h>
+	<alsa/asoundlib.h>
+	<netinet/in.h>
+	<arpa/inet.h>
+	"includes/version.h"
+	"includes/b64.h"
+	"includes/ui.h"
+	"decode.c"
+
+1541955626 /home/pi/UI24r-Midi/ui2mcp.0.9.60/includes/version.h
+
+1543056938 /home/pi/UI24r-Midi/ui2mcp.0.9.60/includes/ui.h
+
+1543057335 /home/pi/UI24r-Midi/ui2mcp.0.9.60/decode.c
+	<stdio.h>
+	<stdlib.h>
+	<ctype.h>
+	"includes/b64.h"
+
+1543072782 source:/home/pi/UI24r-Midi/ui2mcp.0.9.70/decode.c
+	<stdio.h>
+	<stdlib.h>
+	<ctype.h>
+	"includes/b64.h"
+
+1543056928 /home/pi/UI24r-Midi/ui2mcp.0.9.70/includes/b64.h
+
+1543076673 source:/home/pi/UI24r-Midi/ui2mcp.0.9.70/main.c
+	<unistd.h>
+	<time.h>
+	<stdio.h>
+	<signal.h>
+	<stdlib.h>
+	<string.h>
+	<math.h>
+	<ctype.h>
+	<sys/socket.h>
+	<sys/time.h>
+	<alsa/asoundlib.h>
+	<netinet/in.h>
+	<arpa/inet.h>
+	"includes/version.h"
+	"includes/ui.h"
+	"includes/b64.h"
+
+1541955626 /home/pi/UI24r-Midi/ui2mcp.0.9.70/includes/version.h
+
+1543056938 /home/pi/UI24r-Midi/ui2mcp.0.9.70/includes/ui.h
+
+1543072429 /home/pi/UI24r-Midi/ui2mcp.0.9.70/decode.c
+	<stdio.h>
+	<stdlib.h>
+	<ctype.h>
+	"includes/b64.h"
+

@@ -2,36 +2,34 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Debug" />
-	<File name="includes/version.h" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="main.c" open="1" top="1" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="378" topLine="0" />
+			<Cursor1 position="39870" topLine="723" />
 		</Cursor>
 	</File>
-	<File name="Helps" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="includes/ui.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1569" topLine="0" />
+			<Cursor1 position="0" topLine="43" />
 		</Cursor>
 	</File>
-	<File name="main.c" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="CHANGELOG.md" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="43904" topLine="834" />
-		</Cursor>
-		<Folding>
-			<Collapse line="695" />
-			<Collapse line="797" />
-			<Collapse line="881" />
-			<Collapse line="901" />
-			<Collapse line="913" />
-		</Folding>
-	</File>
-	<File name="TODO.md" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="523" topLine="0" />
+			<Cursor1 position="0" topLine="41" />
 		</Cursor>
 	</File>
-	<File name="CHANGELOG.md" open="1" top="1" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="Helps" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="2416" topLine="46" />
+			<Cursor1 position="0" topLine="184" />
+		</Cursor>
+	</File>
+	<File name="decode.c" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2902" topLine="82" />
+		</Cursor>
+	</File>
+	<File name="includes/b64.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="36" />
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>

@@ -62,3 +62,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Load name of channel in char.
 
+  -------------------------------------------------------------------------------------------------------------------------------------------------
+## [0.9.54] - 2018-11-03
+
+### Changed
+- Send message to Ui to stop correctly the websocket connexion.
+
+### Added
+- Synchronization this UI and selected touch channel.
+- Send Midi message for channel number and name on LCD controler.
+- Fonction to stop the software with MIDI button sequence.
+
+  -------------------------------------------------------------------------------------------------------------------------------------------------
+## [0.9.55] - 2018-11-04
+
+### Changed
+-
+
+### Added
+-

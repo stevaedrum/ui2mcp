@@ -2,7 +2,7 @@
 #define VERSION_H
 
 	//Date Version Types
-	static const char DATE[] = "02";
+	static const char DATE[] = "11";
 	static const char MONTH[] = "11";
 	static const char YEAR[] = "2018";
 
@@ -13,7 +13,7 @@
 	//Standard Version Type
 	static const long MAJOR = 0;
 	static const long MINOR = 9;
-	static const long BUILD = 53;
+	static const long BUILD = 60;
 	static const long REVISION = 1000;
 
 	//Miscellaneous Version Types

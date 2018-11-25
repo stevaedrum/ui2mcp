@@ -23,8 +23,8 @@
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
+					<Add option="-Wall" />
 					<Add option="-lasound" />
-					<Add option="-O2" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
@@ -42,9 +42,13 @@
 		<Unit filename="Helps" />
 		<Unit filename="README.md" />
 		<Unit filename="TODO.md" />
-		<Unit filename="includes/version.h">
-			<Option target="&lt;{~None~}&gt;" />
+		<Unit filename="decode.c">
+			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="includes/b64.h" />
+		<Unit filename="includes/controler.h" />
+		<Unit filename="includes/ui.h" />
+		<Unit filename="includes/version.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>

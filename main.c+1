@@ -24,8 +24,8 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include "includes/version.h"
+//#include "includes/b64.h"
 #include "includes/ui.h"
-#include "includes/b64.h"
 
 //#include "decode.c"
 
@@ -350,16 +350,12 @@ int main(int argc, char *argv[]) {
 
     // Main variable
 	//char *version = "1.0.0";
-	int i,j = 0;
 	int status = 0;
 	int current_time_init;
 	int current_time;
 
 	int i_Watchdog_init;
 	int i_Watchdog;
-
-	int i_VuMeter_init;
-	int i_VuMeter;
 
 	//int i_StxBuffer = 0;
     char  c_StxBuffer[1024] = "";
@@ -398,14 +394,14 @@ int main(int argc, char *argv[]) {
 	int UIMaster = 2;
 	int UILineIn = 2;
 
-	// student structure variable
-	struct UiI ui_i[UIChannel];
-	struct UiI ui_media[UIMedia];
-	struct UiSubFx ui_s[UISubGroup];
-	struct UiSubFx ui_f[UIFx];
-	struct UiAux ui_a[UIAux];
-	struct UiMaster ui_master[UIMaster];
-	struct UiI ui_l[UILineIn];
+//	// student structure variable
+//	struct UiI i[UIChannel];
+//	struct UiI media[UIMedia];
+//	struct UiSubFx s[UISubGroup];
+//	struct UiSubFx f[UIFx];
+//	struct UiAux a[UIAux];
+//	struct UiMaster master[UIMaster];
+//	struct UiI l[UILineIn];
 
 	char UImsg[64] = "";
 	char UIio[64] = "";
@@ -627,29 +623,30 @@ int main(int argc, char *argv[]) {
     //printf("MESSAGE GET send\n");
 
 	// Init value array
-	for (j = 0; j < UIChannel; j++){
-		for (i = 0; i < 8; i++){
-			MidiTable [j][i] = 0;
+	int i_x,i_j = 0;
+	for (i_j = 0; i_j < UIChannel; i_j++){
+		for (i_x = 0; i_x < 8; i_x++){
+			MidiTable [i_j][i_x] = 0;
 		}
-		PanMidi[j] = .5;			// Pan //MidiTable = Pan potentiometer 0=left 0.5=center 1=right
+		PanMidi[i_j] = .5;			// Pan //MidiTable = Pan potentiometer 0=left 0.5=center 1=right
 	}
-	for (j = 0; j < 6; j++){
-		GroupMaskMute[j] = 0;
+	for (i_j = 0; i_j < 6; i_j++){
+		GroupMaskMute[i_j] = 0;
 	}
 
 	// Reset Button light
-	for (j = 0; j < NbMidiFader; j++){
-		char MidiArray[3] = {AddrMidiButtonLed, AddrMidiMute+j, 0x00};
+	for (i_j = 0; i_j < NbMidiFader; i_j++){
+		char MidiArray[3] = {AddrMidiButtonLed, AddrMidiMute+i_j, 0x00};
         SendMidiOut(midiout, MidiArray);
 	}
 
-	for (j = 0; j < NbMidiFader; j++){
-		char MidiArray[3] = {AddrMidiButtonLed, AddrMidiSolo+j, 0x00};
+	for (i_j = 0; i_j < NbMidiFader; i_j++){
+		char MidiArray[3] = {AddrMidiButtonLed, AddrMidiSolo+i_j, 0x00};
         SendMidiOut(midiout, MidiArray);
 	}
 
-	for (j = 0; j < NbMidiFader; j++){
-		char MidiArray[3] = {AddrMidiButtonLed, AddrMidiRec+j, 0x00};
+	for (i_j = 0; i_j < NbMidiFader; i_j++){
+		char MidiArray[3] = {AddrMidiButtonLed, AddrMidiRec+i_j, 0x00};
         SendMidiOut(midiout, MidiArray);
 	}
 
@@ -658,12 +655,12 @@ int main(int argc, char *argv[]) {
     SendMidiOut(midiout, ForwardLedOn);
 
 /*  Configuration mode LCD  */
- for (j = 0; j < NbMidiFader; j++){
+ for (i_j = 0; i_j < NbMidiFader; i_j++){
     char Cmd[32] = "";
     char c_Canal[32] = "";
 
     strcpy(Cmd, "13");
-    sprintf(c_Canal, "%02X", j);
+    sprintf(c_Canal, "%02X", i_j);
     strcat(Cmd, c_Canal);
     strcat(Cmd, "18");
     SendSysExTextOut(midiout, SysExHdr, Cmd, "");
@@ -672,7 +669,6 @@ int main(int argc, char *argv[]) {
  /*  Initialization of timer variable  */
  current_time_init = currentTimeMillis();
  i_Watchdog_init = currentTimeMillis();
- i_VuMeter_init = currentTimeMillis();
 
 do {
 
@@ -880,200 +876,7 @@ do {
 					// Actually nothing... futur VuMeter message to LCD MIDI Controler
 				}
 				if(strstr(UIMessage, "VU2^")){
-
-                    SplitArrayComa=split(UIMessage,"^",1);
-					free(SplitArrayComa);
-
-                    char *enc = SplitArrayComa[1];
-
-                   unsigned char *dec = b64_decode(enc, strlen(enc));
-
-                   int i_k = 0;
-                   int i_size64 = (3*strlen(enc))/4;
-
-                   UIChannel = (int)dec[0];
-                   UIMedia = (int)dec[1];
-                   UISubGroup = (int)dec[2];
-                   UIFx = (int)dec[3];
-                   UIAux = (int)dec[4];
-                   UIMaster = (int)dec[5];
-                   UILineIn = (int)dec[6];
-
-                    int t = 8;
-                    //Inputs
-                    for (i_k = 0; i_k < (UIChannel); ++i_k) {
-                        //for (i = 8; i < s; ++i) {
-                            ui_i[i_k].vuPre = (int)dec[t];
-                            ui_i[i_k].VuPost = (int)dec[t+1];
-                            ui_i[i_k].vuPostFader = (int)dec[t+2];
-                            ui_i[i_k].vuGateIn = (int)dec[t+3];
-                            ui_i[i_k].vuCompOut = (int)dec[t+4];
-                            if((int)dec[t+5] & 0x80){
-                                ui_i[i_k].vuCompMeter = 0x7F-((int)dec[t+5]^0x80);
-                                ui_i[i_k].Gate = 0x01;
-                                //printf("vuCompMeter:%02X Gate ON\n", 0x7F-(vuCompMeter[Canal]^0x80));
-                            }else{
-                                ui_i[i_k].vuCompMeter = 0x7F-((int)dec[t+5]);
-                                ui_i[i_k].Gate = 0x00;
-                                //printf("vuCompMeter:%02X Gate OFF\n", 0x7F-vuCompMeter[Canal]);
-                            }
-                            //printf("%i %02X%02X%02X%02X%02X%02X\n", t, (int)dec[t],(int)dec[t+1],(int)dec[t+2],(int)dec[t+3],(int)dec[t+4],(int)dec[t+5]);
-                            t = t+6;
-                        //}
-                    }
-                    //Media
-                    for (i_k = 0; i_k < (UIMedia); ++i_k) {
-                        //for (i = 8; i < s; ++i) {
-                            ui_media[i_k].vuPre = (int)dec[t];
-                            ui_media[i_k].VuPost = (int)dec[t+1];
-                            ui_media[i_k].vuPostFader = (int)dec[t+2];
-                            ui_media[i_k].vuGateIn = (int)dec[t+3];
-                            ui_media[i_k].vuCompOut = (int)dec[t+4];
-                            if((int)dec[t+5] & 0x80){
-                                ui_media[i_k].vuCompMeter = 0x7F-((int)dec[t+5]^0x80);
-                                ui_media[i_k].Gate = 0x01;
-                                //printf("vuCompMeter:%02X Gate ON\n", 0x7F-(vuCompMeter[Canal]^0x80));
-                            }else{
-                                ui_media[i_k].vuCompMeter = 0x7F-((int)dec[t+5]);
-                                ui_media[i_k].Gate = 0x00;
-                                //printf("vuCompMeter:%02X Gate OFF\n", 0x7F-vuCompMeter[Canal]);
-                            }
-                            //printf("%i %02X%02X%02X%02X%02X%02X\n", t, (int)dec[t],(int)dec[t+1],(int)dec[t+2],(int)dec[t+3],(int)dec[t+4],(int)dec[t+5]);
-                            t = t+6;
-                        //}
-                    }
-                    //Sub
-                    for (i_k = 0; i_k < (UISubGroup); ++i_k) {
-                            ui_s[i_k].vuPostL = (int)dec[t];
-                            ui_s[i_k].vuPostR = (int)dec[t+1];
-                            ui_s[i_k].vuPostFaderL = (int)dec[t+2];
-                            ui_s[i_k].vuPostFaderR = (int)dec[t+3];
-                            ui_s[i_k].vuGateIn = (int)dec[t+4];
-                            ui_s[i_k].vuCompOut = (int)dec[t+5];
-                            if((int)dec[t+6] & 0x80){
-                                ui_s[i_k].vuCompMeter = 0x7F-((int)dec[t+6]^0x80);
-                                ui_s[i_k].Gate = 0x01;
-                                //printf("vuCompMeter:%02X Gate ON\n", 0x7F-(vuCompMeter[Canal]^0x80));
-                            }else{
-                                ui_s[i_k].vuCompMeter = 0x7F-((int)dec[t+6]);
-                                ui_s[i_k].Gate = 0x00;
-                                //printf("vuCompMeter:%02X Gate OFF\n", 0x7F-vuCompMeter[Canal]);
-                            }
-                            //printf("%i %02X%02X%02X%02X%02X%02X%02X\n", t, (int)dec[t],(int)dec[t+1],(int)dec[t+2],(int)dec[t+3],(int)dec[t+4],(int)dec[t+5],(int)dec[t+6]);
-                            t = t+7;
-                    }
-                    //FX
-                    for (i_k = 0; i_k < (UIFx); ++i_k) {
-                            ui_f[i_k].vuPostL = (int)dec[t];
-                            ui_f[i_k].vuPostR = (int)dec[t+1];
-                            ui_f[i_k].vuPostFaderL = (int)dec[t+2];
-                            ui_f[i_k].vuPostFaderR = (int)dec[t+3];
-                            ui_f[i_k].vuGateIn = (int)dec[t+4];
-                            ui_f[i_k].vuCompOut = (int)dec[t+5];
-                            if((int)dec[t+6] & 0x80){
-                                ui_f[i_k].vuCompMeter = 0x7F-((int)dec[t+6]^0x80);
-                                ui_f[i_k].Gate = 0x01;
-                                //printf("vuCompMeter:%02X Gate ON\n", 0x7F-(vuCompMeter[Canal]^0x80));
-                            }else{
-                                ui_f[i_k].vuCompMeter = 0x7F-((int)dec[t+6]);
-                                ui_f[i_k].Gate = 0x00;
-                                //printf("vuCompMeter:%02X Gate OFF\n", 0x7F-vuCompMeter[Canal]);
-                            }
-                            //printf("%i %02X%02X%02X%02X%02X%02X%02X\n", t, (int)dec[t],(int)dec[t+1],(int)dec[t+2],(int)dec[t+3],(int)dec[t+4],(int)dec[t+5],(int)dec[t+6]);
-                            t = t+7;
-                    }
-                    //Aux
-                    for (i_k = 0; i_k < (UIAux); ++i_k) {
-                            ui_a[i_k].VuPost = (int)dec[t];
-                            ui_a[i_k].vuPostFader = (int)dec[t+1];
-                            ui_a[i_k].vuGateIn = (int)dec[t+2];
-                            ui_a[i_k].vuCompOut = (int)dec[t+3];
-                            if((int)dec[t+4] & 0x80){
-                                ui_a[i_k].vuCompMeter = 0x7F-((int)dec[t+4]^0x80);
-                                ui_a[i_k].Gate = 0x01;
-                                //printf("vuCompMeter:%02X Gate ON\n", 0x7F-(vuCompMeter[Canal]^0x80));
-                            }else{
-                                ui_a[i_k].vuCompMeter = 0x7F-((int)dec[t+4]);
-                                ui_a[i_k].Gate = 0x00;
-                                //printf("vuCompMeter:%02X Gate OFF\n", 0x7F-vuCompMeter[Canal]);
-                            }
-                            //printf("%i %02X%02X%02X%02X%02X\n", t, (int)dec[t],(int)dec[t+1],(int)dec[t+2],(int)dec[t+3],(int)dec[t+4]);
-                            t = t+5;
-                    }
-                    //Master
-                    for (i_k = 0; i_k < (UIMaster); ++i_k) {
-                            ui_master[i_k].VuPost = (int)dec[t];
-                            ui_master[i_k].vuPostFader = (int)dec[t+1];
-                            ui_master[i_k].vuGateIn = (int)dec[t+2];
-                            ui_master[i_k].vuCompOut = (int)dec[t+3];
-                            if((int)dec[t+4] & 0x80){
-                                ui_master[i_k].vuCompMeter = 0x7F-((int)dec[t+4]^0x80);
-                                ui_master[i_k].Gate = 0x01;
-                                //printf("vuCompMeter:%02X Gate ON\n", 0x7F-(vuCompMeter[Canal]^0x80));
-                            }else{
-                                ui_master[i_k].vuCompMeter = 0x7F-((int)dec[t+4]);
-                                ui_master[i_k].Gate = 0x00;
-                                //printf("vuCompMeter:%02X Gate OFF\n", 0x7F-vuCompMeter[Canal]);
-                            }
-                            //printf("%i %02X%02X%02X%02X%02X\n", t, (int)dec[t],(int)dec[t+1],(int)dec[t+2],(int)dec[t+3],(int)dec[t+4]);
-                            t = t+5;
-                    }
-                    //Line
-                    for (i_k = 0; i_k < (UILineIn); ++i_k) {
-                            ui_l[i_k].vuPre = (int)dec[t];
-                            ui_l[i_k].VuPost = (int)dec[t+1];
-                            ui_l[i_k].vuPostFader = (int)dec[t+2];
-                            ui_l[i_k].vuGateIn = (int)dec[t+3];
-                            ui_l[i_k].vuCompOut = (int)dec[t+4];
-                            if((int)dec[t+5] & 0x80){
-                                ui_l[i_k].vuCompMeter = 0x7F-((int)dec[t+5]^0x80);
-                                ui_l[i_k].Gate = 0x01;
-                                //printf("vuCompMeter:%02X Gate ON\n", 0x7F-(vuCompMeter[Canal]^0x80));
-                            }else{
-                                ui_l[i_k].vuCompMeter = 0x7F-((int)dec[t+5]);
-                                ui_l[i_k].Gate = 0x00;
-                                //printf("vuCompMeter:%02X Gate OFF\n", 0x7F-vuCompMeter[Canal]);
-                            }
-                            //printf("%i %02X%02X%02X%02X%02X%02X\n", t, (int)dec[t],(int)dec[t+1],(int)dec[t+2],(int)dec[t+3],(int)dec[t+4],(int)dec[t+5]);
-                            t = t+6;
-                    }
-                    //printf("t=%i\n", t);
-                    //printf("i_size64=%i\n", i_size64);
-                    //printf("\n");
-                    free(dec);
-
-//                    Canal = 0;
-//                    for (Canal = 0; Canal < UIChannel; ++Canal) {
-//                        //printf("Canal(%i) vuPre:%02X VuPost:%02X vuPostFader:%02X vuGateIn%02X vuCompOut:%02X vuCompMeter:%02X Gate:%i\n", Canal, vuPre[Canal], VuPost[Canal], vuPostFader[Canal], vuGateIn[Canal], vuCompOut[Canal], vuCompMeter[Canal], Gate[Canal]);
-//
-//                        printf("Canal(%i) ", Canal);
-//                        printf("vuPre:%02X ", ui_i[Canal].vuPre);
-//                        printf("VuPost:%02X ", ui_i[Canal].VuPost);
-//                        printf("vuPostFader:%02X ", ui_i[Canal].vuPostFader);
-//                        printf("vuGateIn%02X ", ui_i[Canal].vuGateIn);
-//                        printf("vuCompOut:%02X ", ui_i[Canal].vuCompOut);
-//                        printf("vuCompMeter:%02X ", ui_i[Canal].vuCompMeter);
-//                        printf("Gate:%i\n", ui_i[Canal].Gate);
-//
-//                    }
-                    /*  Refresh Vu Meter only 800ms  */
-                    i_VuMeter = currentTimeMillis();
-                    int i_Flag = 0;
-                    if (i_VuMeter >= (i_VuMeter_init + 450)){
-                        Canal = 0;
-                        char MidiArray[2];
-                        for (Canal = 0; Canal < UIChannel; ++Canal) {
-                            if(ui_i[Canal].vuPostFader > 0){
-                                printf("(%i) %02X ", Canal, ui_i[Canal].vuPostFader);
-                                char MidiArray[2] = {0xD0+Canal, ui_i[Canal].vuPostFader};
-                                SendMidiOut(midiout, MidiArray);
-                                i_Flag = 1;
-                            }
-                       }
-                        i_VuMeter_init = currentTimeMillis();
-                        if(i_Flag){printf("\n");}
-                    }
-
+					// Actually nothing... futur VuMeter message to LCD MIDI Controler
 				}
 				if(strstr(UIMessage, "currentShow^")){
 					//SETS^var.currentShow^Studio Stephan
@@ -1472,6 +1275,7 @@ do {
 	else{
         LogTrace(hfErr, debug, "UI2MCP <-- MIDI : Midi read\n");
 
+		int j;
 		InMidi = (int)Midibuffer[0];
 		MidiCC = (int)Midibuffer[j+1];
 		MidiValue = (int)Midibuffer[j+2];
@@ -1690,7 +1494,7 @@ do {
 				usleep( 250000 ); /* Sleep 100000 micro seconds = 100 ms, etc. */
 
 				// Update Midi Controler with Array valuefor (j = 0; j < UIChannel; j++){
-				i = Mute;
+//				i = Mute;
 				//printf("Track N°%i to N°%i\n", NbMidiFader*AddrMidiTrack, (NbMidiFader*AddrMidiTrack)+NbMidiFader-1);
 				for (j = 0; j < UIChannel; j++){
 
@@ -1713,15 +1517,15 @@ do {
 					//printf("Midi Controler CanalId %i Value %i ModuloValue %i\n", j,MidiTable [j][i], AddrMidiMute+(j % NbMidiFader));
 				}
 				// Update Midi Controler with Array valuefor (j = 0; j < UIChannel; j++){
-				i = Solo;
+//				i = Solo;
 				//printf("Track N°%i to N°%i\n", NbMidiFader*AddrMidiTrack, (NbMidiFader*AddrMidiTrack)+NbMidiFader-1);
 				for (j = 0; j < UIChannel; j++){
-					if(MidiTable [j][i] == 1 && (j >= NbMidiFader*AddrMidiTrack && j <= (NbMidiFader*AddrMidiTrack)+NbMidiFader-1)){
+					if(MidiTable [j][Solo] == 1 && (j >= NbMidiFader*AddrMidiTrack && j <= (NbMidiFader*AddrMidiTrack)+NbMidiFader-1)){
 
 						char MidiArray[3] = {AddrMidiButtonLed, AddrMidiSolo+(j % NbMidiFader), 0x7F};
                         SendMidiOut(midiout, MidiArray);
 					}
-					else if(MidiTable [j][i] == 0 && (j >= NbMidiFader*AddrMidiTrack && j <= (NbMidiFader*AddrMidiTrack)+NbMidiFader-1)){
+					else if(MidiTable [j][Solo] == 0 && (j >= NbMidiFader*AddrMidiTrack && j <= (NbMidiFader*AddrMidiTrack)+NbMidiFader-1)){
 
 						char MidiArray[3] = {AddrMidiButtonLed, AddrMidiSolo+(j % NbMidiFader), 0x00};
                         SendMidiOut(midiout, MidiArray);
@@ -1729,15 +1533,15 @@ do {
 					//printf("Midi Controler CanalId %i Value %i ModuloValue %i\n", j,MidiTable [j][i], AddrMidiMute+(j % NbMidiFader));
 				}
 				// Update Midi Controler with Array valuefor (j = 0; j < UIChannel; j++){
-				i = Rec;
+//				i = Rec;
 				//printf("Track N°%i to N°%i\n", NbMidiFader*AddrMidiTrack, (NbMidiFader*AddrMidiTrack)+NbMidiFader-1);
 				for (j = 0; j < UIChannel; j++){
-					if(MidiTable [j][i] == 1 && (j >= NbMidiFader*AddrMidiTrack && j <= (NbMidiFader*AddrMidiTrack)+NbMidiFader-1)){
+					if(MidiTable [j][Rec] == 1 && (j >= NbMidiFader*AddrMidiTrack && j <= (NbMidiFader*AddrMidiTrack)+NbMidiFader-1)){
 
 						char MidiArray[3] = {AddrMidiButtonLed, AddrMidiRec+(j % NbMidiFader), 0x7F};
                         SendMidiOut(midiout, MidiArray);
 					}
-					else if(MidiTable [j][i] == 0 && (j >= NbMidiFader*AddrMidiTrack && j <= (NbMidiFader*AddrMidiTrack)+NbMidiFader-1)){
+					else if(MidiTable [j][Rec] == 0 && (j >= NbMidiFader*AddrMidiTrack && j <= (NbMidiFader*AddrMidiTrack)+NbMidiFader-1)){
 
 						char MidiArray[3] = {AddrMidiButtonLed, AddrMidiRec+(j % NbMidiFader), 0x00};
                         SendMidiOut(midiout, MidiArray);
@@ -1801,7 +1605,7 @@ do {
 				usleep( 250000 ); /* Sleep 100000 micro seconds = 100 ms, etc. */
 
 				// Update Midi Controler with Array valuefor (j = 0; j < UIChannel; j++){
-				i = Mute;
+//				i = Mute;
 				//printf("Track N°%i to N°%i\n", NbMidiFader*AddrMidiTrack, (NbMidiFader*AddrMidiTrack)+NbMidiFader-1);
 				for (j = 0; j < UIChannel; j++){
                     int i_OrMute = (MidiTable [j][MaskMute] | MidiTable [j][Mute]) & ( ! (MidiTable [j][ForceUnMute]));
@@ -1822,15 +1626,15 @@ do {
 					//printf("Midi Controler CanalId %i Value %i ModuloValue %i\n", j,MidiTable [j][i], AddrMidiMute+(j % NbMidiFader));
 				}
 				// Update Midi Controler with Array valuefor (j = 0; j < UIChannel; j++){
-				i = Solo;
+//				i = Solo;
 				//printf("Track N°%i to N°%i\n", NbMidiFader*AddrMidiTrack, (NbMidiFader*AddrMidiTrack)+NbMidiFader-1);
 				for (j = 0; j < UIChannel; j++){
-					if(MidiTable [j][i] == 1 && (j >= NbMidiFader*AddrMidiTrack && j <= (NbMidiFader*AddrMidiTrack)+NbMidiFader-1)){
+					if(MidiTable [j][Solo] == 1 && (j >= NbMidiFader*AddrMidiTrack && j <= (NbMidiFader*AddrMidiTrack)+NbMidiFader-1)){
 
 						char MidiArray[3] = {AddrMidiButtonLed, AddrMidiSolo+(j % NbMidiFader), 0x7F};
                         SendMidiOut(midiout, MidiArray);
 					}
-					else if(MidiTable [j][i] == 0 && (j >= NbMidiFader*AddrMidiTrack && j <= (NbMidiFader*AddrMidiTrack)+NbMidiFader-1)){
+					else if(MidiTable [j][Solo] == 0 && (j >= NbMidiFader*AddrMidiTrack && j <= (NbMidiFader*AddrMidiTrack)+NbMidiFader-1)){
 
 						char MidiArray[3] = {AddrMidiButtonLed, AddrMidiSolo+(j % NbMidiFader), 0x00};
                         SendMidiOut(midiout, MidiArray);
@@ -1838,15 +1642,15 @@ do {
 					//printf("Midi Controler CanalId %i Value %i ModuloValue %i\n", j,MidiTable [j][i], AddrMidiMute+(j % NbMidiFader));
 				}
 				// Update Midi Controler with Array valuefor (j = 0; j < UIChannel; j++){
-				i = Rec;
+//				i = Rec;
 				//printf("Track N°%i to N°%i\n", NbMidiFader*AddrMidiTrack, (NbMidiFader*AddrMidiTrack)+NbMidiFader-1);
 				for (j = 0; j < UIChannel; j++){
-					if(MidiTable [j][i] == 1 && (j >= NbMidiFader*AddrMidiTrack && j <= (NbMidiFader*AddrMidiTrack)+NbMidiFader-1)){
+					if(MidiTable [j][Rec] == 1 && (j >= NbMidiFader*AddrMidiTrack && j <= (NbMidiFader*AddrMidiTrack)+NbMidiFader-1)){
 
 						char MidiArray[3] = {AddrMidiButtonLed, AddrMidiRec+(j % NbMidiFader), 0x7F};
                         SendMidiOut(midiout, MidiArray);
 					}
-					else if(MidiTable [j][i] == 0 && (j >= NbMidiFader*AddrMidiTrack && j <= (NbMidiFader*AddrMidiTrack)+NbMidiFader-1)){
+					else if(MidiTable [j][Rec] == 0 && (j >= NbMidiFader*AddrMidiTrack && j <= (NbMidiFader*AddrMidiTrack)+NbMidiFader-1)){
 
 						char MidiArray[3] = {AddrMidiButtonLed, AddrMidiRec+(j % NbMidiFader), 0x00};
                         SendMidiOut(midiout, MidiArray);
@@ -2074,15 +1878,15 @@ do {
 
 	//------------------------------------------------------------------------------------------------------------------------
 	// Clear Midibuffer
-	for (j = 0; j < status; j++){
-		InMidi = Midibuffer[j];
+	for (i_j = 0; i_j < status; i_j++){
+		InMidi = Midibuffer[i_j];
 		//printf("Status %i InMidi %s\n", status, InMidi);
 	}
 
 	if(debug == 2){
-		for (j = 0; j < UIChannel; j++){
-			for (i = 0; i < 5; i++){
-				printf("Midi Controler CanalId %i Value %i \n", j,MidiTable [j][i]);
+		for (i_j = 0; i_j < UIChannel; i_j++){
+			for (i_x = 0; i_x < 5; i_x++){
+				printf("Midi Controler CanalId %i Value %i \n", i_j,MidiTable [i_j][i_x]);
 			}
 		}
 	}
@@ -2093,33 +1897,33 @@ do {
 /* ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
 
  /*  Reset Button light on Midi Controler  */
- for (j = 0; j < NbMidiFader; j++){
-    char MidiArray[3] = {AddrMidiButtonLed, AddrMidiMute+j, 0x00};
+ for (i_j = 0; i_j < NbMidiFader; i_j++){
+    char MidiArray[3] = {AddrMidiButtonLed, AddrMidiMute+i_j, 0x00};
     SendMidiOut(midiout, MidiArray);
  }
 
- for (j = 0; j < NbMidiFader; j++){
- 	char MidiArray[3] = {AddrMidiButtonLed, AddrMidiSolo+j, 0x00};
+ for (i_j = 0; i_j < NbMidiFader; i_j++){
+ 	char MidiArray[3] = {AddrMidiButtonLed, AddrMidiSolo+i_j, 0x00};
     SendMidiOut(midiout, MidiArray);
  }
 
- for (j = 0; j < NbMidiFader; j++){
-	char MidiArray[3] = {AddrMidiButtonLed, AddrMidiRec+j, 0x00};
+ for (i_j = 0; i_j < NbMidiFader; i_j++){
+	char MidiArray[3] = {AddrMidiButtonLed, AddrMidiRec+i_j, 0x00};
     SendMidiOut(midiout, MidiArray);
  }
 
- for (j = 0; j < NbMidiFader; j++){
+ for (i_j = 0; i_j < NbMidiFader; i_j++){
     int MidiValue = 0;
-    char MidiArray[3] = {AddrMidiMix+j, MidiValue, MidiValue};
+    char MidiArray[3] = {AddrMidiMix+i_j, MidiValue, MidiValue};
     SendMidiOut(midiout, MidiArray);
  }
 
- for (j = 0; j < NbMidiFader; j++){
+ for (i_j = 0; i_j < NbMidiFader; i_j++){
     char Cmd[32] = "";
     char c_Canal[32] = "";
 
     strcpy(Cmd, "13");
-    sprintf(c_Canal, "%02X", j);
+    sprintf(c_Canal, "%02X", i_j);
     strcat(Cmd, c_Canal);
     strcat(Cmd, "10");
     SendSysExTextOut(midiout, SysExHdr, Cmd, "");
