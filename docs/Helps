@@ -28,10 +28,9 @@ Types of changes
     Security in case of vulnerabilities.
 
 
-
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     UI Messages
 
-    	/*
 					REC Multitrack fonction
 					SETD^i.0.mtkrec^0			//Mode REC sur une piste
 
@@ -58,19 +57,19 @@ Types of changes
 					Recu 24 [SETD^i.23.color^9]  =  Gris	=> R128V128B128
 					Recu 24 [SETD^i.23.color^10] =  Blanc	=> R255V255B255
 					Recu 24 [SETD^i.23.color^11] =  Cyan	=> R255V20B147
-					
+
 					Recu 24 [SETD^l.0.mute^0]  = Line In L
 					Recu 24 [SETD^l.1.mute^0]  = Line In R
-					
+
 					Recu 24 [SETD^p.0.pan^0.25] = Player Line L
 					Recu 24 [SETD^p.0.pan^0.25] = Player Line R
-					
+
 					Recu 24 [SETD^v.0.mute^1]
 					Recu 24 [SETD^v.5.mute^1]
 					Recu 24 [SETD^v.5.mute^0]
 					Recu 24 [SETD^v.0.mute^0]
-					
-					
+
+
 					Recu 24 [SETD^v.0.mute^1]
 					Recu 24 [SETD^v.5.mute^1]
 					Recu 24 [SETD^v.5.mute^0]
@@ -81,7 +80,7 @@ Types of changes
 					Recu 24 [SETD^a.3.mute^0]
 					Recu 24 [SETD^a.8.mute^1]
 					Recu 24 [SETD^a.8.mute^0]
-					
+
 					Recu 24 [SETD^f.0.mute^1]
 					Recu 24 [SETD^f.0.mute^0]
 					Recu 24 [SETD^f.3.mute^1]
@@ -92,22 +91,22 @@ Types of changes
 					Recu 24 [SETD^s.0.mute^0]
 					Recu 24 [SETD^s.5.mute^1]
 					Recu 24 [SETD^s.5.mute^0]
-					
+
 					Recu 24 [SETD^m.mix^0.7364360948]
 					Recu 24 [SETD^m.mix^0.7619835401]
 					Recu 24 [SETD^mgmask^8388614]
 					Recu 24 [SETD^a.2.forceunmute^0]
 					Recu 24 [SETD^a.2.forceunmute^0]
 					Recu 24 [SETD^mgmask^6]
-					Recu 24 [SETD^mgmask^8388614]					
-					
+					Recu 24 [SETD^mgmask^8388614]
+
 					Recu 24 [SETD^mgmask^4194310]  = Mute all FX
 					Recu 24 [SETD^mgmask^8388614]  = Mute ALL
-					
+
 					Recu 24 [SETD^var.mtk.soundcheck^1]
 					Recu 24 [SETD^var.mtk.soundcheck^0]
-					
-					
+
+
 					Recu 24 [SETD^var.currentState^0]
 					Recu 24 [SETD^var.currentState^0]
 					Recu 24 [SETD^var.currentState^2]
@@ -122,7 +121,7 @@ Types of changes
 					Recu 24 [SETD^var.currentTrackPos^0.005973406849]
 					Recu 24 [SETD^var.currentTrackPos^0.006711515245]
 					Recu 24 [SETD^var.currentTrackPos^0.007285212452]
-					
+
 					# UI24R
 					24 I/O
 					2 Line
@@ -139,7 +138,7 @@ Types of changes
 					4 FX
 					4 SUB
 					4 AUX
-					
+
 					# UI12
 					8 I/O
 					2 Line
@@ -147,8 +146,60 @@ Types of changes
 					4 FX
 					4 SUB
 					2 AUX
-					
-	19039 - MIDI IN [nanoKONTROL2 1 SLIDER/KNOB]: F0 42 50 01 00 02 13 01 00 00 03 00 01 00 F7
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Exemple message reception websocket for Vu Meter
+
+3:::RTA^AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
+VU2^GAIGBAoCAgAAAAAAAPcAAAAAAPcAAAAAAPcAAAAAAPfJ3pXJ3vMAAAAAAHcAAAAAAPcAAAAAAPcmMAAfLPcqNAAiMvdYZUFYZ/eAjV+AivedmDadnPeZlTOZmPdgAABgAHdlAABnAHdfAABdAHduAABoAHdrAABoAHeNjRCNjfcAAAAAAPcAAAAAAPcAAAAAAPcAAAAAAPcAAAAAAPcAAAAAAPcAAAAAAAD3AAAAAAAA9wAAAAAAAPcAAAAAAAD3AAAAAAAA9wAAAAAAAPdESRccSUn3LTAAADAw9wAAAAAAAPdENwkARET3oY6enPegjZ2c94J4nJr3AAAAAPcAAAAA9wAAAAD3x7bHxffHtsfF959/n533n36fnfeSb56c95NwAJz3t7eLt7X3vLyQvLv3
+
+Encoded64 message
+GAIGBAoCAgAAAAAAAPcAAAAAAPcAAAAAAPcAAAAAAPe3gTgAgs4AAAAAAHcAAAAAAPcAAAAAAPcAAAAAAPcAAAAAAPcAAAAAAPcAAAAAAPcAAAAAAPcAAAAAAPcAAAAAAHcAAAAAAHcAAAAAAHcAAAAAAHcAAAAAAHcAAAAAAPcAAAAAAPcAAAAAAPcAAAAAAPcAAAAAAPcAAAAAAPcAAAAAAPcAAAAAAAD3AAAAAAAA9wAAAAAAAPcAAAAAAAD3AAAAAAAA9wAAAAAAAPcAAAAAAAD3AAAAAAAA9wAAAAAAAPcAAAAAAAD3AAAAAPcAAAAA9wAAAAD3AAAAAPcAAAAA9wAAAAD3AAAAAPcAAAAA9wAAAAD3AAAAAPcjADg29yMAADb3AAAAAAD3AAAAAAD3
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+     | Header                  | Channel 0       | Channel 1    | Channel 2      | Channel 3    | Channel 4      | Channel 5      | Channel 6     | Channel 7     | Channel 8      | Channel 9     | Channel 10    | Channel 11  | Channel 12    | Channel 13   | Channel 14    | Channel 15    | Channel 16    | Channel 17    | Channel 18    | Channel 19    | Channel 20   | Channel 21   | Channel 22   | Channel 23   | Media Left     | Media Right  | FX1                   | FX2                    | FX3                   | FX4                     | SUBGROUP 1   | SUBGROUP 2   | SUBGROUP 3   | SUBGROUP 4   | SUBGROUP 5   | SUBGROUP 6   |  AUX 1        |  AUX 2       |  AUX 3      |  AUX 4      |  AUX 5       |  AUX 6       |  AUX 7       |  AUX 8       |  AUX 9       |  AUX 10    | Master L   | Master R    |  Line Left       | Line Right    |
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+0x  180206040a020200 0000000000f7 0000000000f7 0000000000f7 0000000000f7 b781380082ce 000000000077 0000000000f7 0000000000f7 0000000000f7 0000000000f7 0000000000f7 0000000000f7 0000000000f7 0000000000f7 000000000077 000000000077 000000000077 000000000077 000000000077 0000000000f7 0000000000f7 0000000000f7 0000000000f7 0000000000f7 0000000000f7 0000000000f7 000000000000f7 000000000000f7 000000000000f7 000000000000f7 000000000000f7 000000000000f7 000000000000f7 000000000000f7 000000000000f7 000000000000f7 00000000f7 00000000f7 00000000f7 00000000f7 00000000f7 00000000f7 00000000f7 00000000f7 00000000f7 00000000f7 23003836f7 23000036f7 0000000000f7 0000000000f7
+
+Dec 24020604100202
+
+	Header decription:
+
+		NINPUTS,NMEDIA,NSUBGROUPS,NFX,NAUX,NMASTERS,NLINEIN,0
+Example		 24,    02,        06, 04,  10,      02,     02,00
+
+	Strip description:
+
+		Inputs/Line In/media = 28 Channels
+		vuPre   |VuPost  |vuPostFader|vuGateIn|vuCompOut|(vuCompMeter&0x7F)+(gated?0x80:0x00)
+
+		Channel 5 avec gate actif + Compresser
+Example	b7      |81      |38         |00      |82       |ce --> ‭[1]1001110‬‬ --> Gate[ON] & vuCompMeter[31]
+
+		Channel 5 avec gate actif + Compresser Bypass
+Example 9d      |00      |00         |98      |00       |77 --> [‭0]1110111‬ --> Gate[OFF] & vuCompMeter[8]
+
+		Channel 5 avec gate inactif + Compresser Bypass
+Example 8c      |84      |3b         |83      |00       |f7 --> [1‭]1110111‬‬ --> Gate[ON] & vuCompMeter[8]
+
+		Channel 5 avec gate inactif + Compresser
+Example d3      |71      |28         |d3      |78       |bb --> [1‭]‭0111011‬‬‬ --> Gate[ON] & vuCompMeter[44]
+
+		subgroups/fx = 10 Channels
+		vuPostL | vuPostR|vuPostFaderL|vuPostFaderR|vuGateIn |vuCompOut|(vuCompMeter&0x7F)+(gated?0x80:0x00)
+
+		aux/masters = 11 Channels
+		vuPost  |vuPostFader|vuGateIn|vuCompOut|(vuCompMeter&0x7F)+(gated?0x80:0x00)
+
+Example  23      |00         |38      |36       |f7
+	        	23      |00         |00      |36       |f7
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Dump Presonus FaderControl with Cubase & Studio One
+
+19039 - MIDI IN [nanoKONTROL2 1 SLIDER/KNOB]: F0 42 50 01 00 02 13 01 00 00 03 00 01 00 F7
 19039 - MIDI IN [nanoKONTROL2 1 SLIDER/KNOB]: F0 42 50 01 00 02 13 01 00 00 03 00 01 00 F7
 24335 - MIDI IN [nanoKONTROL2 1 SLIDER/KNOB]: F0 7E 00 06 02 42 13 01 00 00 03 00 01 00 F7
 24335 - MIDI IN [nanoKONTROL2 1 SLIDER/KNOB]: F0 42 40 00 01 13 00 5F 42 00 F7
@@ -205,12 +256,5 @@ Types of changes
 366683 - MIDI OUT [Bome MIDI Translator Virtual Out]: 90 01 7F
 366893 - MIDI IN [nanoKONTROL2 1 SLIDER/KNOB]: 90 01 00
 366893 - MIDI OUT [Bome MIDI Translator Virtual Out]: 90 01 00
-
-3:::RTA^AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
-VU2^GAIGBAoCAgAAAAAA APcAAAAA APcAAAAA APcAAAAA APcAAAAA AHcAAAAA AHcAAAAA APcAAAAA APeJmwCJkfcAAAAAAPcAAAAAAPcAAAAAAPcAAAAAAPcAAAAAAPcAAAAAAHcAAAAAAHcAAAAAAHcAAAAAAHcAAAAAAHcAAAAAAPcAAAAAAPcAAAAAAPcAAAAAAPcAAAAAAPcAAAAAAPcAAAAAAPcAAAAAAAD3AAAAAAAA9wAAAAAAAPcAAAAAAAD3AAAAAAAA9wAAAAAAAPcAAAAAAAD3AAAAAAAA9wAAAAAAAPcAAAAAAAD3AAAAAPcAAAAA9wAAAAD3AAAAAPcAAAAA9wAAAAD3AAAAAPcAAAAA9wAAAAD3AAAAAPcAAAAA9wAAAAD3AAAAAAD3AAAAAAD3
-
-3:::RTA^AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
-VU2^GAIGBAoCAgB+fQB7d/cAAAAAAPcAAAAAAPcAAAAAAPcAAAAAAHcAAAAAAHcAAAAAAPcAAAAAAPcAAAAAAPcAAAAAAPcAAAAAAPcAAAAAAPcAAAAAAPcAAAAAAPcAAAAAAHcAAAAAAHcAAAAAAHcAAAAAAHcAAAAAAHcAAAAAAPcAAAAAAPcAAAAAAPcAAAAAAPcAAAAAAPcAAAAAAPcAAAAAAPcAAAAAAAD3AAAAAAAA9wAAAAAAAPcAAAAAAAD3AAAAAAAA9wAAAAAAAPcAAAAAAAD3AAAAAAAA9wAAAAAAAPcAAAAAAAD3XUpcWPddSlxY9wAAAAD3AAAAAPcAAAAA9wAAAAD3AAAAAPcAAAAA9wAAAAD3AAAAAPcAAAAA9wAAAAD3AAAAAAD3AAAAAAD3
-	*/
 
 

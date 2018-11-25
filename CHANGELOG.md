@@ -74,10 +74,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fonction to stop the software with MIDI button sequence.
 
   -------------------------------------------------------------------------------------------------------------------------------------------------
-## [0.9.55] - 2018-11-04
+## [0.9.70] - 2018-11-25
 
 ### Changed
 -
 
 ### Added
--
+- Decode VU message and send LCD vu meter information on midi controler FaderControl 2

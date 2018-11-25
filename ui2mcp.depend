@@ -91,7 +91,7 @@
 
 1543056928 /home/pi/UI24r-Midi/ui2mcp.0.9.70/includes/b64.h
 
-1543076673 source:/home/pi/UI24r-Midi/ui2mcp.0.9.70/main.c
+1543156703 source:/home/pi/UI24r-Midi/ui2mcp.0.9.70/main.c
 	<unistd.h>
 	<time.h>
 	<stdio.h>
@@ -108,14 +108,25 @@
 	"includes/version.h"
 	"includes/ui.h"
 	"includes/b64.h"
+	"includes/readconfig.h"
 
 1541955626 /home/pi/UI24r-Midi/ui2mcp.0.9.70/includes/version.h
 
-1543056938 /home/pi/UI24r-Midi/ui2mcp.0.9.70/includes/ui.h
+1543154160 /home/pi/UI24r-Midi/ui2mcp.0.9.70/includes/ui.h
 
 1543072429 /home/pi/UI24r-Midi/ui2mcp.0.9.70/decode.c
 	<stdio.h>
 	<stdlib.h>
 	<ctype.h>
 	"includes/b64.h"
+
+1543147551 source:/home/pi/UI24r-Midi/ui2mcp.0.9.70/functions.c
+
+1543156728 source:/home/pi/UI24r-Midi/ui2mcp.0.9.70/readconfig.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"includes/readconfig.h"
+
+1543157009 /home/pi/UI24r-Midi/ui2mcp.0.9.70/includes/readconfig.h
 

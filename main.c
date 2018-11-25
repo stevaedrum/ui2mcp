@@ -26,8 +26,7 @@
 #include "includes/version.h"
 #include "includes/ui.h"
 #include "includes/b64.h"
-
-//#include "decode.c"
+#include "includes/readconfig.h"
 
 /*  define  */
 
@@ -37,6 +36,9 @@
 #define FALSE = 0
 
 #define  KORG
+#define FILENAME "config.conf"
+#define MAXBUF 1024
+#define DELIM "="
 
 unsigned short stop = 0;                                                        // Flag of program stop, default value is 0.
 FILE *hfErr;                                                                            // Declaration for log file.
@@ -407,6 +409,15 @@ int main(int argc, char *argv[]) {
 	struct UiMaster ui_master[UIMaster];
 	struct UiI ui_l[UILineIn];
 
+
+    for(int c = 0; c < UIChannel; c++){ui_i[c].Color = 0;}
+    for(int c = 0; c < UILineIn; c++){ui_l[c].Color = 3;}
+    for(int c = 0; c < UIMedia; c++){ui_media[c].Color = 11;}
+    for(int c = 0; c < UISubGroup; c++){ui_s[c].Color  = 8;}
+    for(int c = 0; c < UIFx; c++){ui_f[c].Color = 7;}
+    for(int c = 0; c < UIAux; c++){ui_a[c].Color = 5;}
+    for(int c = 0; c < UIMaster; c++){ui_master[c].Color = 2;}
+
 	char UImsg[64] = "";
 	char UIio[64] = "";
 	char UIfunc[64] = "";
@@ -463,6 +474,44 @@ int main(int argc, char *argv[]) {
 	// Parameter of MIDI device
     //int MidiValueOn = 0x7F;
 	//int MidiValueOff = 0x00;
+
+    struct config ControlerConfig;
+
+    ControlerConfig = get_config(FILENAME);
+
+    /* Struct members */
+    printf("%s",ControlerConfig.ControlerName);
+    printf("%s",ControlerConfig.ControlerMode);
+    printf("%s",ControlerConfig.Lcd);
+    printf("%s",ControlerConfig.NbMidiFader);
+    printf("%s",ControlerConfig.AddrMidiMix);
+    printf("%s",ControlerConfig.AddrMidiEncoderPan);
+    printf("%s",ControlerConfig.AddrMidiPan);
+    printf("%s",ControlerConfig.AddrMidiButtonLed);
+    printf("%s",ControlerConfig.AddrMidiRec);
+    printf("%s",ControlerConfig.AddrMidiMute);
+    printf("%s",ControlerConfig.AddrMidiSolo);
+    printf("%s",ControlerConfig.AddrMidiTouch);
+    printf("%s",ControlerConfig.IdTrackPrev);
+    printf("%s",ControlerConfig.IdTrackNext);
+    printf("%s",ControlerConfig.IdLoop);
+    printf("%s",ControlerConfig.IdMarkerSet);
+    printf("%s",ControlerConfig.IdMarkerLeft);
+    printf("%s",ControlerConfig.IdMarkerRight);
+    printf("%s",ControlerConfig.IdRewind);
+    printf("%s",ControlerConfig.IdForward);
+    printf("%s",ControlerConfig.IdStop);
+    printf("%s",ControlerConfig.IdPlay);
+    printf("%s",ControlerConfig.IdRec);
+    printf("%s",ControlerConfig.AddrMidiBar);
+    printf("%s",ControlerConfig.AddrMidiValueBar);
+    printf("%s",ControlerConfig.SysExHdr);
+    printf("%s",ControlerConfig.i_Tap);
+    printf("%s",ControlerConfig.i_Dim);
+    printf("%s",ControlerConfig.i_SnapShotNavUp);
+    printf("%s",ControlerConfig.i_SnapShotNavDown);
+
+
 
 #ifdef KORG
 	// Parameter of MIDI device "Korg nanoKONTROL 2
@@ -1061,7 +1110,6 @@ do {
                     int i_Flag = 0;
                     if (i_VuMeter >= (i_VuMeter_init + 450)){
                         Canal = 0;
-                        char MidiArray[2];
                         for (Canal = 0; Canal < UIChannel; ++Canal) {
                             if(ui_i[Canal].vuPostFader > 0){
                                 printf("(%i) %02X ", Canal, ui_i[Canal].vuPostFader);
