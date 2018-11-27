@@ -1,9 +1,9 @@
-//
+/*  ###########################################################  */
 // Programmer:    Stephan Allene <stephan.allene]gmail.com>
-// Filename:      alsarawmidiout.c
-// Syntax:        C; ALSA 1.0
-// $Smake:      gcc -o %b %f -lasound
 //
+// Project:    Ui MPC interface Midi Controler
+//
+/*  ###########################################################  */
 
 /*  standard include  */
 
@@ -410,6 +410,7 @@ int main(int argc, char *argv[]) {
 	struct UiI ui_l[UILineIn];
 
 
+    /*  Configuration of default color for UI channel  */
     for(int c = 0; c < UIChannel; c++){ui_i[c].Color = 0;}
     for(int c = 0; c < UILineIn; c++){ui_l[c].Color = 3;}
     for(int c = 0; c < UIMedia; c++){ui_media[c].Color = 11;}
@@ -455,20 +456,20 @@ int main(int argc, char *argv[]) {
 	int Canal;
 	int MidiTable [UIChannel][7];	            	// Array of Mix, Solo, Mute, Rec, MaskMute, MaskMuteValue
 	//int Mix = 1; 					                        	// Fader MIX //MidiTable [Fader][1] = Mix Potentiometer
-	int Solo = 2;			                        			// Solo button //MidiTable [Fader][2] = Solo Button
-	int Mute = 3; 		                        				// Mute button //MidiTable [Fader][3] = Mute Button
-	int ForceUnMute = 4; 		                        		// ForceMute button //MidiTable [Fader][4] = Force Mute Button
-	int Rec = 5;					                            	// Rec button //MidiTable [Fader][5] = Rec Button
-	int MaskMute = 6;			                    		// Mute button //MidiTable [Fader][6] = Mute Button with UI Mask
-	int MaskMuteValue = 7;		                	// Mute button //MidiTable [Fader][7] = Mute Button with UI Mask
+	//int Solo = 2;			                        			// Solo button //MidiTable [Fader][2] = Solo Button
+	//int Mute = 3; 		                        				// Mute button //MidiTable [Fader][3] = Mute Button
+//	int ForceUnMute = 4; 		                        		// ForceMute button //MidiTable [Fader][4] = Force Mute Button
+	//int Rec = 5;					                            	// Rec button //MidiTable [Fader][5] = Rec Button
+	//int MaskMute = 6;			                    		// Mute button //MidiTable [Fader][6] = Mute Button with UI Mask
+	//int MaskMuteValue = 7;		                	// Mute button //MidiTable [Fader][7] = Mute Button with UI Mask
 
 	//int MtkStop;						                        // Value for Mtk STOP
 	int MtkPlay;					                        	// Value for Mtk PLAY
 	int MtkRec;					                            	// Value for Mtk REC
 	int DimMaster;				                    		// Value for Dim Master
-	double PanMidi[UIChannel];		            	// Pan //MidiTable = Pan potentiometer 0=left 0.5=center 1=right
-	double MixMidi[UIChannel];		            	// Mix //MidiTable = Fader potentiometer 0 to 1
-	char NameChannel[UIChannel][256];                    // Name of the channel on UIx for Midi LCD pannel.
+	//double PanMidi[UIChannel];		            	// Pan //MidiTable = Pan potentiometer 0=left 0.5=center 1=right
+	//double MixMidi[UIChannel];		            	// Mix //MidiTable = Fader potentiometer 0 to 1
+	//char NameChannel[UIChannel][256];                    // Name of the channel on UIx for Midi LCD pannel.
     //int i_OrMuteMaskMute[UIChannel];
 
 	// Parameter of MIDI device
@@ -636,11 +637,19 @@ int main(int argc, char *argv[]) {
     //printf("MESSAGE GET send\n");
 
 	// Init value array
-	for (j = 0; j < UIChannel; j++){
+	for (int c = 0; c < UIChannel; c++){
 		for (i = 0; i < 8; i++){
-			MidiTable [j][i] = 0;
+			MidiTable [c][i] = 0;
 		}
-		PanMidi[j] = .5;			// Pan //MidiTable = Pan potentiometer 0=left 0.5=center 1=right
+        ui_i[c].MixMidi = 0;
+        ui_i[c].Solo = 0;
+        ui_i[c].Mute = 0;
+        ui_i[c].ForceUnMute = 0;
+        ui_i[c].Rec = 0;
+        ui_i[c].MaskMute = 0;
+        ui_i[c].MaskMuteValue = 0;
+		//PanMidi[j] = .5;			// Pan //MidiTable = Pan potentiometer 0=left 0.5=center 1=right
+		ui_i[c].PanMidi = .5;			// Pan //MidiTable = Pan potentiometer 0=left 0.5=center 1=right
 	}
 	for (j = 0; j < 6; j++){
 		GroupMaskMute[j] = 0;
@@ -1201,6 +1210,7 @@ do {
 						if( strcmp(UIio,"mgmask") == 0 )
 						{
 
+							*UIMuteMask = '\0';
 							strcat(UIMuteMask, UIval);
 
                             sprintf(sa_LogMessage,"UI2MCP <-- UI : %s : Mute Mask : %i\n", UIMessage, atoi(UIMuteMask));
@@ -1215,28 +1225,30 @@ do {
 							}
 
 							for (Canal = 0; Canal < UIChannel; Canal++){
-								if( (GroupMaskMute[0] == (MidiTable [Canal][MaskMuteValue] & (1u << 0)) && (MidiTable [Canal][MaskMuteValue] & (1u << 0)) != 0) ||
-									(GroupMaskMute[1] == (MidiTable [Canal][MaskMuteValue] & (1u << 1)) && (MidiTable [Canal][MaskMuteValue] & (1u << 1)) != 0) ||
-									(GroupMaskMute[2] == (MidiTable [Canal][MaskMuteValue] & (1u << 2)) && (MidiTable [Canal][MaskMuteValue] & (1u << 2)) != 0) ||
-									(GroupMaskMute[3] == (MidiTable [Canal][MaskMuteValue] & (1u << 3)) && (MidiTable [Canal][MaskMuteValue] & (1u << 3)) != 0) ||
-									(GroupMaskMute[4] == (MidiTable [Canal][MaskMuteValue] & (1u << 4)) && (MidiTable [Canal][MaskMuteValue] & (1u << 4)) != 0) ||
-									(GroupMaskMute[5] == (MidiTable [Canal][MaskMuteValue] & (1u << 5)) && (MidiTable [Canal][MaskMuteValue] & (1u << 5)) != 0)){
+								if( (GroupMaskMute[0] == (ui_i[Canal].MaskMuteValue & (1u << 0)) && (ui_i[Canal].MaskMuteValue & (1u << 0)) != 0) ||
+									(GroupMaskMute[1] == (ui_i[Canal].MaskMuteValue & (1u << 1)) && (ui_i[Canal].MaskMuteValue & (1u << 1)) != 0) ||
+									(GroupMaskMute[2] == (ui_i[Canal].MaskMuteValue & (1u << 2)) && (ui_i[Canal].MaskMuteValue & (1u << 2)) != 0) ||
+									(GroupMaskMute[3] == (ui_i[Canal].MaskMuteValue & (1u << 3)) && (ui_i[Canal].MaskMuteValue & (1u << 3)) != 0) ||
+									(GroupMaskMute[4] == (ui_i[Canal].MaskMuteValue & (1u << 4)) && (ui_i[Canal].MaskMuteValue & (1u << 4)) != 0) ||
+									(GroupMaskMute[5] == (ui_i[Canal].MaskMuteValue & (1u << 5)) && (ui_i[Canal].MaskMuteValue & (1u << 5)) != 0)){
 
-									MidiTable [Canal][MaskMute] = 1;
+									ui_i[Canal].MaskMute = 1;
 								}
 								else{
-									MidiTable [Canal][MaskMute] = 0;
+									ui_i[Canal].MaskMute = 0;
 								}
 
                                 int d = 0x7F;
-                                int i_OrMute = (MidiTable [Canal][MaskMute] | MidiTable [Canal][Mute]) & ( ! (MidiTable [Canal][ForceUnMute]));
+                                //int i_OrMute = (MidiTable [Canal][MaskMute] | MidiTable [Canal][Mute]) & ( ! (MidiTable [Canal][ForceUnMute]));
+                                int i_OrMute = (ui_i[Canal].MaskMute | ui_i[Canal].Mute) & ( ! (ui_i[Canal].ForceUnMute));
                                 if(Canal >= NbMidiFader*AddrMidiTrack && Canal <= (NbMidiFader*AddrMidiTrack)+NbMidiFader-1){
                                     sprintf(sa_LogMessage,"UI2MCP <-- UI : mgmask : Update Light : Canal(%i) : Mute | MaskMute | ! ForceUnMute = %i * 0x7F\n", Canal, i_OrMute);
                                     LogTrace(hfErr, debug, sa_LogMessage);
                                     char MidiArray[3] = {AddrMidiButtonLed, AddrMidiMute+Canal-(NbMidiFader*AddrMidiTrack) , i_OrMute*d};
                                     SendMidiOut(midiout, MidiArray);
                                 }
-                                sprintf(sa_LogMessage,"UI2MCP <-- UI : mgmask : Canal(%i) [Mute=%i][ForceUnMute=%i][MaskMute=%i][MaskMuteValue=%i]\n", Canal, MidiTable [Canal][Mute], MidiTable [Canal][ForceUnMute], MidiTable [Canal][MaskMute], MidiTable [Canal][MaskMuteValue]);
+                                //sprintf(sa_LogMessage,"UI2MCP <-- UI : mgmask : Canal(%i) [Mute=%i][ForceUnMute=%i][MaskMute=%i][MaskMuteValue=%i]\n", Canal, MidiTable [Canal][Mute], MidiTable [Canal][ForceUnMute], MidiTable [Canal][MaskMute], MidiTable [Canal][MaskMuteValue]);
+                                sprintf(sa_LogMessage,"UI2MCP <-- UI : mgmask : Canal(%i) [Mute=%i][ForceUnMute=%i][MaskMute=%i][MaskMuteValue=%i]\n", Canal, ui_i[Canal].Mute, ui_i[Canal].ForceUnMute, ui_i[Canal].MaskMute, ui_i[Canal].MaskMuteValue);
                                 LogTrace(hfErr, debug, sa_LogMessage);
 								//printf( "Canal %i AddrMute %02x NbMidiFader %02x AddrMidiTrack %i ValueMute %i\n", Canal, AddrMidiMute, NbMidiFader, AddrMidiTrack, v);
 							}
@@ -1267,23 +1279,25 @@ do {
 								(GroupMaskMute[4] == (atoi(UIval) & (1u << 4)) && (atoi(UIval) & (1u << 4)) != 0) ||
 								(GroupMaskMute[5] == (atoi(UIval) & (1u << 5)) && (atoi(UIval) & (1u << 5)) != 0)){
 
-								MidiTable [Canal][MaskMute]=1;
-								MidiTable [Canal][MaskMuteValue]=atoi(UIval);
+								ui_i[Canal].MaskMute = 1;
+								ui_i[Canal].MaskMuteValue = atoi(UIval);
 							}
 							else{
-								MidiTable [Canal][MaskMute]=0;
-								MidiTable [Canal][MaskMuteValue]=atoi(UIval);
+								ui_i[Canal].MaskMute = 0;
+								ui_i[Canal].MaskMuteValue = atoi(UIval);
 							}
 
 							int d = 0x7F;
-                            int i_OrMute = (MidiTable [Canal][MaskMute] | MidiTable [Canal][Mute]) & ( ! (MidiTable [Canal][ForceUnMute]));
+                            //int i_OrMute = (MidiTable [Canal][MaskMute] | MidiTable [Canal][Mute]) & ( ! (MidiTable [Canal][ForceUnMute]));
+                            int i_OrMute = (ui_i[Canal].MaskMute | ui_i[Canal].Mute) & ( ! (ui_i[Canal].ForceUnMute));
                             if(Canal >= NbMidiFader*AddrMidiTrack && Canal <= (NbMidiFader*AddrMidiTrack)+NbMidiFader-1){
                                 sprintf(sa_LogMessage,"UI2MCP <-- UI : io.mgmask : Update Light : Canal(%i) : Mute | MaskMute | ! ForceUnMute =%i * 0x7F\n", Canal, i_OrMute);
                                 LogTrace(hfErr, debug, sa_LogMessage);
                                 char MidiArray[3] = {AddrMidiButtonLed, AddrMidiMute+Canal-(NbMidiFader*AddrMidiTrack) , i_OrMute*d};
                                 SendMidiOut(midiout, MidiArray);
                             }
-                            sprintf(sa_LogMessage,"UI2MCP <-- UI : io.mgmask : Canal(%i) [Mute=%i][ForceUnMute=%i][MaskMute=%i][MaskMuteValue=%i]\n", Canal, MidiTable [Canal][Mute], MidiTable [Canal][ForceUnMute], MidiTable [Canal][MaskMute], MidiTable [Canal][MaskMuteValue]);
+                            //sprintf(sa_LogMessage,"UI2MCP <-- UI : io.mgmask : Canal(%i) [Mute=%i][ForceUnMute=%i][MaskMute=%i][MaskMuteValue=%i]\n", Canal, MidiTable [Canal][Mute], MidiTable [Canal][ForceUnMute], MidiTable [Canal][MaskMute], MidiTable [Canal][MaskMuteValue]);
+                            sprintf(sa_LogMessage,"UI2MCP <-- UI : io.mgmask : Canal(%i) [Mute=%i][ForceUnMute=%i][MaskMute=%i][MaskMuteValue=%i]\n", Canal, ui_i[Canal].Mute, ui_i[Canal].ForceUnMute, ui_i[Canal].MaskMute, ui_i[Canal].MaskMuteValue);
                             LogTrace(hfErr, debug, sa_LogMessage);
 							//printf( "Canal %i AddrMute %02x NbMidiFader %02x AddrMidiTrack %i ValueMute %i\n", Canal, AddrMidiMute, NbMidiFader, AddrMidiTrack, v);
 						}
@@ -1295,22 +1309,25 @@ do {
 						Canal = atoi(UIchan);
 						v = atoi(UIval);
 
-                        int i_OrMuteForceunmute = (MidiTable [Canal][Mute] | MidiTable [Canal][MaskMute] | ( ! (MidiTable [Canal][ForceUnMute])));
+                        //int i_OrMuteForceunmute = (MidiTable [Canal][Mute] | MidiTable [Canal][MaskMute] | ( ! (MidiTable [Canal][ForceUnMute])));
+                        int i_OrMuteForceunmute = (ui_i[Canal].Mute | ui_i[Canal].MaskMute | ( ! (ui_i[Canal].ForceUnMute)));
                                 // Bug !!!                (MidiTable [Canal][MaskMute] | MidiTable [Canal][Mute]) & ( ! (MidiTable [Canal][ForceUnMute]));
 
                         sprintf(sa_LogMessage,"UI2MCP <-- UI : %s\n", UIMessage);
                         LogTrace(hfErr, debug, sa_LogMessage);
 
 						if (strcmp(UIfunc,"forceunmute") == 0){
-                            if (MidiTable [Canal][MaskMute] == 1){
+                            if (ui_i[Canal].MaskMute == 1){
                                 if (v == 1){
-                                    MidiTable [Canal][ForceUnMute] = 1;
+                                    //MidiTable [Canal][ForceUnMute] = 1;
+                                    ui_i[Canal].ForceUnMute = 1;
                                     d = 0x00;
                                     sprintf(sa_LogMessage,"UI2MCP <-- UI : io.forceunmute : forceunmute to 1 on Canal(%i)\n", Canal);
                                     LogTrace(hfErr, debug, sa_LogMessage);
                                 }
                                 else if (v == 0){
-                                    MidiTable [Canal][ForceUnMute] = 0;
+                                    //MidiTable [Canal][ForceUnMute] = 0;
+                                    ui_i[Canal].ForceUnMute = 0;
                                     d = 0x7F;
                                     sprintf(sa_LogMessage,"UI2MCP <-- UI : io.forceunmute :  forceunmute to 0 on Canal(%i)\n", Canal);
                                     LogTrace(hfErr, debug, sa_LogMessage);
@@ -1322,29 +1339,31 @@ do {
                                     char MidiArray[3] = {AddrMidiButtonLed, AddrMidiMute+Canal-(NbMidiFader*AddrMidiTrack) , i_OrMuteForceunmute*d};
                                     SendMidiOut(midiout, MidiArray);
                                 }
-                            }else if (MidiTable [Canal][MaskMute] == 0){
+                            }else if (ui_i[Canal].MaskMute == 0){
                                 if (v == 1){
-                                    MidiTable [Canal][ForceUnMute] = 1;
+                                    //MidiTable [Canal][ForceUnMute] = 1;
+                                    ui_i[Canal].ForceUnMute = 1;
                                     sprintf(sa_LogMessage,"UI2MCP <-- UI : io.forceunmute : update only forceunmute to 1 on Canal(%i)\n", Canal);
                                     LogTrace(hfErr, debug, sa_LogMessage);
                                 }
                                 else if (v == 0){
-                                    MidiTable [Canal][ForceUnMute] = 0;
+                                    //MidiTable [Canal][ForceUnMute] = 0;
+                                    ui_i[Canal].ForceUnMute = 0;
                                     sprintf(sa_LogMessage,"UI2MCP <-- UI : io.forceunmute : update only forceunmute to 0 on Canal(%i)\n", Canal);
                                     LogTrace(hfErr, debug, sa_LogMessage);
                                 }
                             }
 						}
 						else if(strcmp(UIfunc,"mute") == 0){
-                            if (MidiTable [Canal][MaskMute] == 0){
+                            if (ui_i[Canal].MaskMute == 0){
                                 if (v == 0){
-                                    MidiTable [Canal][Mute] = 0;
+                                    ui_i[Canal].Mute = 0;
                                     d = 0x00;
                                     sprintf(sa_LogMessage,"UI2MCP <-- UI : io.mute : mute to 0 on Canal(%i)\n", Canal);
                                     LogTrace(hfErr, debug, sa_LogMessage);
                                 }
                                 else if (v == 1){
-                                    MidiTable [Canal][Mute] = 1;
+                                    ui_i[Canal].Mute = 1;
                                     d = 0x7F;
                                     sprintf(sa_LogMessage,"UI2MCP <-- UI : io.mute : mute to 1 on Canal(%i)\n", Canal);
                                     LogTrace(hfErr, debug, sa_LogMessage);
@@ -1356,20 +1375,21 @@ do {
                                     char MidiArray[3] = {AddrMidiButtonLed, AddrMidiMute+Canal-(NbMidiFader*AddrMidiTrack) , i_OrMuteForceunmute*d};
                                     SendMidiOut(midiout, MidiArray);
                                 }
-                            }else if (MidiTable [Canal][MaskMute] == 1){
+                            }else if (ui_i[Canal].MaskMute == 1){
                                 if (v == 0){
-                                    MidiTable [Canal][Mute] = 0;
+                                    ui_i[Canal].Mute = 0;
                                     sprintf(sa_LogMessage,"UI2MCP <-- UI : io.mute : update only mute to 0 on Canal(%i)\n", Canal);
                                     LogTrace(hfErr, debug, sa_LogMessage);
                                 }
                                 else if (v == 1){
-                                    MidiTable [Canal][Mute] = 1;
+                                    ui_i[Canal].Mute = 1;
                                     sprintf(sa_LogMessage,"UI2MCP <-- UI : io.mute : update only mute to 1 on Canal(%i)\n", Canal);
                                     LogTrace(hfErr, debug, sa_LogMessage);
                                 }
                             }
 						}
-                        sprintf(sa_LogMessage,"UI2MCP <-- UI : io.mute/forceunmute : Canal(%i) [Mute=%i][ForceUnMute=%i][MaskMute=%i][MaskMuteValue=%i]\n", Canal, MidiTable [Canal][Mute], MidiTable [Canal][ForceUnMute], MidiTable [Canal][MaskMute], MidiTable [Canal][MaskMuteValue]);
+                        //sprintf(sa_LogMessage,"UI2MCP <-- UI : io.mute/forceunmute : Canal(%i) [Mute=%i][ForceUnMute=%i][MaskMute=%i][MaskMuteValue=%i]\n", Canal, MidiTable [Canal][Mute], MidiTable [Canal][ForceUnMute], MidiTable [Canal][MaskMute], MidiTable [Canal][MaskMuteValue]);
+                        sprintf(sa_LogMessage,"UI2MCP <-- UI : io.mute/forceunmute : Canal(%i) [Mute=%i][ForceUnMute=%i][MaskMute=%i][MaskMuteValue=%i]\n", Canal, ui_i[Canal].Mute, ui_i[Canal].ForceUnMute, ui_i[Canal].MaskMute, ui_i[Canal].MaskMuteValue);
                         LogTrace(hfErr, debug, sa_LogMessage);
 						//printf( "Canal %i AddrMute %02x NbMidiFader %02x AddrMidiTrack %i ValueMute %i\n", Canal, AddrMidiMute, NbMidiFader, AddrMidiTrack, v);
 					}
@@ -1380,12 +1400,12 @@ do {
 						v = atoi(UIval);
 						if (v == 0){
 							ui_i[Canal].Rec = 0;
-							MidiTable [Canal][Rec] = 0;
+							//MidiTable [Canal][Rec] = 0;
 							d = 0x00;
 						}
 						else if (v == 1){
 							ui_i[Canal].Rec = 1;
-							MidiTable [Canal][Rec] = 1;
+							//MidiTable [Canal][Rec] = 1;
 							d = 0x7F;
 						}
 
@@ -1411,7 +1431,7 @@ do {
 					else if( strcmp(UIio,"i") == 0 && strcmp(UIfunc,"name") == 0 ){
 
 						Canal = atoi(UIchan);
-                        strcpy(NameChannel[Canal], UIval);
+                        //strcpy(NameChannel[Canal], UIval);
                         strcpy(ui_i[Canal].Name, UIval);
 
                         //sprintf(sa_LogMessage, "UI2MCP  <--  UI : Name %i: %s\n", Canal, NameChannel[Canal]);
@@ -1569,12 +1589,12 @@ do {
 						v = atoi(UIval);
 						if (v == 0){
 							ui_i[Canal].Solo = 0;
-							MidiTable [Canal][Solo] = 0;
+							//MidiTable [Canal][Solo] = 0;
 							d = 0x00;
 						}
 						else if (v == 1){
 							ui_i[Canal].Solo = 1;
-							MidiTable [Canal][Solo] = 1;
+							//MidiTable [Canal][Solo] = 1;
 							d = 0x7F;
 						}
 						if(Canal >= NbMidiFader*AddrMidiTrack && Canal <= (NbMidiFader*AddrMidiTrack)+NbMidiFader-1){
@@ -1595,7 +1615,8 @@ do {
 						//MidiValue = (127 * MixMidi[Canal]);
 						MidiValue = (127 * ui_i[Canal].MixMidi);
 
-                        sprintf(sa_LogMessage, "UI2MCP  <--  UI : Fader %i: %f %i\n", Canal, MixMidi[Canal], MidiValue);
+                        //sprintf(sa_LogMessage, "UI2MCP  <--  UI : Fader %i: %f %i\n", Canal, MixMidi[Canal], MidiValue);
+                        sprintf(sa_LogMessage, "UI2MCP  <--  UI : Fader %i: %f %i\n", Canal, ui_i[Canal].MixMidi, MidiValue);
                         LogTrace(hfErr, debug, sa_LogMessage);
 
 						if(Canal >= NbMidiFader*AddrMidiTrack && Canal <= (NbMidiFader*AddrMidiTrack)+NbMidiFader-1){
@@ -1659,16 +1680,22 @@ do {
 				sprintf(sendui,"BMSG^SYNC^%s^%i\n", c_SyncId, Canal);
 				send(sock , sendui, strlen(sendui) , 0 );
 
-				if(MidiValue == 0x41 && PanMidi[Canal] > 0){
-					PanMidi[Canal] =  fabs (PanMidi[Canal]-.03);
+				//if(MidiValue == 0x41 && PanMidi[Canal] > 0){
+				if(MidiValue == 0x41 && ui_i[Canal].PanMidi > 0){
+					//PanMidi[Canal] =  fabs (PanMidi[Canal]-.03);
+					ui_i[Canal].PanMidi =  fabs (ui_i[Canal].PanMidi-.03);
 				}
-				else if(MidiValue == 0x01 && PanMidi[Canal] < 1){
-					PanMidi[Canal] = PanMidi[Canal]+.03;
+				//else if(MidiValue == 0x01 && PanMidi[Canal] < 1){
+				else if(MidiValue == 0x01 && ui_i[Canal].PanMidi < 1){
+					//PanMidi[Canal] = PanMidi[Canal]+.03;
+					ui_i[Canal].PanMidi = ui_i[Canal].PanMidi+.03;
 				}
-				printf("Pan %i: %f\n", Canal, PanMidi[Canal]);
+				//printf("Pan %i: %f\n", Canal, PanMidi[Canal]);
+				printf("Pan %i: %f\n", Canal, ui_i[Canal].PanMidi);
 
 				//char sendui[256];
-				sprintf(sendui,"SETD^i.%d.pan^%.10f\n", Canal, PanMidi[Canal]);
+				//sprintf(sendui,"SETD^i.%d.pan^%.10f\n", Canal, PanMidi[Canal]);
+				sprintf(sendui,"SETD^i.%d.pan^%.10f\n", Canal, ui_i[Canal].PanMidi);
 				send(sock , sendui, strlen(sendui) , 0 );
 			}
 		}
@@ -1696,7 +1723,7 @@ do {
 				}
 				//else if(MidiValue == 0x7F && MidiTable [Canal][Rec] == 1){
 				else if(MidiValue == 0x7F && ui_i[Canal].Rec == 1){
-					MidiTable [Canal][Rec] = 0;
+					//MidiTable [Canal][Rec] = 0;
 					ui_i[Canal].Rec = 0;
 					char sendui[256];
 					sprintf(sendui,"SETD^i.%d.mtkrec^0\n", Canal);
@@ -1779,10 +1806,10 @@ do {
                     send(sock , sendui, strlen(sendui) , 0 );
 				}
 
-				if(MidiValue == 0x7F && MidiTable [Canal][Mute] ==0){
-					MidiTable [Canal][Mute] = 1;
+				if(MidiValue == 0x7F && ui_i[Canal].Mute ==0){
+					ui_i[Canal].Mute = 1;
 					char sendui[256];
-					if(MidiTable [Canal][MaskMute]==1){
+					if(ui_i[Canal].MaskMute == 1){
 						sprintf(sendui,"SETD^i.%d.forceunmute^0\n", Canal);
 						printf(sendui,"SETD^i.%d.forceunmute^0\n", Canal);
 					}
@@ -1795,10 +1822,10 @@ do {
 					char MidiArray[3] = {AddrMidiButtonLed, MidiCC, 0x7F};
                     SendMidiOut(midiout, MidiArray);
 				}
-				else if(MidiValue == 0x7F && MidiTable [Canal][Mute] ==1){
-					MidiTable [Canal][Mute] = 0;
+				else if(MidiValue == 0x7F && ui_i[Canal].Mute ==1){
+					ui_i[Canal].Mute = 0;
 					char sendui[256];
-					if(MidiTable [Canal][MaskMute]==1){
+					if(ui_i[Canal].MaskMute ==1){
 						sprintf(sendui,"SETD^i.%d.forceunmute^1\n", Canal);
 						printf(sendui,"SETD^i.%d.forceunmute^1\n", Canal);
 					}
@@ -1843,11 +1870,12 @@ do {
 				usleep( 250000 ); /* Sleep 100000 micro seconds = 100 ms, etc. */
 
 				// Update Midi Controler with Array valuefor (j = 0; j < UIChannel; j++){
-				i = Mute;
+				//i = Mute;
 				//printf("Track N°%i to N°%i\n", NbMidiFader*AddrMidiTrack, (NbMidiFader*AddrMidiTrack)+NbMidiFader-1);
 				for (j = 0; j < UIChannel; j++){
 
-                    int i_OrMute = (MidiTable [j][MaskMute] | MidiTable [j][Mute]) & ( ! (MidiTable [j][ForceUnMute]));
+                    //int i_OrMute = (MidiTable [j][MaskMute] | MidiTable [j][Mute]) & ( ! (MidiTable [j][ForceUnMute]));
+                    int i_OrMute = (ui_i[j].MaskMute | ui_i[j].Mute) & ( ! (ui_i[j].ForceUnMute));
                     //(MidiTable [Canal][MaskMute] | MidiTable [Canal][Mute] | | MidiTable [Canal][ForceUnMute])
 //					if(MidiTable [j][i] == 1 && (j >= NbMidiFader*AddrMidiTrack && j <= (NbMidiFader*AddrMidiTrack)+NbMidiFader-1)){
 					if(i_OrMute == 1 && (j >= NbMidiFader*AddrMidiTrack && j <= (NbMidiFader*AddrMidiTrack)+NbMidiFader-1)){
@@ -1960,10 +1988,11 @@ do {
 				usleep( 250000 ); /* Sleep 100000 micro seconds = 100 ms, etc. */
 
 				// Update Midi Controler with Array valuefor (j = 0; j < UIChannel; j++){
-				i = Mute;
+				//i = Mute;
 				//printf("Track N°%i to N°%i\n", NbMidiFader*AddrMidiTrack, (NbMidiFader*AddrMidiTrack)+NbMidiFader-1);
 				for (j = 0; j < UIChannel; j++){
-                    int i_OrMute = (MidiTable [j][MaskMute] | MidiTable [j][Mute]) & ( ! (MidiTable [j][ForceUnMute]));
+                    //int i_OrMute = (MidiTable [j][MaskMute] | MidiTable [j][Mute]) & ( ! (MidiTable [j][ForceUnMute]));
+                    int i_OrMute = (ui_i[j].MaskMute | ui_i[j].Mute) & ( ! (ui_i[j].ForceUnMute));
 					if(i_OrMute == 1 && (j >= NbMidiFader*AddrMidiTrack && j <= (NbMidiFader*AddrMidiTrack)+NbMidiFader-1)){
 					//if(MidiTable [j][i] == 1 && (j >= NbMidiFader*AddrMidiTrack && j <= (NbMidiFader*AddrMidiTrack)+NbMidiFader-1)){
                         sprintf(sa_LogMessage,"UI2MCP <-- MIDI : Track Right : Canal(%i) : AddrModuloValue 0x%02X (Mute | MaskMute | ! ForceUnMute = %i * 0x7F)\n", j, AddrMidiMute+(j % NbMidiFader), i_OrMute);

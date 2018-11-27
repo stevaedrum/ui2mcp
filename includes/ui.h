@@ -8,6 +8,12 @@ struct UiI
 	//int Channel;
     char Name[256];
     int Solo;
+
+	int Mute;
+	int ForceUnMute;
+	int MaskMute;
+	int MaskMuteValue;
+
     char Type;
     int Rec;
     int Color;
@@ -28,6 +34,12 @@ struct UiSubFx
     //int Channel;
     char Name[256];
     int Solo;
+
+	int Mute;
+	int ForceUnMute;
+	int MaskMute;
+	int MaskMuteValue;
+
     char Type;
     int Color;
     double PanMidi;
@@ -48,6 +60,12 @@ struct UiAux
     //int Channel;
     char Name[256];
     int Solo;
+
+	int Mute;
+	int ForceUnMute;
+	int MaskMute;
+	int MaskMuteValue;
+
     char Type;
     int Color;
 	double MixMidi;
@@ -63,6 +81,12 @@ struct UiMaster
 {
     // Struture for Aux Master
     //int Channel;
+
+	int Mute;
+	int ForceUnMute;
+	int MaskMute;
+	int MaskMuteValue;
+
     char Type;
     int Color;
 	double PanMidi;
