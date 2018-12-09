@@ -7,6 +7,9 @@ struct config
 {
    char ControlerName[MAXBUF];
    char ControlerMode[MAXBUF];
+   char 	MidiPort[MAXBUF];
+   char 	UiAddr[MAXBUF];
+   char 	SyncId[MAXBUF];
    char Lcd[MAXBUF];
    char NbMidiFader[MAXBUF];
    char AddrMidiMix[MAXBUF];

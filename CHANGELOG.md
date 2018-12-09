@@ -81,3 +81,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Decode VU message and send LCD vu meter information on midi controler FaderControl 2
+
+  -------------------------------------------------------------------------------------------------------------------------------------------------
+## [0.9.77] - 2018-12-09
+
+### Changed
+- Correct Mute, MaskMute, ForceUnMute
+
+### Added
+- Solo Mode option
+- Mute All and Mute Fx support
