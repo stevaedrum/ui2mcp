@@ -351,10 +351,8 @@ void SendMidiOut(snd_rawmidi_t *hwMidi, char *MidiOut){
 
 int main(int argc, char *argv[]) {
 
-    char *version = "0.9.77";
+    char *version = "0.9.78";
 	int debug = 0;
-
-//	printf ("Nombre d'argument : %d\n", argc);
 
 //	if(argc == 1){
 //        printf ("Please specify at least one of --port=name, --hostname=address.\n");
@@ -362,15 +360,13 @@ int main(int argc, char *argv[]) {
 //	}
 
 	for (int x = 0; x < argc; ++x){
-//		printf ("Argument %d : %s\n", x + 1, argv[x]);
-
         if(strcmp(argv[x],"-h") == 0 || strcmp(argv[x],"--help") == 0){
             printf ("Usage: ui2mcp options\n\n");
             printf ("-h, --help                             this help\n");
             printf ("-v, --version                          print current version\n");
-            printf ("-l, --list-devices                     list all hardware ports\n");
-            printf ("-p, --port=name                        select port by name\n");
-            printf ("-H, --hostname=address                 select hostname of UI controler\n");
+//            printf ("-l, --list-devices                     list all hardware ports\n");
+//            printf ("-p, --port=name                        select port by name\n");
+//            printf ("-H, --hostname=address                 select hostname of UI controler\n");
             exit(0);
         }else if (strcmp(argv[x],"-v") == 0 || strcmp(argv[x],"--version") == 0){
             printf ("Version %s\n", version);
@@ -380,19 +376,19 @@ int main(int argc, char *argv[]) {
             debug++;
             if ( argc >= 3 ){
                 if ( strlen(argv[x+1]) != 0 ){
-                        //printf ("%s\n", argv[x+1]);
                         debug = atoi(argv[x+1]);
                         printf ("Log level: %i\n", debug);
                 }
             }
         }
 	}
-//    exit(0);
 
-	//int j = 0;
 	int status = 0;
 	int current_time_init;
 	int current_time;
+
+    int tap[255];
+    int i_NbTap = 0;
 
 	int i_Watchdog_init;
 	int i_Watchdog;
@@ -400,7 +396,6 @@ int main(int argc, char *argv[]) {
 	int i_VuMeter_init;
 	int i_VuMeter;
 
-	//int i_StxBuffer = 0;
     char  c_StxBuffer[1024] = "";
 
 	int init = 0;
@@ -426,7 +421,6 @@ int main(int argc, char *argv[]) {
     printf("%s\n", sa_LogMessage);
 
 	// Midi connexion  variable
-	//const char* portname = "hw:1,0,0";                                      // Default portname
 	const char* portname = "";
     portname = ControlerConfig.MidiPort;
     printf("Midi Port [%s]\n", portname);
@@ -451,7 +445,6 @@ int main(int argc, char *argv[]) {
 	char** SplitArrayDot = NULL;
 
 	// UI device variable
-	//char  UIAddress = "192.168.0.10";
 	int UIChannel = 24;
 	int UIMedia = 2;
 	int UISubGroup = 6;
@@ -522,10 +515,6 @@ int main(int argc, char *argv[]) {
             strcpy(ui[c].Name, "MASTER");
     }
 
-//    for(int c = 0; c < UIAllStrip; c++){
-//            printf("Canal %i Position %i Numb %i Type %s Rec %i Color %i Name %s\n", c, ui[c].Position, ui[c].Numb, ui[c].Type, ui[c].Rec, ui[c].Color, ui[c].Name);
-//    }
-
 	char UImsg[64] = "";
 	char UIio[64] = "";
 	char UIfunc[64] = "";
@@ -536,7 +525,6 @@ int main(int argc, char *argv[]) {
 	//float zeroDbPos = .7647058823529421;   //   0 db
 	//float maxDb = 1;					                    // +10 db
 
-	//char c_SyncId[256] = "Stevae";
 	char c_SyncId[256];
     sscanf(ControlerConfig.SyncId, "%s", c_SyncId);
     printf("UI SyncId [%s]\n", c_SyncId);
@@ -544,7 +532,6 @@ int main(int argc, char *argv[]) {
 	char *UIModel = NULL;
 	char UIFirmware[32] = "";
 	char *UICommand = NULL;
-	//char *uisnapshot = "";
 
 	//UI MuteMask
 	char UIMuteMask[16] = "";
@@ -725,7 +712,6 @@ int main(int argc, char *argv[]) {
 
     send(sock , ack , strlen(ack) , 0 );
     LogTrace(hfErr, debug, "UI2MCP --> UI : MESSAGE GET send\n" );
-    //printf("MESSAGE GET send\n");
 
 	// Init value array
 	for (int c = 0; c < UIAllStrip; c++){
@@ -780,8 +766,6 @@ int main(int argc, char *argv[]) {
  current_time_init = currentTimeMillis();
  i_Watchdog_init = currentTimeMillis();
  i_VuMeter_init = currentTimeMillis();
-
- //int j=0;
 
 do {
 
@@ -1803,8 +1787,6 @@ do {
         LogTrace(hfErr, debug, "UI2MCP <-- MIDI : Midi read\n");
 
 		InMidi = (int)Midibuffer[0];
-//		MidiCC = (int)Midibuffer[j+1];
-//		MidiValue = (int)Midibuffer[j+2];
 		MidiCC = (int)Midibuffer[1];
 		MidiValue = (int)Midibuffer[2];
 
@@ -2011,6 +1993,37 @@ do {
                     char sendui[256];
                     sprintf(sendui,"BMSG^SYNC^%s^%i\n", c_SyncId, Canal);
                     send(sock , sendui, strlen(sendui) , 0 );
+				}
+			}
+			else if (MidiCC == i_Tap){                                                                                                         /*  Button for Track Next */
+
+				if(MidiValue == 0x7F){
+                    i_NbTap++;
+
+                    tap[i_NbTap] = currentTimeMillis();
+
+                    int SumTap = 0;
+                    int Compt = 0;
+                    double MoyenneTap = 0;
+
+                    for (int t = 1; t < i_NbTap; t+=2){
+                        //printf("Tap : %i\n",  60000/(tap[t+1]-tap[t] ));
+                        SumTap+=(60000/(tap[t+1]-tap[t]));
+                        Compt = t;
+                    }
+                    //printf("Div Tap : %i %i\n", Compt, (Compt/2)+1);
+                    //printf("SumTap : %i\n", SumTap);
+                    MoyenneTap = SumTap / ((Compt/2)+1);
+                    //printf("Moyenne Tap : %i\n", (int)MoyenneTap);
+
+                    if ( (Compt/2)+1 > 1 ){
+                        UIBpm = (int)MoyenneTap;
+                        printf("SETD^f.1.bpm^%i\n", UIBpm);
+
+						char sendui[256];
+						sprintf(sendui,"SETD^f.1.bpm^%i\n", UIBpm);
+						send(sock , sendui, strlen(sendui) , 0 );
+                    }
 				}
 			}
 			else if (MidiCC == IdTrackNext){                                                                                                         /*  Button for Track Next */

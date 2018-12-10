@@ -106,6 +106,8 @@ Types of changes
 					Recu 24 [SETD^var.mtk.soundcheck^1]
 					Recu 24 [SETD^var.mtk.soundcheck^0]
 
+                    SETD^i.8.stereoIndex^-1   --> Un Link Stereo
+                    SETD^i.8.stereoIndex^0    --> Link Stereo with Channel +1
 
                     SETD^settings.multiplesolo^1  = Mode Solo multiple
                     SETD^settings.multiplesolo^0  = Mode Solo single

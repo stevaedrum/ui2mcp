@@ -2,65 +2,53 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Debug" />
-	<File name="docs/Helps" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="3720" topLine="86" />
-		</Cursor>
-	</File>
-	<File name="main.c" open="1" top="1" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="52868" topLine="1027" />
-		</Cursor>
-		<Folding>
-			<Collapse line="972" />
-			<Collapse line="991" />
-			<Collapse line="994" />
-			<Collapse line="1162" />
-			<Collapse line="1182" />
-			<Collapse line="1196" />
-			<Collapse line="1222" />
-			<Collapse line="1238" />
-			<Collapse line="1290" />
-			<Collapse line="1298" />
-			<Collapse line="1393" />
-			<Collapse line="1450" />
-			<Collapse line="1472" />
-			<Collapse line="1478" />
-			<Collapse line="1484" />
-			<Collapse line="1539" />
-			<Collapse line="1562" />
-			<Collapse line="1612" />
-			<Collapse line="1742" />
-			<Collapse line="1767" />
-			<Collapse line="1843" />
-			<Collapse line="1863" />
-			<Collapse line="1890" />
-			<Collapse line="1951" />
-			<Collapse line="2005" />
-			<Collapse line="2015" />
-			<Collapse line="2217" />
-			<Collapse line="2422" />
-			<Collapse line="2437" />
-			<Collapse line="2492" />
-			<Collapse line="2509" />
-			<Collapse line="2535" />
-			<Collapse line="2559" />
-			<Collapse line="2579" />
-		</Folding>
-	</File>
-	<File name="CHANGELOG.md" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="3414" topLine="67" />
-		</Cursor>
-	</File>
-	<File name="config.conf" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="config.conf" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="910" topLine="30" />
 		</Cursor>
 	</File>
+	<File name="TODO.md" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="609" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="main.c" open="1" top="1" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="95993" topLine="1736" />
+		</Cursor>
+		<Folding>
+			<Collapse line="956" />
+			<Collapse line="975" />
+			<Collapse line="978" />
+			<Collapse line="1146" />
+			<Collapse line="1166" />
+			<Collapse line="1180" />
+			<Collapse line="1206" />
+			<Collapse line="1222" />
+			<Collapse line="2028" />
+			<Collapse line="2230" />
+			<Collapse line="2435" />
+			<Collapse line="2450" />
+			<Collapse line="2505" />
+			<Collapse line="2522" />
+			<Collapse line="2548" />
+			<Collapse line="2572" />
+			<Collapse line="2592" />
+		</Folding>
+	</File>
 	<File name="includes/ui.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="163" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="docs/Helps" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="3899" topLine="88" />
+		</Cursor>
+	</File>
+	<File name="CHANGELOG.md" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="3718" topLine="79" />
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>

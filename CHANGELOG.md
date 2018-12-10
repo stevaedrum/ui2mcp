@@ -91,3 +91,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Solo Mode option
 - Mute All and Mute Fx support
+
+  -------------------------------------------------------------------------------------------------------------------------------------------------
+## [0.9.78] - 2018-12-10
+
+### Changed
+-
+
+### Added
+- New function TAP tempo for FX
