@@ -63,14 +63,32 @@ struct config get_config(char *filename)
 							} else if (strstr(line, "AddrMidiRec")){
 									memcpy(ControlerConfig.AddrMidiRec,cfline,strlen(cfline)-1);
 									//printf("%s",ControlerConfig.getcmd);
+							} else if (strstr(line, "NbRecButton")){
+									memcpy(ControlerConfig.NbRecButton,cfline,strlen(cfline)-1);
+									//printf("%s",ControlerConfig.getcmd);
 							} else if (strstr(line, "AddrMidiMute")){
 									memcpy(ControlerConfig.AddrMidiMute,cfline,strlen(cfline)-1);
 									//printf("%s",ControlerConfig.getcmd);
 							} else if (strstr(line, "AddrMidiSolo")){
 									memcpy(ControlerConfig.AddrMidiSolo,cfline,strlen(cfline)-1);
 									//printf("%s",ControlerConfig.getcmd);
+							} else if (strstr(line, "AddrShiftLeft")){
+									memcpy(ControlerConfig.AddrShiftLeft,cfline,strlen(cfline)-1);
+									//printf("%s",ControlerConfig.getcmd);
+							} else if (strstr(line, "AddrShiftRight")){
+									memcpy(ControlerConfig.AddrShiftRight,cfline,strlen(cfline)-1);
+									//printf("%s",ControlerConfig.getcmd);
 							} else if (strstr(line, "AddrMidiSelect")){
 									memcpy(ControlerConfig.AddrMidiSelect,cfline,strlen(cfline)-1);
+									//printf("%s",ControlerConfig.getcmd);
+							} else if (strstr(line, "AddrMuteClear")){
+									memcpy(ControlerConfig.AddrMuteClear,cfline,strlen(cfline)-1);
+									//printf("%s",ControlerConfig.getcmd);
+							} else if (strstr(line, "AddrMuteSolo")){
+									memcpy(ControlerConfig.AddrMuteSolo,cfline,strlen(cfline)-1);
+									//printf("%s",ControlerConfig.getcmd);
+							} else if (strstr(line, "AddrMidiSelectButton")){
+									memcpy(ControlerConfig.AddrMidiSelectButton,cfline,strlen(cfline)-1);
 									//printf("%s",ControlerConfig.getcmd);
 							} else if (strstr(line, "AddrMidiTouch")){
 									memcpy(ControlerConfig.AddrMidiTouch,cfline,strlen(cfline)-1);

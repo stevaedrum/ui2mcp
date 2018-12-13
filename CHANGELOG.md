@@ -100,3 +100,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - New function TAP tempo for FX
+
+  -------------------------------------------------------------------------------------------------------------------------------------------------
+## [0.9.79] - 2018-12-12
+
+### Changed
+- Function to update Midi Controler with array struture UI variable.
+
+### Added
+- Add New parameter of channel StereoIndex
+- Add function Clear Mute
+- Add function Clear Solo
+- Add management REC button with multiple on channel and only one for all channel.

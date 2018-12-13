@@ -9,6 +9,7 @@ struct Ui
     char Name[256];
     int Solo;
 	int Mute;
+	int StereoIndex;
 	int ForceUnMute;
 	int MaskMute;
 	int MaskMuteValue;

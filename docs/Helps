@@ -102,6 +102,7 @@ Types of changes
 
 					Recu 24 [SETD^mgmask^4194304]  = Mute all FX  --> bit(22)
 					Recu 24 [SETD^mgmask^8388608]  = Mute ALL     --> bit(23)
+					SETD^mgmask^0  --> Clear Mute
 
 					Recu 24 [SETD^var.mtk.soundcheck^1]
 					Recu 24 [SETD^var.mtk.soundcheck^0]

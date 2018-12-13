@@ -9,11 +9,35 @@
 
 1544128057 source:/home/pi/UI24r-Midi/ui2mcp.0.9.77/functions.c
 
-1544133160 source:/home/pi/UI24r-Midi/ui2mcp.0.9.77/readconfig.c
+1544715652 source:/home/pi/UI24r-Midi/ui2mcp.0.9.77/readconfig.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"includes/readconfig.h"
 
-1544133293 /home/pi/UI24r-Midi/ui2mcp.0.9.77/includes/readconfig.h
+1544715624 /home/pi/UI24r-Midi/ui2mcp.0.9.77/includes/readconfig.h
+
+1544722449 source:/home/pi/UI24r-Midi/ui2mcp.0.9.77/main.c
+	<unistd.h>
+	<time.h>
+	<stdio.h>
+	<signal.h>
+	<stdlib.h>
+	<string.h>
+	<math.h>
+	<ctype.h>
+	<sys/socket.h>
+	<sys/time.h>
+	<netdb.h>
+	<alsa/asoundlib.h>
+	<netinet/in.h>
+	<arpa/inet.h>
+	"includes/version.h"
+	"includes/ui.h"
+	"includes/b64.h"
+	"includes/readconfig.h"
+
+1544128057 /home/pi/UI24r-Midi/ui2mcp.0.9.77/includes/version.h
+
+1544648143 /home/pi/UI24r-Midi/ui2mcp.0.9.77/includes/ui.h
 

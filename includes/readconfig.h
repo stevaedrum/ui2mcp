@@ -17,6 +17,7 @@ struct config
    char AddrMidiPan[MAXBUF];
    char AddrMidiButtonLed[MAXBUF];
    char AddrMidiRec[MAXBUF];
+   char NbRecButton[MAXBUF];
    char AddrMidiMute[MAXBUF];
    char AddrMidiSolo[MAXBUF];
    char AddrMidiSelect[MAXBUF];
@@ -41,6 +42,11 @@ struct config
    char i_SnapShotNavDown[MAXBUF];
    char i_StopUI2Mcp[MAXBUF];
    char i_ConfirmStopUI2Mcp[MAXBUF];
+   char AddrMidiSelectButton[MAXBUF];
+   char AddrMuteClear[MAXBUF];
+   char AddrMuteSolo[MAXBUF];
+   char AddrShiftLeft[MAXBUF];
+   char AddrShiftRight[MAXBUF];
 };
 
 /**
