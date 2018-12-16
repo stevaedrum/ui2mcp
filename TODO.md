@@ -14,15 +14,17 @@ Correction when Unmute MIDI controler on stereo link channel
     StereoLink --> Mix, Solo, Mute, MaskMute, ForceUnmute, Pan 0 for Channel 0 Pan & for Channel +1
 
 Pan function:
-    Center Pan when push PAN button
-    Pan Channel on selected SET button
+    Center Pan when push PAN button  --> DONE
+    Pan Channel on selected SET button  --> DONE
     LCD Pan update
 
 Pan Midi:
-    Encoder or Potentionmeter option.
+    Encoder or Potentionmeter option.  --> DONE
 
-Optimize update with global function same Track Next & Prev
+Optimize update with global function same Track Next & Prev  --> DONE
 
 Light On Write button when UI sent to Midi
 
-For Controler with LCD and only one REC button, do inverse channel number when REC on on channel
+For Controler with LCD and only one REC button, do inverse channel number when REC on on channel  --> DONE
+
+Add REC function for only one button with Midi  --> DONE

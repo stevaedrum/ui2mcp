@@ -15,6 +15,7 @@ struct config
    char AddrMidiMix[MAXBUF];
    char AddrMidiEncoderPan[MAXBUF];
    char AddrMidiPan[MAXBUF];
+   char TypePan[MAXBUF];
    char AddrMidiButtonLed[MAXBUF];
    char AddrMidiRec[MAXBUF];
    char NbRecButton[MAXBUF];
@@ -42,11 +43,12 @@ struct config
    char i_SnapShotNavDown[MAXBUF];
    char i_StopUI2Mcp[MAXBUF];
    char i_ConfirmStopUI2Mcp[MAXBUF];
-   char AddrMidiSelectButton[MAXBUF];
+   char AddrMidiParamButton[MAXBUF];
    char AddrMuteClear[MAXBUF];
    char AddrMuteSolo[MAXBUF];
    char AddrShiftLeft[MAXBUF];
    char AddrShiftRight[MAXBUF];
+   char NbPanButton[MAXBUF];
 };
 
 /**

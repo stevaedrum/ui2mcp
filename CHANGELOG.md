@@ -1,114 +1,119 @@
-# Changelog
-All notable changes to this project will be documented in this file.
+16 December 2018
+   released version 0.9.171 of ui2mcp
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+     Change log:
+        -Updated: function Pan with encoder
+        -Updated: Changed LCD text inverted when channel have status REC
+        -Updated: Log message for stereoindex, pan and solomode
+        -Updated: manage stereoindex change on MIDI controler
+        -Updated: optimize manage stereoindex on change
+        -Updated: change mix management with stereoindex when mix change on UI
+        -Updated: change mix management with stereoindex when changes on MIDI Controler
 
-## [Unreleased]
-### Changed
-- Update and improvement of Polish translation from [@m-aciek](https://github.com/m-aciek).
+16 December 2018
+   released version 0.9.153 of ui2mcp
 
--------------------------------------------------------------------------------------------------------------------------------------------------
-## [0.9.0] - 2018-10-28
-### Added
-- Initial version if the program.
-- Hardware supported is Korg nanoKontrol2 with MCP mode (static configuration).
-- Function supported:
-	UIx <--> MIDI Controler : Mix fader
-	UIx <--> MIDI Controler : Solo buttons for fader
-	UIx <--> MIDI Controler : Rec buttons for fader linkedto Multitrkconfig
-	MIDI Controler --> UIx  : Dim on Master
-	MIDI Controler          : Track function for 24 channels
+     Change log:
+        -Updated: function to manage type pan encoder or potentiometer
+        -Added: new function for manage pan information to ui
+        -Added: new function pan center via parameter button for pan
+        -Cleaned: clean code and and comment
+        -Removed: button led flashing when receive ui message
+        -Added: new function for manage REC on Midi controler with only one button
 
--------------------------------------------------------------------------------------------------------------------------------------------------
-## [0.9.50] - 2018-11-02
+15 December 2018
+   released version 0.9.104 of ui2mcp
 
-### Added
-- LogTrace function for debug in log file
-- Function with Mute Mask on UIx
-	UIx <--> MIDI Controler : Mute buttons for fader with Mask Mute option (Mute/Forceunmute/Mask)
+     Change log:
+        -Added: integrate function Pan update after Select button is selected
+        -Fixed: optimize Midibuffer buffer for midi raw and remove midi clear function
+        -Fixed: Improve pan function for potentiometer
 
-### Changed
-- Print messages with error message & Log
+14 December 2018
+   released version 0.9.81 of ui2mcp
 
-### Fixed
-- Bug with multiple interaction of Mute
+     Change log:
+        -Added: integrated update function for Select button
 
--------------------------------------------------------------------------------------------------------------------------------------------------
-## [0.9.51] - 2018-11-02
+12 December 2018
+   released version 0.9.79 of ui2mcp
 
-### Added
-- MidiValue On/Off for light variable.
+     Change log:
+        -Updated: Function to update Midi Controler with array struture UI variable.
+        -Added: Add New parameter of channel StereoIndex
+        -Added: Add function Clear Mute
+        -Added: Add function Clear Solo
+        -Added: Add management REC button with multiple on channel and only one for all channel.
 
-### Changed
-- Cleanup the code
+10 December 2018
+   released version 0.9.78 of ui2mcp
 
-### Fixed
-- Bug on Mute function when button on MIDI Controler is used and Track function is used. !!! not find
+     Change log:
+        -Added: New function TAP tempo for FX
 
--------------------------------------------------------------------------------------------------------------------------------------------------
-## [0.9.52] - 2018-11-03
+09 December 2018
+   released version 0.9.77 of ui2mcp
 
-### Fixed
-- Bug when the message is truncate in the buffer [STX].
-  Put in memory the rest of the message and concat with the next message.
+     Change log:
+        -Updated: Correct Mute, MaskMute, ForceUnMute
+        -Added: Solo Mode option
+        -Added: Mute All and Mute Fx support
 
-  -------------------------------------------------------------------------------------------------------------------------------------------------
-## [0.9.53] - 2018-11-03
+25 November 2018
+   released version 0.9.70 of ui2mcp
 
-### Changed
-- Update print message to Log Trace for several function.
+     Change log:
+        -Added: Decode VU message and send LCD vu meter information on midi controler FaderControl 2
 
-### Added
-- Load name of channel in char.
+03 November 2018
+   released version 0.9.54 of ui2mcp
 
-  -------------------------------------------------------------------------------------------------------------------------------------------------
-## [0.9.54] - 2018-11-03
+     Change log:
+        -Updated: Send message to Ui to stop correctly the websocket connexion.
+        -Added: Synchronization this UI and selected touch channel.
+        -Added: Send Midi message for channel number and name on LCD controler.
+        -Added: Fonction to stop the software with MIDI button sequence.
 
-### Changed
-- Send message to Ui to stop correctly the websocket connexion.
+03 November 2018
+   released version 0.9.53 of ui2mcp
 
-### Added
-- Synchronization this UI and selected touch channel.
-- Send Midi message for channel number and name on LCD controler.
-- Fonction to stop the software with MIDI button sequence.
+     Change log:
+        -Updated: Update print message to Log Trace for several function.
+        -Added: Load name of channel in char.
 
-  -------------------------------------------------------------------------------------------------------------------------------------------------
-## [0.9.70] - 2018-11-25
+03 November 2018
+   released version 0.9.52 of ui2mcp
 
-### Changed
--
+     Change log:
+        -Fixed: Bug when the message is truncate in the buffer [STX].
+        -Fixed: Put in memory the rest of the message and concat with the next message.
 
-### Added
-- Decode VU message and send LCD vu meter information on midi controler FaderControl 2
+02 November 2018
+   released version 0.9.51 of ui2mcp
 
-  -------------------------------------------------------------------------------------------------------------------------------------------------
-## [0.9.77] - 2018-12-09
+     Change log:
+        -Added: MidiValue On/Off for light variable.
+        -Updated: Cleanup the code
+        -Fixed: Bug on Mute function when button on MIDI Controler is used and Track function is used. !!! not find
 
-### Changed
-- Correct Mute, MaskMute, ForceUnMute
+02 November 2018
+   released version 0.9.50 of ui2mcp
 
-### Added
-- Solo Mode option
-- Mute All and Mute Fx support
+     Change log:
+        -Added: LogTrace function for debug in log file
+        -Added: Function with Mute Mask on UIx
+        -Added:	UIx <--> MIDI Controler : Mute buttons for fader with Mask Mute option (Mute/Forceunmute/Mask)
+        -Updated: Print messages with error message & Log
+        -Fixed: Bug with multiple interaction of Mute
 
-  -------------------------------------------------------------------------------------------------------------------------------------------------
-## [0.9.78] - 2018-12-10
+28 October 2018
+   released version 0.9.0 of ui2mcp
 
-### Changed
--
-
-### Added
-- New function TAP tempo for FX
-
-  -------------------------------------------------------------------------------------------------------------------------------------------------
-## [0.9.79] - 2018-12-12
-
-### Changed
-- Function to update Midi Controler with array struture UI variable.
-
-### Added
-- Add New parameter of channel StereoIndex
-- Add function Clear Mute
-- Add function Clear Solo
-- Add management REC button with multiple on channel and only one for all channel.
+     Change log:
+        -Added: Initial version if the program.
+        -Added: Hardware supported is Korg nanoKontrol2 with MCP mode (static configuration).
+        -Added:	UIx <--> MIDI Controler : Mix fader
+        -Added:	UIx <--> MIDI Controler : Solo buttons for fader
+        -Added:	UIx <--> MIDI Controler : Rec buttons for fader linkedto Multitrkconfig
+        -Added:	MIDI Controler --> UIx  : Dim on Master
+        -Added:	MIDI Controler          : Track function for 24 channels

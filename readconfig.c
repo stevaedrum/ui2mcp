@@ -57,6 +57,12 @@ struct config get_config(char *filename)
 							} else if (strstr(line, "AddrMidiPan")){
 									memcpy(ControlerConfig.AddrMidiPan,cfline,strlen(cfline)-1);
 									//printf("%s",ControlerConfig.getcmd);
+							} else if (strstr(line, "TypePan")){
+									memcpy(ControlerConfig.TypePan,cfline,strlen(cfline)-1);
+									//printf("%s",ControlerConfig.getcmd);
+							} else if (strstr(line, "NbPanButton")){
+									memcpy(ControlerConfig.NbPanButton,cfline,strlen(cfline)-1);
+									//printf("%s",ControlerConfig.getcmd);
 							} else if (strstr(line, "AddrMidiButtonLed")){
 									memcpy(ControlerConfig.AddrMidiButtonLed,cfline,strlen(cfline)-1);
 									//printf("%s",ControlerConfig.getcmd);
@@ -87,8 +93,8 @@ struct config get_config(char *filename)
 							} else if (strstr(line, "AddrMuteSolo")){
 									memcpy(ControlerConfig.AddrMuteSolo,cfline,strlen(cfline)-1);
 									//printf("%s",ControlerConfig.getcmd);
-							} else if (strstr(line, "AddrMidiSelectButton")){
-									memcpy(ControlerConfig.AddrMidiSelectButton,cfline,strlen(cfline)-1);
+							} else if (strstr(line, "AddrMidiParamButton")){
+									memcpy(ControlerConfig.AddrMidiParamButton,cfline,strlen(cfline)-1);
 									//printf("%s",ControlerConfig.getcmd);
 							} else if (strstr(line, "AddrMidiTouch")){
 									memcpy(ControlerConfig.AddrMidiTouch,cfline,strlen(cfline)-1);
