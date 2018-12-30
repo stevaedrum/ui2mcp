@@ -1,0 +1,902 @@
+215381 - MIDI IN [Bome MIDI Translator Virtual In]: A0 00 00
+215381 - MIDI OUT [PreSonus FP8]: A0 00 00
+216408 - MIDI IN [Bome MIDI Translator Virtual In]: A0 00 00
+216408 - MIDI OUT [PreSonus FP8]: A0 00 00
+217442 - MIDI IN [Bome MIDI Translator Virtual In]: A0 00 00
+217442 - MIDI OUT [PreSonus FP8]: A0 00 00
+218442 - MIDI IN [Bome MIDI Translator Virtual In]: A0 00 00
+218442 - MIDI OUT [PreSonus FP8]: A0 00 00
+219686 - MIDI IN [Bome MIDI Translator Virtual In]: A0 00 00
+219686 - MIDI OUT [PreSonus FP8]: A0 00 00
+219686 - MIDI IN [Bome MIDI Translator Virtual In]: 90 00 00
+219686 - MIDI OUT [PreSonus FP8]: 90 00 00
+219686 - MIDI IN [Bome MIDI Translator Virtual In]: D0 00
+219686 - MIDI OUT [PreSonus FP8]: D0 00
+219687 - MIDI IN [Bome MIDI Translator Virtual In]: B0 38 01
+219687 - MIDI OUT [PreSonus FP8]: B0 38 01
+219687 - MIDI IN [Bome MIDI Translator Virtual In]: B0 30 40
+219687 - MIDI OUT [PreSonus FP8]: B0 30 40
+219687 - MIDI IN [Bome MIDI Translator Virtual In]: E0 0F 51
+219687 - MIDI OUT [PreSonus FP8]: E0 0F 51
+219687 - MIDI IN [Bome MIDI Translator Virtual In]: 90 18 00
+219687 - MIDI OUT [PreSonus FP8]: 90 18 00
+219687 - MIDI IN [Bome MIDI Translator Virtual In]: 91 18 7F
+219687 - MIDI OUT [PreSonus FP8]: 91 18 7F
+219687 - MIDI IN [Bome MIDI Translator Virtual In]: 92 18 7F
+219687 - MIDI OUT [PreSonus FP8]: 92 18 7F
+219687 - MIDI IN [Bome MIDI Translator Virtual In]: 93 18 7F
+219687 - MIDI OUT [PreSonus FP8]: 93 18 7F
+219687 - MIDI IN [Bome MIDI Translator Virtual In]: D1 00
+219687 - MIDI OUT [PreSonus FP8]: D1 00
+219687 - MIDI IN [Bome MIDI Translator Virtual In]: B0 39 01
+219687 - MIDI OUT [PreSonus FP8]: B0 39 01
+219688 - MIDI IN [Bome MIDI Translator Virtual In]: B0 31 40
+219688 - MIDI OUT [PreSonus FP8]: B0 31 40
+219688 - MIDI IN [Bome MIDI Translator Virtual In]: E1 28 4F
+219688 - MIDI OUT [PreSonus FP8]: E1 28 4F
+219688 - MIDI IN [Bome MIDI Translator Virtual In]: 90 19 00
+219688 - MIDI OUT [PreSonus FP8]: 90 19 00
+219688 - MIDI IN [Bome MIDI Translator Virtual In]: 91 19 7F
+219688 - MIDI OUT [PreSonus FP8]: 91 19 7F
+219688 - MIDI IN [Bome MIDI Translator Virtual In]: 92 19 7F
+219688 - MIDI OUT [PreSonus FP8]: 92 19 7F
+219688 - MIDI IN [Bome MIDI Translator Virtual In]: 93 19 7F
+219688 - MIDI OUT [PreSonus FP8]: 93 19 7F
+219688 - MIDI IN [Bome MIDI Translator Virtual In]: D2 00
+219688 - MIDI OUT [PreSonus FP8]: D2 00
+219688 - MIDI IN [Bome MIDI Translator Virtual In]: B0 3A 01
+219688 - MIDI OUT [PreSonus FP8]: B0 3A 01
+219688 - MIDI IN [Bome MIDI Translator Virtual In]: B0 32 40
+219688 - MIDI OUT [PreSonus FP8]: B0 32 40
+219689 - MIDI IN [Bome MIDI Translator Virtual In]: E2 23 61
+219689 - MIDI OUT [PreSonus FP8]: E2 23 61
+219689 - MIDI IN [Bome MIDI Translator Virtual In]: 90 1A 00
+219689 - MIDI OUT [PreSonus FP8]: 90 1A 00
+219689 - MIDI IN [Bome MIDI Translator Virtual In]: 91 1A 7F
+219689 - MIDI OUT [PreSonus FP8]: 91 1A 7F
+219689 - MIDI IN [Bome MIDI Translator Virtual In]: 92 1A 7F
+219689 - MIDI OUT [PreSonus FP8]: 92 1A 7F
+219689 - MIDI IN [Bome MIDI Translator Virtual In]: 93 1A 7F
+219689 - MIDI OUT [PreSonus FP8]: 93 1A 7F
+219689 - MIDI IN [Bome MIDI Translator Virtual In]: D3 00
+219689 - MIDI OUT [PreSonus FP8]: D3 00
+219689 - MIDI IN [Bome MIDI Translator Virtual In]: B0 3B 01
+219689 - MIDI OUT [PreSonus FP8]: B0 3B 01
+219689 - MIDI IN [Bome MIDI Translator Virtual In]: B0 33 40
+219689 - MIDI OUT [PreSonus FP8]: B0 33 40
+219689 - MIDI IN [Bome MIDI Translator Virtual In]: E3 49 31
+219689 - MIDI OUT [PreSonus FP8]: E3 49 31
+219690 - MIDI IN [Bome MIDI Translator Virtual In]: 90 1B 00
+219690 - MIDI OUT [PreSonus FP8]: 90 1B 00
+219690 - MIDI IN [Bome MIDI Translator Virtual In]: 91 1B 7F
+219690 - MIDI OUT [PreSonus FP8]: 91 1B 7F
+219690 - MIDI IN [Bome MIDI Translator Virtual In]: 92 1B 7F
+219690 - MIDI OUT [PreSonus FP8]: 92 1B 7F
+219690 - MIDI IN [Bome MIDI Translator Virtual In]: 93 1B 7F
+219690 - MIDI OUT [PreSonus FP8]: 93 1B 7F
+219690 - MIDI IN [Bome MIDI Translator Virtual In]: D4 00
+219690 - MIDI OUT [PreSonus FP8]: D4 00
+219690 - MIDI IN [Bome MIDI Translator Virtual In]: B0 3C 01
+219690 - MIDI OUT [PreSonus FP8]: B0 3C 01
+219690 - MIDI IN [Bome MIDI Translator Virtual In]: B0 34 53
+219690 - MIDI OUT [PreSonus FP8]: B0 34 53
+219690 - MIDI IN [Bome MIDI Translator Virtual In]: E4 66 41
+219690 - MIDI OUT [PreSonus FP8]: E4 66 41
+219690 - MIDI IN [Bome MIDI Translator Virtual In]: 90 1C 00
+219690 - MIDI OUT [PreSonus FP8]: 90 1C 00
+219691 - MIDI IN [Bome MIDI Translator Virtual In]: 91 1C 7F
+219691 - MIDI OUT [PreSonus FP8]: 91 1C 7F
+219691 - MIDI IN [Bome MIDI Translator Virtual In]: 92 1C 7F
+219691 - MIDI OUT [PreSonus FP8]: 92 1C 7F
+219691 - MIDI IN [Bome MIDI Translator Virtual In]: 93 1C 7F
+219691 - MIDI OUT [PreSonus FP8]: 93 1C 7F
+219691 - MIDI IN [Bome MIDI Translator Virtual In]: D5 00
+219691 - MIDI OUT [PreSonus FP8]: D5 00
+219691 - MIDI IN [Bome MIDI Translator Virtual In]: B0 3D 01
+219691 - MIDI OUT [PreSonus FP8]: B0 3D 01
+219691 - MIDI IN [Bome MIDI Translator Virtual In]: B0 35 2F
+219691 - MIDI OUT [PreSonus FP8]: B0 35 2F
+219691 - MIDI IN [Bome MIDI Translator Virtual In]: E5 68 3E
+219691 - MIDI OUT [PreSonus FP8]: E5 68 3E
+219691 - MIDI IN [Bome MIDI Translator Virtual In]: 90 1D 00
+219691 - MIDI OUT [PreSonus FP8]: 90 1D 00
+219692 - MIDI IN [Bome MIDI Translator Virtual In]: 91 1D 7F
+219692 - MIDI OUT [PreSonus FP8]: 91 1D 7F
+219692 - MIDI IN [Bome MIDI Translator Virtual In]: 92 1D 7F
+219692 - MIDI OUT [PreSonus FP8]: 92 1D 7F
+219692 - MIDI IN [Bome MIDI Translator Virtual In]: 93 1D 7F
+219692 - MIDI OUT [PreSonus FP8]: 93 1D 7F
+219692 - MIDI IN [Bome MIDI Translator Virtual In]: D6 00
+219692 - MIDI OUT [PreSonus FP8]: D6 00
+219692 - MIDI IN [Bome MIDI Translator Virtual In]: B0 3E 01
+219692 - MIDI OUT [PreSonus FP8]: B0 3E 01
+219692 - MIDI IN [Bome MIDI Translator Virtual In]: B0 36 2F
+219692 - MIDI OUT [PreSonus FP8]: B0 36 2F
+219692 - MIDI IN [Bome MIDI Translator Virtual In]: E6 68 3E
+219692 - MIDI OUT [PreSonus FP8]: E6 68 3E
+219693 - MIDI IN [Bome MIDI Translator Virtual In]: 90 1E 00
+219693 - MIDI OUT [PreSonus FP8]: 90 1E 00
+219693 - MIDI IN [Bome MIDI Translator Virtual In]: 91 1E 7F
+219693 - MIDI OUT [PreSonus FP8]: 91 1E 7F
+219693 - MIDI IN [Bome MIDI Translator Virtual In]: 92 1E 7F
+219693 - MIDI OUT [PreSonus FP8]: 92 1E 7F
+219693 - MIDI IN [Bome MIDI Translator Virtual In]: 93 1E 7F
+219693 - MIDI OUT [PreSonus FP8]: 93 1E 7F
+219693 - MIDI IN [Bome MIDI Translator Virtual In]: D7 00
+219693 - MIDI OUT [PreSonus FP8]: D7 00
+219693 - MIDI IN [Bome MIDI Translator Virtual In]: B0 3F 01
+219693 - MIDI OUT [PreSonus FP8]: B0 3F 01
+219693 - MIDI IN [Bome MIDI Translator Virtual In]: B0 37 00
+219693 - MIDI OUT [PreSonus FP8]: B0 37 00
+219693 - MIDI IN [Bome MIDI Translator Virtual In]: E7 0A 36
+219693 - MIDI OUT [PreSonus FP8]: E7 0A 36
+219693 - MIDI IN [Bome MIDI Translator Virtual In]: 90 1F 00
+219693 - MIDI OUT [PreSonus FP8]: 90 1F 00
+219694 - MIDI IN [Bome MIDI Translator Virtual In]: 91 1F 7F
+219694 - MIDI OUT [PreSonus FP8]: 91 1F 7F
+219694 - MIDI IN [Bome MIDI Translator Virtual In]: 92 1F 7F
+219694 - MIDI OUT [PreSonus FP8]: 92 1F 7F
+219694 - MIDI IN [Bome MIDI Translator Virtual In]: 93 1F 7F
+219694 - MIDI OUT [PreSonus FP8]: 93 1F 7F
+219694 - MIDI IN [Bome MIDI Translator Virtual In]: 91 05 7F
+219694 - MIDI OUT [PreSonus FP8]: 91 05 7F
+219694 - MIDI IN [Bome MIDI Translator Virtual In]: 92 05 7F
+219694 - MIDI OUT [PreSonus FP8]: 92 05 7F
+219694 - MIDI IN [Bome MIDI Translator Virtual In]: 93 05 7F
+219694 - MIDI OUT [PreSonus FP8]: 93 05 7F
+219694 - MIDI IN [Bome MIDI Translator Virtual In]: 91 03 00
+219694 - MIDI OUT [PreSonus FP8]: 91 03 00
+219694 - MIDI IN [Bome MIDI Translator Virtual In]: 92 03 00
+219694 - MIDI OUT [PreSonus FP8]: 92 03 00
+219694 - MIDI IN [Bome MIDI Translator Virtual In]: 93 03 7F
+219694 - MIDI OUT [PreSonus FP8]: 93 03 7F
+219695 - MIDI IN [Bome MIDI Translator Virtual In]: 91 04 00
+219695 - MIDI OUT [PreSonus FP8]: 91 04 00
+219695 - MIDI IN [Bome MIDI Translator Virtual In]: 92 04 40
+219695 - MIDI OUT [PreSonus FP8]: 92 04 40
+219695 - MIDI IN [Bome MIDI Translator Virtual In]: 93 04 00
+219695 - MIDI OUT [PreSonus FP8]: 93 04 00
+219695 - MIDI IN [Bome MIDI Translator Virtual In]: 90 06 00
+219695 - MIDI OUT [PreSonus FP8]: 90 06 00
+219695 - MIDI IN [Bome MIDI Translator Virtual In]: 90 46 00
+219695 - MIDI OUT [PreSonus FP8]: 90 46 00
+219695 - MIDI IN [Bome MIDI Translator Virtual In]: 90 05 00
+219695 - MIDI OUT [PreSonus FP8]: 90 05 00
+219695 - MIDI IN [Bome MIDI Translator Virtual In]: 90 28 7F
+219695 - MIDI OUT [PreSonus FP8]: 90 28 7F
+219695 - MIDI IN [Bome MIDI Translator Virtual In]: 90 2B 00
+219695 - MIDI OUT [PreSonus FP8]: 90 2B 00
+219696 - MIDI IN [Bome MIDI Translator Virtual In]: 90 29 00
+219696 - MIDI OUT [PreSonus FP8]: 90 29 00
+219696 - MIDI IN [Bome MIDI Translator Virtual In]: 90 2A 00
+219696 - MIDI OUT [PreSonus FP8]: 90 2A 00
+219696 - MIDI IN [Bome MIDI Translator Virtual In]: 90 04 00
+219696 - MIDI OUT [PreSonus FP8]: 90 04 00
+219696 - MIDI IN [Bome MIDI Translator Virtual In]: 90 3E 00
+219696 - MIDI OUT [PreSonus FP8]: 90 3E 00
+219696 - MIDI IN [Bome MIDI Translator Virtual In]: 90 3F 00
+219696 - MIDI OUT [PreSonus FP8]: 90 3F 00
+219696 - MIDI IN [Bome MIDI Translator Virtual In]: 90 40 00
+219696 - MIDI OUT [PreSonus FP8]: 90 40 00
+219696 - MIDI IN [Bome MIDI Translator Virtual In]: 90 41 00
+219696 - MIDI OUT [PreSonus FP8]: 90 41 00
+219696 - MIDI IN [Bome MIDI Translator Virtual In]: 90 42 7F
+219696 - MIDI OUT [PreSonus FP8]: 90 42 7F
+219696 - MIDI IN [Bome MIDI Translator Virtual In]: 91 3E 00
+219696 - MIDI OUT [PreSonus FP8]: 91 3E 00
+219697 - MIDI IN [Bome MIDI Translator Virtual In]: 92 3E 00
+219697 - MIDI OUT [PreSonus FP8]: 92 3E 00
+219697 - MIDI IN [Bome MIDI Translator Virtual In]: 93 3E 7F
+219697 - MIDI OUT [PreSonus FP8]: 93 3E 7F
+219697 - MIDI IN [Bome MIDI Translator Virtual In]: 91 3F 00
+219697 - MIDI OUT [PreSonus FP8]: 91 3F 00
+219697 - MIDI IN [Bome MIDI Translator Virtual In]: 92 3F 00
+219697 - MIDI OUT [PreSonus FP8]: 92 3F 00
+219697 - MIDI IN [Bome MIDI Translator Virtual In]: 93 3F 7F
+219697 - MIDI OUT [PreSonus FP8]: 93 3F 7F
+219697 - MIDI IN [Bome MIDI Translator Virtual In]: 91 40 00
+219697 - MIDI OUT [PreSonus FP8]: 91 40 00
+219697 - MIDI IN [Bome MIDI Translator Virtual In]: 92 40 00
+219697 - MIDI OUT [PreSonus FP8]: 92 40 00
+219698 - MIDI IN [Bome MIDI Translator Virtual In]: 93 40 7F
+219698 - MIDI OUT [PreSonus FP8]: 93 40 7F
+219698 - MIDI IN [Bome MIDI Translator Virtual In]: 91 41 00
+219698 - MIDI OUT [PreSonus FP8]: 91 41 00
+219698 - MIDI IN [Bome MIDI Translator Virtual In]: 92 41 00
+219698 - MIDI OUT [PreSonus FP8]: 92 41 00
+219698 - MIDI IN [Bome MIDI Translator Virtual In]: 93 41 7F
+219698 - MIDI OUT [PreSonus FP8]: 93 41 7F
+219698 - MIDI IN [Bome MIDI Translator Virtual In]: 91 42 00
+219698 - MIDI OUT [PreSonus FP8]: 91 42 00
+219698 - MIDI IN [Bome MIDI Translator Virtual In]: 92 42 00
+219698 - MIDI OUT [PreSonus FP8]: 92 42 00
+219698 - MIDI IN [Bome MIDI Translator Virtual In]: 93 42 7F
+219698 - MIDI OUT [PreSonus FP8]: 93 42 7F
+219698 - MIDI IN [Bome MIDI Translator Virtual In]: 90 36 00
+219698 - MIDI OUT [PreSonus FP8]: 90 36 00
+219698 - MIDI IN [Bome MIDI Translator Virtual In]: 90 37 00
+219698 - MIDI OUT [PreSonus FP8]: 90 37 00
+219699 - MIDI IN [Bome MIDI Translator Virtual In]: 90 38 00
+219699 - MIDI OUT [PreSonus FP8]: 90 38 00
+219699 - MIDI IN [Bome MIDI Translator Virtual In]: 90 39 7F
+219699 - MIDI OUT [PreSonus FP8]: 90 39 7F
+219699 - MIDI IN [Bome MIDI Translator Virtual In]: 90 3A 00
+219699 - MIDI OUT [PreSonus FP8]: 90 3A 00
+219699 - MIDI IN [Bome MIDI Translator Virtual In]: 90 3C 00
+219699 - MIDI OUT [PreSonus FP8]: 90 3C 00
+219699 - MIDI IN [Bome MIDI Translator Virtual In]: 90 3D 00
+219699 - MIDI OUT [PreSonus FP8]: 90 3D 00
+219699 - MIDI IN [Bome MIDI Translator Virtual In]: 90 03 00
+219699 - MIDI OUT [PreSonus FP8]: 90 03 00
+219699 - MIDI IN [Bome MIDI Translator Virtual In]: 90 4E 00
+219699 - MIDI OUT [PreSonus FP8]: 90 4E 00
+219699 - MIDI IN [Bome MIDI Translator Virtual In]: 90 4F 7F
+219699 - MIDI OUT [PreSonus FP8]: 90 4F 7F
+219700 - MIDI IN [Bome MIDI Translator Virtual In]: 90 4A 00
+219700 - MIDI OUT [PreSonus FP8]: 90 4A 00
+219700 - MIDI IN [Bome MIDI Translator Virtual In]: 90 4D 00
+219700 - MIDI OUT [PreSonus FP8]: 90 4D 00
+219700 - MIDI IN [Bome MIDI Translator Virtual In]: 90 4B 00
+219700 - MIDI OUT [PreSonus FP8]: 90 4B 00
+219700 - MIDI IN [Bome MIDI Translator Virtual In]: 91 4E 7F
+219700 - MIDI OUT [PreSonus FP8]: 91 4E 7F
+219700 - MIDI IN [Bome MIDI Translator Virtual In]: 92 4E 00
+219700 - MIDI OUT [PreSonus FP8]: 92 4E 00
+219700 - MIDI IN [Bome MIDI Translator Virtual In]: 93 4E 00
+219700 - MIDI OUT [PreSonus FP8]: 93 4E 00
+219700 - MIDI IN [Bome MIDI Translator Virtual In]: 91 4C 7F
+219700 - MIDI OUT [PreSonus FP8]: 91 4C 7F
+219700 - MIDI IN [Bome MIDI Translator Virtual In]: 92 4C 00
+219700 - MIDI OUT [PreSonus FP8]: 92 4C 00
+219700 - MIDI IN [Bome MIDI Translator Virtual In]: 93 4C 00
+219700 - MIDI OUT [PreSonus FP8]: 93 4C 00
+219701 - MIDI IN [Bome MIDI Translator Virtual In]: 91 4F 7F
+219701 - MIDI OUT [PreSonus FP8]: 91 4F 7F
+219701 - MIDI IN [Bome MIDI Translator Virtual In]: 92 4F 7F
+219701 - MIDI OUT [PreSonus FP8]: 92 4F 7F
+219701 - MIDI IN [Bome MIDI Translator Virtual In]: 93 4F 7F
+219701 - MIDI OUT [PreSonus FP8]: 93 4F 7F
+219701 - MIDI IN [Bome MIDI Translator Virtual In]: 91 4D 7F
+219701 - MIDI OUT [PreSonus FP8]: 91 4D 7F
+219701 - MIDI IN [Bome MIDI Translator Virtual In]: 92 4D 52
+219701 - MIDI OUT [PreSonus FP8]: 92 4D 52
+219701 - MIDI IN [Bome MIDI Translator Virtual In]: 93 4D 00
+219701 - MIDI OUT [PreSonus FP8]: 93 4D 00
+219701 - MIDI IN [Bome MIDI Translator Virtual In]: 91 4B 7F
+219701 - MIDI OUT [PreSonus FP8]: 91 4B 7F
+219701 - MIDI IN [Bome MIDI Translator Virtual In]: 92 4B 00
+219701 - MIDI OUT [PreSonus FP8]: 92 4B 00
+219701 - MIDI IN [Bome MIDI Translator Virtual In]: 93 4B 00
+219701 - MIDI OUT [PreSonus FP8]: 93 4B 00
+219702 - MIDI IN [Bome MIDI Translator Virtual In]: 91 4A 00
+219702 - MIDI OUT [PreSonus FP8]: 91 4A 00
+219702 - MIDI IN [Bome MIDI Translator Virtual In]: 92 4A 40
+219702 - MIDI OUT [PreSonus FP8]: 92 4A 40
+219702 - MIDI IN [Bome MIDI Translator Virtual In]: 93 4A 00
+219702 - MIDI OUT [PreSonus FP8]: 93 4A 00
+219702 - MIDI IN [Bome MIDI Translator Virtual In]: 90 08 00
+219702 - MIDI OUT [PreSonus FP8]: 90 08 00
+219702 - MIDI IN [Bome MIDI Translator Virtual In]: 90 10 00
+219702 - MIDI OUT [PreSonus FP8]: 90 10 00
+219702 - MIDI IN [Bome MIDI Translator Virtual In]: D8 00
+219702 - MIDI OUT [PreSonus FP8]: D8 00
+219702 - MIDI IN [Bome MIDI Translator Virtual In]: 90 09 00
+219702 - MIDI OUT [PreSonus FP8]: 90 09 00
+219702 - MIDI IN [Bome MIDI Translator Virtual In]: 90 11 00
+219702 - MIDI OUT [PreSonus FP8]: 90 11 00
+219702 - MIDI IN [Bome MIDI Translator Virtual In]: D9 00
+219702 - MIDI OUT [PreSonus FP8]: D9 00
+219703 - MIDI IN [Bome MIDI Translator Virtual In]: 90 0A 00
+219703 - MIDI OUT [PreSonus FP8]: 90 0A 00
+219703 - MIDI IN [Bome MIDI Translator Virtual In]: 90 12 00
+219703 - MIDI OUT [PreSonus FP8]: 90 12 00
+219703 - MIDI IN [Bome MIDI Translator Virtual In]: DA 00
+219703 - MIDI OUT [PreSonus FP8]: DA 00
+219703 - MIDI IN [Bome MIDI Translator Virtual In]: 90 0B 00
+219703 - MIDI OUT [PreSonus FP8]: 90 0B 00
+219703 - MIDI IN [Bome MIDI Translator Virtual In]: 90 13 00
+219703 - MIDI OUT [PreSonus FP8]: 90 13 00
+219703 - MIDI IN [Bome MIDI Translator Virtual In]: DB 00
+219703 - MIDI OUT [PreSonus FP8]: DB 00
+219703 - MIDI IN [Bome MIDI Translator Virtual In]: 90 0C 00
+219703 - MIDI OUT [PreSonus FP8]: 90 0C 00
+219703 - MIDI IN [Bome MIDI Translator Virtual In]: 90 14 00
+219703 - MIDI OUT [PreSonus FP8]: 90 14 00
+219703 - MIDI IN [Bome MIDI Translator Virtual In]: DC 00
+219703 - MIDI OUT [PreSonus FP8]: DC 00
+219704 - MIDI IN [Bome MIDI Translator Virtual In]: 90 0D 00
+219704 - MIDI OUT [PreSonus FP8]: 90 0D 00
+219704 - MIDI IN [Bome MIDI Translator Virtual In]: 90 15 00
+219704 - MIDI OUT [PreSonus FP8]: 90 15 00
+219704 - MIDI IN [Bome MIDI Translator Virtual In]: DD 00
+219704 - MIDI OUT [PreSonus FP8]: DD 00
+219704 - MIDI IN [Bome MIDI Translator Virtual In]: 90 0E 00
+219704 - MIDI OUT [PreSonus FP8]: 90 0E 00
+219704 - MIDI IN [Bome MIDI Translator Virtual In]: 90 16 00
+219704 - MIDI OUT [PreSonus FP8]: 90 16 00
+219704 - MIDI IN [Bome MIDI Translator Virtual In]: DE 00
+219704 - MIDI OUT [PreSonus FP8]: DE 00
+219704 - MIDI IN [Bome MIDI Translator Virtual In]: 90 0F 00
+219704 - MIDI OUT [PreSonus FP8]: 90 0F 00
+219704 - MIDI IN [Bome MIDI Translator Virtual In]: 90 17 00
+219704 - MIDI OUT [PreSonus FP8]: 90 17 00
+219704 - MIDI IN [Bome MIDI Translator Virtual In]: DF 00
+219704 - MIDI OUT [PreSonus FP8]: DF 00
+219705 - MIDI IN [Bome MIDI Translator Virtual In]: 90 01 00
+219705 - MIDI OUT [PreSonus FP8]: 90 01 00
+219705 - MIDI IN [Bome MIDI Translator Virtual In]: 90 02 00
+219705 - MIDI OUT [PreSonus FP8]: 90 02 00
+219705 - MIDI IN [Bome MIDI Translator Virtual In]: 90 56 7F
+219705 - MIDI OUT [PreSonus FP8]: 90 56 7F
+219705 - MIDI IN [Bome MIDI Translator Virtual In]: 90 5E 00
+219705 - MIDI OUT [PreSonus FP8]: 90 5E 00
+219705 - MIDI IN [Bome MIDI Translator Virtual In]: 90 5D 7F
+219705 - MIDI OUT [PreSonus FP8]: 90 5D 7F
+219705 - MIDI IN [Bome MIDI Translator Virtual In]: 90 5F 00
+219705 - MIDI OUT [PreSonus FP8]: 90 5F 00
+219705 - MIDI IN [Bome MIDI Translator Virtual In]: 90 5C 00
+219705 - MIDI OUT [PreSonus FP8]: 90 5C 00
+219705 - MIDI IN [Bome MIDI Translator Virtual In]: 90 5B 00
+219705 - MIDI OUT [PreSonus FP8]: 90 5B 00
+219705 - MIDI IN [Bome MIDI Translator Virtual In]: 90 3B 00
+219705 - MIDI OUT [PreSonus FP8]: 90 3B 00
+219753 - MIDI IN [Bome MIDI Translator Virtual In]: F0 00 01 06 02 12 00 00 00 4B 69 63 6B F7
+219753 - MIDI OUT [PreSonus FP8]: F0 00 01 06 02 12 00 00 00 4B 69 63 6B F7
+219753 - MIDI IN [Bome MIDI Translator Virtual In]: F0 00 01 06 02 12 00 01 00 31 F7
+219753 - MIDI OUT [PreSonus FP8]: F0 00 01 06 02 12 00 01 00 31 F7
+219753 - MIDI IN [Bome MIDI Translator Virtual In]: F0 00 01 06 02 12 00 02 00 3C 43 3E F7
+219753 - MIDI OUT [PreSonus FP8]: F0 00 01 06 02 12 00 02 00 3C 43 3E F7
+219753 - MIDI IN [Bome MIDI Translator Virtual In]: F0 00 01 06 02 12 01 00 00 53 6E 61 72 65 20 54 6F 70 F7
+219753 - MIDI OUT [PreSonus FP8]: F0 00 01 06 02 12 01 00 00 53 6E 61 72 65 20 54 6F 70 F7
+219753 - MIDI IN [Bome MIDI Translator Virtual In]: F0 00 01 06 02 12 01 01 00 32 F7
+219753 - MIDI OUT [PreSonus FP8]: F0 00 01 06 02 12 01 01 00 32 F7
+219754 - MIDI IN [Bome MIDI Translator Virtual In]: F0 00 01 06 02 12 01 02 00 3C 43 3E F7
+219754 - MIDI OUT [PreSonus FP8]: F0 00 01 06 02 12 01 02 00 3C 43 3E F7
+219754 - MIDI IN [Bome MIDI Translator Virtual In]: F0 00 01 06 02 12 02 00 00 53 6E 72 42 74 74 6D F7
+219754 - MIDI OUT [PreSonus FP8]: F0 00 01 06 02 12 02 00 00 53 6E 72 42 74 74 6D F7
+219754 - MIDI IN [Bome MIDI Translator Virtual In]: F0 00 01 06 02 12 02 01 00 33 F7
+219754 - MIDI OUT [PreSonus FP8]: F0 00 01 06 02 12 02 01 00 33 F7
+219754 - MIDI IN [Bome MIDI Translator Virtual In]: F0 00 01 06 02 12 02 02 00 3C 43 3E F7
+219754 - MIDI OUT [PreSonus FP8]: F0 00 01 06 02 12 02 02 00 3C 43 3E F7
+219754 - MIDI IN [Bome MIDI Translator Virtual In]: F0 00 01 06 02 12 03 00 00 48 69 48 61 74 F7
+219754 - MIDI OUT [PreSonus FP8]: F0 00 01 06 02 12 03 00 00 48 69 48 61 74 F7
+219754 - MIDI IN [Bome MIDI Translator Virtual In]: F0 00 01 06 02 12 03 01 00 34 F7
+219754 - MIDI OUT [PreSonus FP8]: F0 00 01 06 02 12 03 01 00 34 F7
+219755 - MIDI IN [Bome MIDI Translator Virtual In]: F0 00 01 06 02 12 03 02 00 3C 43 3E F7
+219755 - MIDI OUT [PreSonus FP8]: F0 00 01 06 02 12 03 02 00 3C 43 3E F7
+219755 - MIDI IN [Bome MIDI Translator Virtual In]: F0 00 01 06 02 12 04 00 00 54 6F 6D 20 31 F7
+219755 - MIDI OUT [PreSonus FP8]: F0 00 01 06 02 12 04 00 00 54 6F 6D 20 31 F7
+219755 - MIDI IN [Bome MIDI Translator Virtual In]: F0 00 01 06 02 12 04 01 00 35 F7
+219755 - MIDI OUT [PreSonus FP8]: F0 00 01 06 02 12 04 01 00 35 F7
+219755 - MIDI IN [Bome MIDI Translator Virtual In]: F0 00 01 06 02 12 04 02 00 52 33 30 F7
+219755 - MIDI OUT [PreSonus FP8]: F0 00 01 06 02 12 04 02 00 52 33 30 F7
+219755 - MIDI IN [Bome MIDI Translator Virtual In]: F0 00 01 06 02 12 05 00 00 54 6F 6D 20 32 F7
+219755 - MIDI OUT [PreSonus FP8]: F0 00 01 06 02 12 05 00 00 54 6F 6D 20 32 F7
+219755 - MIDI IN [Bome MIDI Translator Virtual In]: F0 00 01 06 02 12 05 01 00 36 F7
+219755 - MIDI OUT [PreSonus FP8]: F0 00 01 06 02 12 05 01 00 36 F7
+219756 - MIDI IN [Bome MIDI Translator Virtual In]: F0 00 01 06 02 12 05 02 00 4C 32 37 F7
+219756 - MIDI OUT [PreSonus FP8]: F0 00 01 06 02 12 05 02 00 4C 32 37 F7
+219756 - MIDI IN [Bome MIDI Translator Virtual In]: F0 00 01 06 02 12 06 00 00 54 6F 6D 20 33 F7
+219756 - MIDI OUT [PreSonus FP8]: F0 00 01 06 02 12 06 00 00 54 6F 6D 20 33 F7
+219756 - MIDI IN [Bome MIDI Translator Virtual In]: F0 00 01 06 02 12 06 01 00 37 F7
+219756 - MIDI OUT [PreSonus FP8]: F0 00 01 06 02 12 06 01 00 37 F7
+219756 - MIDI IN [Bome MIDI Translator Virtual In]: F0 00 01 06 02 12 06 02 00 4C 32 37 F7
+219756 - MIDI OUT [PreSonus FP8]: F0 00 01 06 02 12 06 02 00 4C 32 37 F7
+219756 - MIDI IN [Bome MIDI Translator Virtual In]: F0 00 01 06 02 12 07 00 00 4F 76 65 72 4C F7
+219756 - MIDI OUT [PreSonus FP8]: F0 00 01 06 02 12 07 00 00 4F 76 65 72 4C F7
+219756 - MIDI IN [Bome MIDI Translator Virtual In]: F0 00 01 06 02 12 07 01 00 38 F7
+219756 - MIDI OUT [PreSonus FP8]: F0 00 01 06 02 12 07 01 00 38 F7
+219757 - MIDI IN [Bome MIDI Translator Virtual In]: F0 00 01 06 02 12 07 02 00 3C 4C 3E F7
+219757 - MIDI OUT [PreSonus FP8]: F0 00 01 06 02 12 07 02 00 3C 4C 3E F7
+219779 - MIDI IN [Bome MIDI Translator Virtual In]: D8 48
+219779 - MIDI OUT [PreSonus FP8]: D8 48
+219779 - MIDI IN [Bome MIDI Translator Virtual In]: D9 4D
+219779 - MIDI OUT [PreSonus FP8]: D9 4D
+219779 - MIDI IN [Bome MIDI Translator Virtual In]: DC 4E
+219779 - MIDI OUT [PreSonus FP8]: DC 4E
+219779 - MIDI IN [Bome MIDI Translator Virtual In]: DD 4E
+219779 - MIDI OUT [PreSonus FP8]: DD 4E
+219779 - MIDI IN [Bome MIDI Translator Virtual In]: DE 4E
+219779 - MIDI OUT [PreSonus FP8]: DE 4E
+219816 - MIDI IN [Bome MIDI Translator Virtual In]: D8 47
+219816 - MIDI OUT [PreSonus FP8]: D8 47
+219816 - MIDI IN [Bome MIDI Translator Virtual In]: D9 48
+219816 - MIDI OUT [PreSonus FP8]: D9 48
+219816 - MIDI IN [Bome MIDI Translator Virtual In]: DC 49
+219816 - MIDI OUT [PreSonus FP8]: DC 49
+219816 - MIDI IN [Bome MIDI Translator Virtual In]: DD 49
+219816 - MIDI OUT [PreSonus FP8]: DD 49
+219816 - MIDI IN [Bome MIDI Translator Virtual In]: DE 49
+219816 - MIDI OUT [PreSonus FP8]: DE 49
+219864 - MIDI IN [Bome MIDI Translator Virtual In]: DC 48
+219864 - MIDI OUT [PreSonus FP8]: DC 48
+219864 - MIDI IN [Bome MIDI Translator Virtual In]: DD 48
+219864 - MIDI OUT [PreSonus FP8]: DD 48
+219864 - MIDI IN [Bome MIDI Translator Virtual In]: DE 48
+219864 - MIDI OUT [PreSonus FP8]: DE 48
+219909 - MIDI IN [Bome MIDI Translator Virtual In]: D9 47
+219909 - MIDI OUT [PreSonus FP8]: D9 47
+219955 - MIDI IN [Bome MIDI Translator Virtual In]: DC 47
+219955 - MIDI OUT [PreSonus FP8]: DC 47
+219955 - MIDI IN [Bome MIDI Translator Virtual In]: DD 47
+219955 - MIDI OUT [PreSonus FP8]: DD 47
+219956 - MIDI IN [Bome MIDI Translator Virtual In]: DE 47
+219956 - MIDI OUT [PreSonus FP8]: DE 47
+220721 - MIDI IN [Bome MIDI Translator Virtual In]: A0 00 00
+220721 - MIDI OUT [PreSonus FP8]: A0 00 00
+221756 - MIDI IN [Bome MIDI Translator Virtual In]: A0 00 00
+221756 - MIDI OUT [PreSonus FP8]: A0 00 00
+222785 - MIDI IN [Bome MIDI Translator Virtual In]: A0 00 00
+222785 - MIDI OUT [PreSonus FP8]: A0 00 00
+222857 - MIDI IN [PreSonus FP8]: 90 2F 7F
+222857 - MIDI OUT [Bome MIDI Translator Virtual Out]: 90 2F 7F
+222894 - MIDI IN [Bome MIDI Translator Virtual In]: 90 2F 7F
+222894 - MIDI OUT [PreSonus FP8]: 90 2F 7F
+222894 - MIDI IN [Bome MIDI Translator Virtual In]: 90 08 00
+222894 - MIDI OUT [PreSonus FP8]: 90 08 00
+222894 - MIDI IN [Bome MIDI Translator Virtual In]: 90 10 00
+222894 - MIDI OUT [PreSonus FP8]: 90 10 00
+222894 - MIDI IN [Bome MIDI Translator Virtual In]: D8 00
+222894 - MIDI OUT [PreSonus FP8]: D8 00
+222894 - MIDI IN [Bome MIDI Translator Virtual In]: B0 30 7F
+222894 - MIDI OUT [PreSonus FP8]: B0 30 7F
+222894 - MIDI IN [Bome MIDI Translator Virtual In]: 90 18 00
+222894 - MIDI OUT [PreSonus FP8]: 90 18 00
+222894 - MIDI IN [Bome MIDI Translator Virtual In]: 91 18 7F
+222894 - MIDI OUT [PreSonus FP8]: 91 18 7F
+222894 - MIDI IN [Bome MIDI Translator Virtual In]: 92 18 7F
+222894 - MIDI OUT [PreSonus FP8]: 92 18 7F
+222894 - MIDI IN [Bome MIDI Translator Virtual In]: 93 18 7F
+222894 - MIDI OUT [PreSonus FP8]: 93 18 7F
+222895 - MIDI IN [Bome MIDI Translator Virtual In]: E0 0A 36
+222895 - MIDI OUT [PreSonus FP8]: E0 0A 36
+222895 - MIDI IN [Bome MIDI Translator Virtual In]: 90 09 00
+222895 - MIDI OUT [PreSonus FP8]: 90 09 00
+222895 - MIDI IN [Bome MIDI Translator Virtual In]: 90 11 00
+222895 - MIDI OUT [PreSonus FP8]: 90 11 00
+222895 - MIDI IN [Bome MIDI Translator Virtual In]: D9 00
+222895 - MIDI OUT [PreSonus FP8]: D9 00
+222895 - MIDI IN [Bome MIDI Translator Virtual In]: B0 31 00
+222895 - MIDI OUT [PreSonus FP8]: B0 31 00
+222895 - MIDI IN [Bome MIDI Translator Virtual In]: 90 19 00
+222895 - MIDI OUT [PreSonus FP8]: 90 19 00
+222895 - MIDI IN [Bome MIDI Translator Virtual In]: 91 19 7F
+222895 - MIDI OUT [PreSonus FP8]: 91 19 7F
+222895 - MIDI IN [Bome MIDI Translator Virtual In]: 92 19 7F
+222895 - MIDI OUT [PreSonus FP8]: 92 19 7F
+222896 - MIDI IN [Bome MIDI Translator Virtual In]: 93 19 7F
+222896 - MIDI OUT [PreSonus FP8]: 93 19 7F
+222896 - MIDI IN [Bome MIDI Translator Virtual In]: E1 62 2F
+222896 - MIDI OUT [PreSonus FP8]: E1 62 2F
+222896 - MIDI IN [Bome MIDI Translator Virtual In]: 90 0A 00
+222896 - MIDI OUT [PreSonus FP8]: 90 0A 00
+222896 - MIDI IN [Bome MIDI Translator Virtual In]: 90 12 00
+222896 - MIDI OUT [PreSonus FP8]: 90 12 00
+222896 - MIDI IN [Bome MIDI Translator Virtual In]: B0 32 7F
+222896 - MIDI OUT [PreSonus FP8]: B0 32 7F
+222896 - MIDI IN [Bome MIDI Translator Virtual In]: 90 1A 00
+222896 - MIDI OUT [PreSonus FP8]: 90 1A 00
+222896 - MIDI IN [Bome MIDI Translator Virtual In]: 91 1A 7F
+222896 - MIDI OUT [PreSonus FP8]: 91 1A 7F
+222896 - MIDI IN [Bome MIDI Translator Virtual In]: 92 1A 7F
+222896 - MIDI OUT [PreSonus FP8]: 92 1A 7F
+222896 - MIDI IN [Bome MIDI Translator Virtual In]: 93 1A 7F
+222896 - MIDI OUT [PreSonus FP8]: 93 1A 7F
+222897 - MIDI IN [Bome MIDI Translator Virtual In]: E2 62 2F
+222897 - MIDI OUT [PreSonus FP8]: E2 62 2F
+222897 - MIDI IN [Bome MIDI Translator Virtual In]: 90 0B 00
+222897 - MIDI OUT [PreSonus FP8]: 90 0B 00
+222897 - MIDI IN [Bome MIDI Translator Virtual In]: 90 13 00
+222897 - MIDI OUT [PreSonus FP8]: 90 13 00
+222897 - MIDI IN [Bome MIDI Translator Virtual In]: B0 33 40
+222897 - MIDI OUT [PreSonus FP8]: B0 33 40
+222897 - MIDI IN [Bome MIDI Translator Virtual In]: 90 1B 00
+222897 - MIDI OUT [PreSonus FP8]: 90 1B 00
+222897 - MIDI IN [Bome MIDI Translator Virtual In]: 91 1B 7F
+222897 - MIDI OUT [PreSonus FP8]: 91 1B 7F
+222897 - MIDI IN [Bome MIDI Translator Virtual In]: 92 1B 7F
+222897 - MIDI OUT [PreSonus FP8]: 92 1B 7F
+222897 - MIDI IN [Bome MIDI Translator Virtual In]: 93 1B 7F
+222897 - MIDI OUT [PreSonus FP8]: 93 1B 7F
+222898 - MIDI IN [Bome MIDI Translator Virtual In]: E3 23 61
+222898 - MIDI OUT [PreSonus FP8]: E3 23 61
+222898 - MIDI IN [Bome MIDI Translator Virtual In]: 90 0C 00
+222898 - MIDI OUT [PreSonus FP8]: 90 0C 00
+222898 - MIDI IN [Bome MIDI Translator Virtual In]: 90 14 00
+222898 - MIDI OUT [PreSonus FP8]: 90 14 00
+222898 - MIDI IN [Bome MIDI Translator Virtual In]: DC 00
+222898 - MIDI OUT [PreSonus FP8]: DC 00
+222898 - MIDI IN [Bome MIDI Translator Virtual In]: B0 34 40
+222898 - MIDI OUT [PreSonus FP8]: B0 34 40
+222898 - MIDI IN [Bome MIDI Translator Virtual In]: 90 1C 00
+222898 - MIDI OUT [PreSonus FP8]: 90 1C 00
+222898 - MIDI IN [Bome MIDI Translator Virtual In]: 91 1C 3B
+222898 - MIDI OUT [PreSonus FP8]: 91 1C 3B
+222898 - MIDI IN [Bome MIDI Translator Virtual In]: 92 1C 26
+222898 - MIDI OUT [PreSonus FP8]: 92 1C 26
+222898 - MIDI IN [Bome MIDI Translator Virtual In]: 93 1C 07
+222898 - MIDI OUT [PreSonus FP8]: 93 1C 07
+222898 - MIDI IN [Bome MIDI Translator Virtual In]: E4 6F 2E
+222898 - MIDI OUT [PreSonus FP8]: E4 6F 2E
+222898 - MIDI IN [Bome MIDI Translator Virtual In]: 90 0D 00
+222899 - MIDI OUT [PreSonus FP8]: 90 0D 00
+222899 - MIDI IN [Bome MIDI Translator Virtual In]: 90 15 00
+222899 - MIDI OUT [PreSonus FP8]: 90 15 00
+222899 - MIDI IN [Bome MIDI Translator Virtual In]: DD 00
+222899 - MIDI OUT [PreSonus FP8]: DD 00
+222899 - MIDI IN [Bome MIDI Translator Virtual In]: B0 35 40
+222899 - MIDI OUT [PreSonus FP8]: B0 35 40
+222899 - MIDI IN [Bome MIDI Translator Virtual In]: 90 1D 00
+222899 - MIDI OUT [PreSonus FP8]: 90 1D 00
+222899 - MIDI IN [Bome MIDI Translator Virtual In]: 91 1D 6D
+222899 - MIDI OUT [PreSonus FP8]: 91 1D 6D
+222899 - MIDI IN [Bome MIDI Translator Virtual In]: 92 1D 59
+222899 - MIDI OUT [PreSonus FP8]: 92 1D 59
+222899 - MIDI IN [Bome MIDI Translator Virtual In]: 93 1D 3F
+222899 - MIDI OUT [PreSonus FP8]: 93 1D 3F
+222899 - MIDI IN [Bome MIDI Translator Virtual In]: E5 0F 51
+222899 - MIDI OUT [PreSonus FP8]: E5 0F 51
+222900 - MIDI IN [Bome MIDI Translator Virtual In]: 90 0E 00
+222900 - MIDI OUT [PreSonus FP8]: 90 0E 00
+222900 - MIDI IN [Bome MIDI Translator Virtual In]: 90 16 00
+222900 - MIDI OUT [PreSonus FP8]: 90 16 00
+222900 - MIDI IN [Bome MIDI Translator Virtual In]: DE 00
+222900 - MIDI OUT [PreSonus FP8]: DE 00
+222900 - MIDI IN [Bome MIDI Translator Virtual In]: B0 36 40
+222900 - MIDI OUT [PreSonus FP8]: B0 36 40
+222900 - MIDI IN [Bome MIDI Translator Virtual In]: 90 1E 00
+222900 - MIDI OUT [PreSonus FP8]: 90 1E 00
+222900 - MIDI IN [Bome MIDI Translator Virtual In]: 91 1E 65
+222900 - MIDI OUT [PreSonus FP8]: 91 1E 65
+222900 - MIDI IN [Bome MIDI Translator Virtual In]: 92 1E 56
+222900 - MIDI OUT [PreSonus FP8]: 92 1E 56
+222900 - MIDI IN [Bome MIDI Translator Virtual In]: 93 1E 03
+222900 - MIDI OUT [PreSonus FP8]: 93 1E 03
+222900 - MIDI IN [Bome MIDI Translator Virtual In]: E6 23 61
+222900 - MIDI OUT [PreSonus FP8]: E6 23 61
+222900 - MIDI IN [Bome MIDI Translator Virtual In]: 90 0F 00
+222900 - MIDI OUT [PreSonus FP8]: 90 0F 00
+222901 - MIDI IN [Bome MIDI Translator Virtual In]: 90 17 00
+222901 - MIDI OUT [PreSonus FP8]: 90 17 00
+222901 - MIDI IN [Bome MIDI Translator Virtual In]: B0 37 40
+222901 - MIDI OUT [PreSonus FP8]: B0 37 40
+222901 - MIDI IN [Bome MIDI Translator Virtual In]: 90 1F 00
+222901 - MIDI OUT [PreSonus FP8]: 90 1F 00
+222901 - MIDI IN [Bome MIDI Translator Virtual In]: 91 1F 7F
+222901 - MIDI OUT [PreSonus FP8]: 91 1F 7F
+222901 - MIDI IN [Bome MIDI Translator Virtual In]: 92 1F 5E
+222901 - MIDI OUT [PreSonus FP8]: 92 1F 5E
+222901 - MIDI IN [Bome MIDI Translator Virtual In]: 93 1F 1F
+222901 - MIDI OUT [PreSonus FP8]: 93 1F 1F
+222901 - MIDI IN [Bome MIDI Translator Virtual In]: E7 60 40
+222901 - MIDI OUT [PreSonus FP8]: E7 60 40
+222911 - MIDI IN [Bome MIDI Translator Virtual In]: F0 00 01 06 02 12 00 00 00 4F 76 65 72 52 F7
+222911 - MIDI OUT [PreSonus FP8]: F0 00 01 06 02 12 00 00 00 4F 76 65 72 52 F7
+222911 - MIDI IN [Bome MIDI Translator Virtual In]: F0 00 01 06 02 12 00 01 00 39 F7
+222911 - MIDI OUT [PreSonus FP8]: F0 00 01 06 02 12 00 01 00 39 F7
+222912 - MIDI IN [Bome MIDI Translator Virtual In]: F0 00 01 06 02 12 00 02 00 3C 52 3E F7
+222912 - MIDI OUT [PreSonus FP8]: F0 00 01 06 02 12 00 02 00 3C 52 3E F7
+222912 - MIDI IN [Bome MIDI Translator Virtual In]: F0 00 01 06 02 12 01 00 00 52 6F 6F 6D 4C F7
+222912 - MIDI OUT [PreSonus FP8]: F0 00 01 06 02 12 01 00 00 52 6F 6F 6D 4C F7
+222912 - MIDI IN [Bome MIDI Translator Virtual In]: F0 00 01 06 02 12 01 01 00 31 30 F7
+222912 - MIDI OUT [PreSonus FP8]: F0 00 01 06 02 12 01 01 00 31 30 F7
+222912 - MIDI IN [Bome MIDI Translator Virtual In]: F0 00 01 06 02 12 01 02 00 3C 4C 3E F7
+222912 - MIDI OUT [PreSonus FP8]: F0 00 01 06 02 12 01 02 00 3C 4C 3E F7
+222912 - MIDI IN [Bome MIDI Translator Virtual In]: F0 00 01 06 02 12 02 00 00 52 6F 6F 6D 52 F7
+222912 - MIDI OUT [PreSonus FP8]: F0 00 01 06 02 12 02 00 00 52 6F 6F 6D 52 F7
+222912 - MIDI IN [Bome MIDI Translator Virtual In]: F0 00 01 06 02 12 02 01 00 31 31 F7
+222912 - MIDI OUT [PreSonus FP8]: F0 00 01 06 02 12 02 01 00 31 31 F7
+222913 - MIDI IN [Bome MIDI Translator Virtual In]: F0 00 01 06 02 12 02 02 00 3C 52 3E F7
+222913 - MIDI OUT [PreSonus FP8]: F0 00 01 06 02 12 02 02 00 3C 52 3E F7
+222913 - MIDI IN [Bome MIDI Translator Virtual In]: F0 00 01 06 02 12 03 00 00 44 72 75 6D 73 F7
+222913 - MIDI OUT [PreSonus FP8]: F0 00 01 06 02 12 03 00 00 44 72 75 6D 73 F7
+222913 - MIDI IN [Bome MIDI Translator Virtual In]: F0 00 01 06 02 12 03 01 00 31 32 F7
+222913 - MIDI OUT [PreSonus FP8]: F0 00 01 06 02 12 03 01 00 31 32 F7
+222913 - MIDI IN [Bome MIDI Translator Virtual In]: F0 00 01 06 02 12 04 00 00 42 61 73 73 F7
+222913 - MIDI OUT [PreSonus FP8]: F0 00 01 06 02 12 04 00 00 42 61 73 73 F7
+222913 - MIDI IN [Bome MIDI Translator Virtual In]: F0 00 01 06 02 12 04 01 00 31 33 F7
+222913 - MIDI OUT [PreSonus FP8]: F0 00 01 06 02 12 04 01 00 31 33 F7
+222913 - MIDI IN [Bome MIDI Translator Virtual In]: F0 00 01 06 02 12 04 02 00 3C 43 3E F7
+222913 - MIDI OUT [PreSonus FP8]: F0 00 01 06 02 12 04 02 00 3C 43 3E F7
+222913 - MIDI IN [Bome MIDI Translator Virtual In]: F0 00 01 06 02 12 05 00 00 45 6C 65 63 20 44 49 F7
+222913 - MIDI OUT [PreSonus FP8]: F0 00 01 06 02 12 05 00 00 45 6C 65 63 20 44 49 F7
+222914 - MIDI IN [Bome MIDI Translator Virtual In]: F0 00 01 06 02 12 05 01 00 31 34 F7
+222914 - MIDI OUT [PreSonus FP8]: F0 00 01 06 02 12 05 01 00 31 34 F7
+222914 - MIDI IN [Bome MIDI Translator Virtual In]: F0 00 01 06 02 12 05 02 00 3C 43 3E F7
+222914 - MIDI OUT [PreSonus FP8]: F0 00 01 06 02 12 05 02 00 3C 43 3E F7
+222914 - MIDI IN [Bome MIDI Translator Virtual In]: F0 00 01 06 02 12 06 00 00 45 2D 47 75 69 74 61 72 F7
+222914 - MIDI OUT [PreSonus FP8]: F0 00 01 06 02 12 06 00 00 45 2D 47 75 69 74 61 72 F7
+222914 - MIDI IN [Bome MIDI Translator Virtual In]: F0 00 01 06 02 12 06 01 00 31 35 F7
+222914 - MIDI OUT [PreSonus FP8]: F0 00 01 06 02 12 06 01 00 31 35 F7
+222914 - MIDI IN [Bome MIDI Translator Virtual In]: F0 00 01 06 02 12 06 02 00 3C 43 3E F7
+222914 - MIDI OUT [PreSonus FP8]: F0 00 01 06 02 12 06 02 00 3C 43 3E F7
+222914 - MIDI IN [Bome MIDI Translator Virtual In]: F0 00 01 06 02 12 07 00 00 41 2D 47 75 69 74 61 72 F7
+222914 - MIDI OUT [PreSonus FP8]: F0 00 01 06 02 12 07 00 00 41 2D 47 75 69 74 61 72 F7
+222914 - MIDI IN [Bome MIDI Translator Virtual In]: F0 00 01 06 02 12 07 01 00 31 36 F7
+222914 - MIDI OUT [PreSonus FP8]: F0 00 01 06 02 12 07 01 00 31 36 F7
+222915 - MIDI IN [Bome MIDI Translator Virtual In]: F0 00 01 06 02 12 07 02 00 3C 43 3E F7
+222915 - MIDI OUT [PreSonus FP8]: F0 00 01 06 02 12 07 02 00 3C 43 3E F7
+222957 - MIDI IN [PreSonus FP8]: 90 2F 00
+222957 - MIDI OUT [Bome MIDI Translator Virtual Out]: 90 2F 00
+223001 - MIDI IN [Bome MIDI Translator Virtual In]: 90 2F 00
+223001 - MIDI OUT [PreSonus FP8]: 90 2F 00
+223784 - MIDI IN [Bome MIDI Translator Virtual In]: A0 00 00
+223784 - MIDI OUT [PreSonus FP8]: A0 00 00
+224177 - MIDI IN [PreSonus FP8]: 90 2F 7F
+224177 - MIDI OUT [Bome MIDI Translator Virtual Out]: 90 2F 7F
+224206 - MIDI IN [Bome MIDI Translator Virtual In]: 90 2F 7F
+224206 - MIDI OUT [PreSonus FP8]: 90 2F 7F
+224206 - MIDI IN [Bome MIDI Translator Virtual In]: 90 08 00
+224206 - MIDI OUT [PreSonus FP8]: 90 08 00
+224207 - MIDI IN [Bome MIDI Translator Virtual In]: 90 10 00
+224207 - MIDI OUT [PreSonus FP8]: 90 10 00
+224207 - MIDI IN [Bome MIDI Translator Virtual In]: B0 30 40
+224207 - MIDI OUT [PreSonus FP8]: B0 30 40
+224207 - MIDI IN [Bome MIDI Translator Virtual In]: 90 18 00
+224207 - MIDI OUT [PreSonus FP8]: 90 18 00
+224207 - MIDI IN [Bome MIDI Translator Virtual In]: 91 18 65
+224207 - MIDI OUT [PreSonus FP8]: 91 18 65
+224207 - MIDI IN [Bome MIDI Translator Virtual In]: 92 18 56
+224207 - MIDI OUT [PreSonus FP8]: 92 18 56
+224207 - MIDI IN [Bome MIDI Translator Virtual In]: 93 18 03
+224207 - MIDI OUT [PreSonus FP8]: 93 18 03
+224207 - MIDI IN [Bome MIDI Translator Virtual In]: E0 23 61
+224207 - MIDI OUT [PreSonus FP8]: E0 23 61
+224207 - MIDI IN [Bome MIDI Translator Virtual In]: 90 09 00
+224207 - MIDI OUT [PreSonus FP8]: 90 09 00
+224207 - MIDI IN [Bome MIDI Translator Virtual In]: 90 11 00
+224207 - MIDI OUT [PreSonus FP8]: 90 11 00
+224207 - MIDI IN [Bome MIDI Translator Virtual In]: B0 31 40
+224207 - MIDI OUT [PreSonus FP8]: B0 31 40
+224207 - MIDI IN [Bome MIDI Translator Virtual In]: 90 19 00
+224207 - MIDI OUT [PreSonus FP8]: 90 19 00
+224208 - MIDI IN [Bome MIDI Translator Virtual In]: 91 19 7F
+224208 - MIDI OUT [PreSonus FP8]: 91 19 7F
+224208 - MIDI IN [Bome MIDI Translator Virtual In]: 92 19 5E
+224208 - MIDI OUT [PreSonus FP8]: 92 19 5E
+224208 - MIDI IN [Bome MIDI Translator Virtual In]: 93 19 1F
+224208 - MIDI OUT [PreSonus FP8]: 93 19 1F
+224208 - MIDI IN [Bome MIDI Translator Virtual In]: E1 60 40
+224208 - MIDI OUT [PreSonus FP8]: E1 60 40
+224208 - MIDI IN [Bome MIDI Translator Virtual In]: 90 0A 00
+224208 - MIDI OUT [PreSonus FP8]: 90 0A 00
+224208 - MIDI IN [Bome MIDI Translator Virtual In]: 90 12 00
+224208 - MIDI OUT [PreSonus FP8]: 90 12 00
+224208 - MIDI IN [Bome MIDI Translator Virtual In]: B0 32 40
+224208 - MIDI OUT [PreSonus FP8]: B0 32 40
+224209 - MIDI IN [Bome MIDI Translator Virtual In]: 90 1A 00
+224209 - MIDI OUT [PreSonus FP8]: 90 1A 00
+224209 - MIDI IN [Bome MIDI Translator Virtual In]: 91 1A 49
+224209 - MIDI OUT [PreSonus FP8]: 91 1A 49
+224209 - MIDI IN [Bome MIDI Translator Virtual In]: 92 1A 29
+224209 - MIDI OUT [PreSonus FP8]: 92 1A 29
+224209 - MIDI IN [Bome MIDI Translator Virtual In]: 93 1A 51
+224209 - MIDI OUT [PreSonus FP8]: 93 1A 51
+224209 - MIDI IN [Bome MIDI Translator Virtual In]: E2 23 61
+224209 - MIDI OUT [PreSonus FP8]: E2 23 61
+224209 - MIDI IN [Bome MIDI Translator Virtual In]: 90 0B 00
+224209 - MIDI OUT [PreSonus FP8]: 90 0B 00
+224209 - MIDI IN [Bome MIDI Translator Virtual In]: 90 13 00
+224209 - MIDI OUT [PreSonus FP8]: 90 13 00
+224210 - MIDI IN [Bome MIDI Translator Virtual In]: B0 33 40
+224210 - MIDI OUT [PreSonus FP8]: B0 33 40
+224210 - MIDI IN [Bome MIDI Translator Virtual In]: 90 1B 00
+224210 - MIDI OUT [PreSonus FP8]: 90 1B 00
+224210 - MIDI IN [Bome MIDI Translator Virtual In]: 91 1B 5D
+224210 - MIDI OUT [PreSonus FP8]: 91 1B 5D
+224210 - MIDI IN [Bome MIDI Translator Virtual In]: 92 1B 37
+224210 - MIDI OUT [PreSonus FP8]: 92 1B 37
+224210 - MIDI IN [Bome MIDI Translator Virtual In]: 93 1B 67
+224210 - MIDI OUT [PreSonus FP8]: 93 1B 67
+224210 - MIDI IN [Bome MIDI Translator Virtual In]: E3 23 61
+224210 - MIDI OUT [PreSonus FP8]: E3 23 61
+224210 - MIDI IN [Bome MIDI Translator Virtual In]: 90 0C 00
+224210 - MIDI OUT [PreSonus FP8]: 90 0C 00
+224210 - MIDI IN [Bome MIDI Translator Virtual In]: 90 14 00
+224210 - MIDI OUT [PreSonus FP8]: 90 14 00
+224211 - MIDI IN [Bome MIDI Translator Virtual In]: B0 34 40
+224211 - MIDI OUT [PreSonus FP8]: B0 34 40
+224211 - MIDI IN [Bome MIDI Translator Virtual In]: 90 1C 00
+224211 - MIDI OUT [PreSonus FP8]: 90 1C 00
+224211 - MIDI IN [Bome MIDI Translator Virtual In]: 91 1C 7F
+224211 - MIDI OUT [PreSonus FP8]: 91 1C 7F
+224211 - MIDI IN [Bome MIDI Translator Virtual In]: 92 1C 7F
+224211 - MIDI OUT [PreSonus FP8]: 92 1C 7F
+224211 - MIDI IN [Bome MIDI Translator Virtual In]: 93 1C 7F
+224211 - MIDI OUT [PreSonus FP8]: 93 1C 7F
+224211 - MIDI IN [Bome MIDI Translator Virtual In]: E4 23 61
+224211 - MIDI OUT [PreSonus FP8]: E4 23 61
+224211 - MIDI IN [Bome MIDI Translator Virtual In]: 90 0D 00
+224211 - MIDI OUT [PreSonus FP8]: 90 0D 00
+224211 - MIDI IN [Bome MIDI Translator Virtual In]: 90 15 00
+224211 - MIDI OUT [PreSonus FP8]: 90 15 00
+224211 - MIDI IN [Bome MIDI Translator Virtual In]: B0 35 40
+224211 - MIDI OUT [PreSonus FP8]: B0 35 40
+224212 - MIDI IN [Bome MIDI Translator Virtual In]: 90 1D 00
+224212 - MIDI OUT [PreSonus FP8]: 90 1D 00
+224212 - MIDI IN [Bome MIDI Translator Virtual In]: 91 1D 7F
+224212 - MIDI OUT [PreSonus FP8]: 91 1D 7F
+224212 - MIDI IN [Bome MIDI Translator Virtual In]: 92 1D 7F
+224212 - MIDI OUT [PreSonus FP8]: 92 1D 7F
+224212 - MIDI IN [Bome MIDI Translator Virtual In]: 93 1D 7F
+224212 - MIDI OUT [PreSonus FP8]: 93 1D 7F
+224212 - MIDI IN [Bome MIDI Translator Virtual In]: E5 23 61
+224212 - MIDI OUT [PreSonus FP8]: E5 23 61
+224212 - MIDI IN [Bome MIDI Translator Virtual In]: 90 0E 00
+224212 - MIDI OUT [PreSonus FP8]: 90 0E 00
+224212 - MIDI IN [Bome MIDI Translator Virtual In]: 90 16 00
+224212 - MIDI OUT [PreSonus FP8]: 90 16 00
+224212 - MIDI IN [Bome MIDI Translator Virtual In]: B0 3E 04
+224212 - MIDI OUT [PreSonus FP8]: B0 3E 04
+224213 - MIDI IN [Bome MIDI Translator Virtual In]: B0 36 00
+224213 - MIDI OUT [PreSonus FP8]: B0 36 00
+224213 - MIDI IN [Bome MIDI Translator Virtual In]: 90 1E 00
+224213 - MIDI OUT [PreSonus FP8]: 90 1E 00
+224213 - MIDI IN [Bome MIDI Translator Virtual In]: 91 1E 7F
+224213 - MIDI OUT [PreSonus FP8]: 91 1E 7F
+224213 - MIDI IN [Bome MIDI Translator Virtual In]: 92 1E 7F
+224213 - MIDI OUT [PreSonus FP8]: 92 1E 7F
+224213 - MIDI IN [Bome MIDI Translator Virtual In]: 93 1E 7F
+224213 - MIDI OUT [PreSonus FP8]: 93 1E 7F
+224213 - MIDI IN [Bome MIDI Translator Virtual In]: E6 23 61
+224213 - MIDI OUT [PreSonus FP8]: E6 23 61
+224213 - MIDI IN [Bome MIDI Translator Virtual In]: 90 0F 00
+224213 - MIDI OUT [PreSonus FP8]: 90 0F 00
+224213 - MIDI IN [Bome MIDI Translator Virtual In]: 90 17 00
+224213 - MIDI OUT [PreSonus FP8]: 90 17 00
+224213 - MIDI IN [Bome MIDI Translator Virtual In]: B0 3F 04
+224213 - MIDI OUT [PreSonus FP8]: B0 3F 04
+224214 - MIDI IN [Bome MIDI Translator Virtual In]: B0 37 00
+224214 - MIDI OUT [PreSonus FP8]: B0 37 00
+224214 - MIDI IN [Bome MIDI Translator Virtual In]: 90 1F 00
+224214 - MIDI OUT [PreSonus FP8]: 90 1F 00
+224214 - MIDI IN [Bome MIDI Translator Virtual In]: 91 1F 7F
+224214 - MIDI OUT [PreSonus FP8]: 91 1F 7F
+224214 - MIDI IN [Bome MIDI Translator Virtual In]: 92 1F 7F
+224214 - MIDI OUT [PreSonus FP8]: 92 1F 7F
+224214 - MIDI IN [Bome MIDI Translator Virtual In]: 93 1F 7F
+224214 - MIDI OUT [PreSonus FP8]: 93 1F 7F
+224214 - MIDI IN [Bome MIDI Translator Virtual In]: E7 23 61
+224214 - MIDI OUT [PreSonus FP8]: E7 23 61
+224223 - MIDI IN [Bome MIDI Translator Virtual In]: F0 00 01 06 02 12 00 00 00 45 2D 47 75 69 74 61 72 F7
+224223 - MIDI OUT [PreSonus FP8]: F0 00 01 06 02 12 00 00 00 45 2D 47 75 69 74 61 72 F7
+224223 - MIDI IN [Bome MIDI Translator Virtual In]: F0 00 01 06 02 12 00 01 00 31 35 F7
+224223 - MIDI OUT [PreSonus FP8]: F0 00 01 06 02 12 00 01 00 31 35 F7
+224224 - MIDI IN [Bome MIDI Translator Virtual In]: F0 00 01 06 02 12 00 02 00 3C 43 3E F7
+224224 - MIDI OUT [PreSonus FP8]: F0 00 01 06 02 12 00 02 00 3C 43 3E F7
+224224 - MIDI IN [Bome MIDI Translator Virtual In]: F0 00 01 06 02 12 01 00 00 41 2D 47 75 69 74 61 72 F7
+224224 - MIDI OUT [PreSonus FP8]: F0 00 01 06 02 12 01 00 00 41 2D 47 75 69 74 61 72 F7
+224224 - MIDI IN [Bome MIDI Translator Virtual In]: F0 00 01 06 02 12 01 01 00 31 36 F7
+224224 - MIDI OUT [PreSonus FP8]: F0 00 01 06 02 12 01 01 00 31 36 F7
+224224 - MIDI IN [Bome MIDI Translator Virtual In]: F0 00 01 06 02 12 01 02 00 3C 43 3E F7
+224224 - MIDI OUT [PreSonus FP8]: F0 00 01 06 02 12 01 02 00 3C 43 3E F7
+224224 - MIDI IN [Bome MIDI Translator Virtual In]: F0 00 01 06 02 12 02 00 00 56 6F 63 61 6C 20 31 F7
+224224 - MIDI OUT [PreSonus FP8]: F0 00 01 06 02 12 02 00 00 56 6F 63 61 6C 20 31 F7
+224224 - MIDI IN [Bome MIDI Translator Virtual In]: F0 00 01 06 02 12 02 01 00 31 37 F7
+224224 - MIDI OUT [PreSonus FP8]: F0 00 01 06 02 12 02 01 00 31 37 F7
+224225 - MIDI IN [Bome MIDI Translator Virtual In]: F0 00 01 06 02 12 02 02 00 3C 43 3E F7
+224225 - MIDI OUT [PreSonus FP8]: F0 00 01 06 02 12 02 02 00 3C 43 3E F7
+224225 - MIDI IN [Bome MIDI Translator Virtual In]: F0 00 01 06 02 12 03 00 00 56 6F 63 61 6C 20 32 F7
+224225 - MIDI OUT [PreSonus FP8]: F0 00 01 06 02 12 03 00 00 56 6F 63 61 6C 20 32 F7
+224225 - MIDI IN [Bome MIDI Translator Virtual In]: F0 00 01 06 02 12 03 01 00 31 38 F7
+224225 - MIDI OUT [PreSonus FP8]: F0 00 01 06 02 12 03 01 00 31 38 F7
+224225 - MIDI IN [Bome MIDI Translator Virtual In]: F0 00 01 06 02 12 04 00 00 52 65 76 65 72 62 F7
+224225 - MIDI OUT [PreSonus FP8]: F0 00 01 06 02 12 04 00 00 52 65 76 65 72 62 F7
+224225 - MIDI IN [Bome MIDI Translator Virtual In]: F0 00 01 06 02 12 04 01 00 31 39 F7
+224225 - MIDI OUT [PreSonus FP8]: F0 00 01 06 02 12 04 01 00 31 39 F7
+224225 - MIDI IN [Bome MIDI Translator Virtual In]: F0 00 01 06 02 12 05 00 00 44 65 6C 61 79 F7
+224225 - MIDI OUT [PreSonus FP8]: F0 00 01 06 02 12 05 00 00 44 65 6C 61 79 F7
+224225 - MIDI IN [Bome MIDI Translator Virtual In]: F0 00 01 06 02 12 05 01 00 32 30 F7
+224225 - MIDI OUT [PreSonus FP8]: F0 00 01 06 02 12 05 01 00 32 30 F7
+224226 - MIDI IN [Bome MIDI Translator Virtual In]: F0 00 01 06 02 12 06 00 00 63 6C 69 63 6B F7
+224226 - MIDI OUT [PreSonus FP8]: F0 00 01 06 02 12 06 00 00 63 6C 69 63 6B F7
+224226 - MIDI IN [Bome MIDI Translator Virtual In]: F0 00 01 06 02 12 06 01 00 31 F7
+224226 - MIDI OUT [PreSonus FP8]: F0 00 01 06 02 12 06 01 00 31 F7
+224226 - MIDI IN [Bome MIDI Translator Virtual In]: F0 00 01 06 02 12 06 02 00 F7
+224226 - MIDI OUT [PreSonus FP8]: F0 00 01 06 02 12 06 02 00 F7
+224226 - MIDI IN [Bome MIDI Translator Virtual In]: F0 00 01 06 02 12 07 00 00 4D 61 69 6E 20 4F 75 74 F7
+224226 - MIDI OUT [PreSonus FP8]: F0 00 01 06 02 12 07 00 00 4D 61 69 6E 20 4F 75 74 F7
+224226 - MIDI IN [Bome MIDI Translator Virtual In]: F0 00 01 06 02 12 07 01 00 31 F7
+224226 - MIDI OUT [PreSonus FP8]: F0 00 01 06 02 12 07 01 00 31 F7
+224227 - MIDI IN [Bome MIDI Translator Virtual In]: F0 00 01 06 02 12 07 02 00 F7
+224227 - MIDI OUT [PreSonus FP8]: F0 00 01 06 02 12 07 02 00 F7
+224296 - MIDI IN [PreSonus FP8]: 90 2F 00
+224296 - MIDI OUT [Bome MIDI Translator Virtual Out]: 90 2F 00
+224313 - MIDI IN [Bome MIDI Translator Virtual In]: 90 2F 00
+224313 - MIDI OUT [PreSonus FP8]: 90 2F 00
+224799 - MIDI IN [Bome MIDI Translator Virtual In]: A0 00 00
+224799 - MIDI OUT [PreSonus FP8]: A0 00 00
+225804 - MIDI IN [Bome MIDI Translator Virtual In]: A0 00 00
+225804 - MIDI OUT [PreSonus FP8]: A0 00 00
+226818 - MIDI IN [Bome MIDI Translator Virtual In]: A0 00 00
+226818 - MIDI OUT [PreSonus FP8]: A0 00 00
+227830 - MIDI IN [Bome MIDI Translator Virtual In]: A0 00 00
+227830 - MIDI OUT [PreSonus FP8]: A0 00 00
+228832 - MIDI IN [Bome MIDI Translator Virtual In]: A0 00 00
+228832 - MIDI OUT [PreSonus FP8]: A0 00 00
+229846 - MIDI IN [Bome MIDI Translator Virtual In]: A0 00 00
+229846 - MIDI OUT [PreSonus FP8]: A0 00 00
+230845 - MIDI IN [Bome MIDI Translator Virtual In]: A0 00 00
+230845 - MIDI OUT [PreSonus FP8]: A0 00 00
+231861 - MIDI IN [Bome MIDI Translator Virtual In]: A0 00 00
+231861 - MIDI OUT [PreSonus FP8]: A0 00 00
+232865 - MIDI IN [Bome MIDI Translator Virtual In]: A0 00 00
+232865 - MIDI OUT [PreSonus FP8]: A0 00 00
+233864 - MIDI IN [Bome MIDI Translator Virtual In]: A0 00 00
+233864 - MIDI OUT [PreSonus FP8]: A0 00 00
+
+All global variables are 0
+
+234880 - MIDI IN [Bome MIDI Translator Virtual In]: A0 00 00
+234880 - MIDI OUT [PreSonus FP8]: A0 00 00
+
+All global variables are 0
+
+235909 - MIDI IN [Bome MIDI Translator Virtual In]: A0 00 00
+235909 - MIDI OUT [PreSonus FP8]: A0 00 00
+
+All global variables are 0
+
+
+All global variables are 0
+
+236908 - MIDI IN [Bome MIDI Translator Virtual In]: A0 00 00
+236908 - MIDI OUT [PreSonus FP8]: A0 00 00
+
+All global variables are 0
+
+
+All global variables are 0
+
+237924 - MIDI IN [Bome MIDI Translator Virtual In]: A0 00 00
+237924 - MIDI OUT [PreSonus FP8]: A0 00 00
+238924 - MIDI IN [Bome MIDI Translator Virtual In]: A0 00 00
+238924 - MIDI OUT [PreSonus FP8]: A0 00 00
+239941 - MIDI IN [Bome MIDI Translator Virtual In]: A0 00 00
+239941 - MIDI OUT [PreSonus FP8]: A0 00 00
+240972 - MIDI IN [Bome MIDI Translator Virtual In]: A0 00 00
+240972 - MIDI OUT [PreSonus FP8]: A0 00 00
+242006 - MIDI IN [Bome MIDI Translator Virtual In]: A0 00 00
+242006 - MIDI OUT [PreSonus FP8]: A0 00 00
+243019 - MIDI IN [Bome MIDI Translator Virtual In]: A0 00 00
+243019 - MIDI OUT [PreSonus FP8]: A0 00 00
+244022 - MIDI IN [Bome MIDI Translator Virtual In]: A0 00 00
+244022 - MIDI OUT [PreSonus FP8]: A0 00 00
+245053 - MIDI IN [Bome MIDI Translator Virtual In]: A0 00 00
+245053 - MIDI OUT [PreSonus FP8]: A0 00 00
+246064 - MIDI IN [Bome MIDI Translator Virtual In]: A0 00 00
+246064 - MIDI OUT [PreSonus FP8]: A0 00 00
+247068 - MIDI IN [Bome MIDI Translator Virtual In]: A0 00 00
+247068 - MIDI OUT [PreSonus FP8]: A0 00 00
+248080 - MIDI IN [Bome MIDI Translator Virtual In]: A0 00 00
+248080 - MIDI OUT [PreSonus FP8]: A0 00 00
+249096 - MIDI IN [Bome MIDI Translator Virtual In]: A0 00 00
+249096 - MIDI OUT [PreSonus FP8]: A0 00 00
+250096 - MIDI IN [Bome MIDI Translator Virtual In]: A0 00 00
+250096 - MIDI OUT [PreSonus FP8]: A0 00 00
+251115 - MIDI IN [Bome MIDI Translator Virtual In]: A0 00 00
+251115 - MIDI OUT [PreSonus FP8]: A0 00 00
+252131 - MIDI IN [Bome MIDI Translator Virtual In]: A0 00 00
+252131 - MIDI OUT [PreSonus FP8]: A0 00 00
+253159 - MIDI IN [Bome MIDI Translator Virtual In]: A0 00 00
+253159 - MIDI OUT [PreSonus FP8]: A0 00 00
+254160 - MIDI IN [Bome MIDI Translator Virtual In]: A0 00 00
+254160 - MIDI OUT [PreSonus FP8]: A0 00 00
+255179 - MIDI IN [Bome MIDI Translator Virtual In]: A0 00 00
+255179 - MIDI OUT [PreSonus FP8]: A0 00 00
+256189 - MIDI IN [Bome MIDI Translator Virtual In]: A0 00 00
+256189 - MIDI OUT [PreSonus FP8]: A0 00 00
+257192 - MIDI IN [Bome MIDI Translator Virtual In]: A0 00 00
+257192 - MIDI OUT [PreSonus FP8]: A0 00 00
+258222 - MIDI IN [Bome MIDI Translator Virtual In]: A0 00 00
+258222 - MIDI OUT [PreSonus FP8]: A0 00 00
+259222 - MIDI IN [Bome MIDI Translator Virtual In]: A0 00 00
+259222 - MIDI OUT [PreSonus FP8]: A0 00 00
+260239 - MIDI IN [Bome MIDI Translator Virtual In]: A0 00 00
+260239 - MIDI OUT [PreSonus FP8]: A0 00 00
+261239 - MIDI IN [Bome MIDI Translator Virtual In]: A0 00 00
+261239 - MIDI OUT [PreSonus FP8]: A0 00 00
+262256 - MIDI IN [Bome MIDI Translator Virtual In]: A0 00 00
+262256 - MIDI OUT [PreSonus FP8]: A0 00 00
+263285 - MIDI IN [Bome MIDI Translator Virtual In]: A0 00 00
+263285 - MIDI OUT [PreSonus FP8]: A0 00 00

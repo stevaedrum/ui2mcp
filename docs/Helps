@@ -27,23 +27,72 @@ Types of changes
     Fixed for any bug fixes.
     Security in case of vulnerabilities.
 
+Filtre Chrome on console : ^((?!RTA|2::|ALIVE|3:::SNAP|3:::CUE).)*$
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     UI Messages
 
-					REC Multitrack fonction
-					SETD^i.0.mtkrec^0			//Mode REC sur une piste
+					Client --> 3:::MTK_GET_SESSIONS   								// Récuperation de la liste des sessions de record
+					UI <-- 3:::MTK_GET_SESSIONS^0001^0002^0003^0004^0005^0006^0007^0008^0009^0010^0011^0012^0013^0014^0015^0016^0017^0018^0019^0020^0021^0022^0023^0024^0025^0026^0027^0028^0029^0030^0031^0032^0033^0034^0035^0036^0037^0038^0039^0040^0041^0042^0043^0044^0045^0046^0047^0048^0049^0050^0051^0052^0053^0054^0055^0056^0057^0058^0059^0062^0063^0064^0065^0066^0067^0068^0069^0070^0071^0072^0073^0074^0075^0076^0077^0078^0079^0080^0081^0082^0083^0084^0085^0086^0087^0088^0089^0090^0091^0092^0093^0094^0095^0096^0097^0098^0099^0100^0101^0102^0103^0104^0105^0106^0107^0108^Audition pierre0^Audition pierre1
 
+					Client --> 3:::MTK_GET_FILES									// Récupération de la liste des fichiers de la session
+					UI <-- 3:::MTK_GET_FILES^01 GUITARE.flac^11 BD.flac^12 SNARE.flac^13 OH.flac^14 OH.flac^15 TOM 8.flac^16 TOM 10.flac^17 TOM 12.flac^18 TOM 14.flac^19 TOM 16.flac^20 HI HAT.flac^LineL Track.flac^LineR Track.flac
+
+					Client --> 3:::MTK_SELECT^0111		// Select the session
+					Client --> 3:::MTK_REC_TOGGLE		// Toggle sur du record
+					Client --> 3:::MTK_PLAY				// Toggle Play
+					Client --> 3:::MTK_STOP				// Toggle Play
+					Client --> 3:::MTK_PAUSE			// Toggle Pause
+
+					
+					Client --> 3:::MEDIA_GET_PLISTS									// donne la liste des fichiers sur USB
+					Client --> 3:::MEDIA_GET_PLIST_TRACKS^~all~						// Donne la liste des fichiers la le repetoire concerné ici all
+					Client --> 3:::MEDIA_GET_PLIST_TRACKS^Playback					// Donne la liste des fichiers la le repetoire concerné ici Playback
+					
+					Client --> 3:::MEDIA_SWITCH_TRACK^~all~^/BrownianNoise.flac		// Switch to track BrownianNoise.flac
+					Client --> 3:::MEDIA_PLAY										// Play media
+					Client --> 3:::MEDIA_PAUSE										// Pause media
+					Client --> 3:::MEDIA_NEXT										// Media next
+					Client --> 3:::MEDIA_PREV										// Media previous
+					Client --> 3:::RECTOGGLE										// Record Master mode
+
+					Statut du player
+					
 					Recu 24 [SETD^var.mtk.rec.currentState^1]  // Mode Record
 					Recu 24 [SETD^var.mtk.rec.currentState^0]  // Stop Record
-
-					Recu 24 [SETD^var.mtk.rec.time^14]	// Second d'enregistrement
-
 					Recu 24 [SETD^var.mtk.currentTrackPos^0.0003866768849]	//Curdeur lecture
-
 					Recu 24 [SETD^var.mtk.currentState^2]  //Play
 					Recu 24 [SETD^var.mtk.currentState^1]	//Pause
-					Recu 24 [SETD^var.mtk.currentState^0]	Stop
+					Recu 24 [SETD^var.mtk.currentState^0]	//Stop
+
+
+
+					SETD^i.0.mtkrec^0			//Mode REC sur une piste
+					
+					Client --> 3:::BMSG^SYNC^Stevae^-1								// BSYNC to Master
+					
+					
+					Client --> 3:::SHOWLIST				/// montre la liste des shows
+					Client --> 3:::RENAMESNAPSHOT^Studio Stephan^Mix répète piano-voi^Studio Stephan^Mix repete piano-voi
+					
+					Client --> 3:::CUELIST^Studio Stephan
+					
+					Client --> 3:::BMSG^SYNC^Stevae^4		// Sync ID sur la voie 4
+					Client --> 3:::DYN^i.4					// a la suite de  SYNC !! 2 clic sur la voie et sur la vue COMP
+					
+					Client --> 3:::UDP^192.168.0.8:6454^Art-NetPG▒▒▒#▒A       ▒▒      // message UDP
+					
+					Client --> 3:::PRESETLIST^ch			// Channel Preset
+					UI <-- 3:::PRESETLIST^ch^f:Acoustic 1^f:Acoustic 2^f:BG Vocals^f:Bass Gtr^f:Brass 1^f:Brass 2^f:Drums OH^f:Electric Gtr^f:Female Vocal 1^f:Female Vocal 2^f:Hi Hat^f:Kick Drum^f:Male Vocal 1^f:Male Vocal 2^f:Piano^f:Snare Drum 1^f:Snare Drum 2^f:Synthesizer^f:Tom Tom^f:Vtg Acoustic Gtr^f:Vtg Bass Gtr^f:Vtg Female Vocal^f:Vtg Kick Drum^f:Vtg Male Vocal^f:Vtg Snare Drum
+					
+					Client --> 3:::READPRESET^ch^f:Electric Gtr    	// Choix du preset
+					
+					Client --> 3:::SETD^i.0.vca^2					// Affectation VCA 3 du cannal 1
+					Client --> 3:::SETD^i.0.subgroup^5				// Affectation subgroup 6 du cannal 1
+					Client --> 3:::SETD^i.0.vca^-1					// Déaffectation VCA du cannal 1
+					Client --> 3:::SETD^i.0.subgroup^-1				// Déaffectation subgroup du cannal 1
+					
+					
 
 					Recu 24 [SETD^i.23.color^0]  =  Off
 					Recu 24 [SETD^i.23.color^1]  =  Noir  	=> R0V0B0
@@ -113,20 +162,6 @@ Types of changes
                     SETD^settings.multiplesolo^1  = Mode Solo multiple
                     SETD^settings.multiplesolo^0  = Mode Solo single
 
-					Recu 24 [SETD^var.currentState^0]
-					Recu 24 [SETD^var.currentState^0]
-					Recu 24 [SETD^var.currentState^2]
-					Recu 24 [SETD^var.currentTrackPos^0.0002933067951]
-					Recu 24 [SETD^var.currentTrackPos^0.0002933067951]
-					Recu 24 [SETD^var.currentTrackPos^0.001123555433]
-					Recu 24 [SETD^var.currentTrackPos^0.001868616741]
-					Recu 24 [SETD^var.currentTrackPos^0.00271078338]
-					Recu 24 [SETD^var.currentTrackPos^0.003552950019]
-					Recu 24 [SETD^var.currentTrackPos^0.004291058415]
-					Recu 24 [SETD^var.currentTrackPos^0.005130244808]
-					Recu 24 [SETD^var.currentTrackPos^0.005973406849]
-					Recu 24 [SETD^var.currentTrackPos^0.006711515245]
-					Recu 24 [SETD^var.currentTrackPos^0.007285212452]
 
 Send command VERSION
 UI Variable : [mtk playsession  ]

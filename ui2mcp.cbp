@@ -22,6 +22,7 @@
 				<Option object_output="obj/Release/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
+				<Option parameters="-d 4" />
 				<Compiler>
 					<Add option="-Wall" />
 					<Add option="-lasound" />
@@ -39,7 +40,6 @@
 			<Add library="../../../../../usr/lib/arm-linux-gnueabihf/libasound.so" />
 		</Linker>
 		<Unit filename="CHANGELOG.md" />
-		<Unit filename="ChangesLog.txt" />
 		<Unit filename="README.md" />
 		<Unit filename="TODO.md" />
 		<Unit filename="config.conf" />
@@ -49,7 +49,6 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="docs/Helps" />
-		<Unit filename="functions" />
 		<Unit filename="functions.c">
 			<Option compilerVar="CC" />
 		</Unit>

@@ -1,54 +1,63 @@
 #ifndef READCONFIG_H_INCLUDED
 #define READCONFIG_H_INCLUDED
 
+#define SIZE 1024
 #define MAXBUF 1024
 
 struct config
 {
    char ControlerName[MAXBUF];
    char ControlerMode[MAXBUF];
-   char 	MidiPort[MAXBUF];
-   char 	UiAddr[MAXBUF];
-   char 	SyncId[MAXBUF];
-   char Lcd[MAXBUF];
-   char NbMidiFader[MAXBUF];
-   char AddrMidiMix[MAXBUF];
-   char AddrMidiEncoderPan[MAXBUF];
-   char AddrMidiPan[MAXBUF];
-   char TypePan[MAXBUF];
-   char AddrMidiButtonLed[MAXBUF];
-   char AddrMidiRec[MAXBUF];
-   char NbRecButton[MAXBUF];
-   char AddrMidiMute[MAXBUF];
-   char AddrMidiSolo[MAXBUF];
-   char AddrMidiSelect[MAXBUF];
-   char AddrMidiTouch[MAXBUF];
-   char IdTrackPrev[MAXBUF];
-   char IdTrackNext[MAXBUF];
-   char IdLoop[MAXBUF];
-   char IdMarkerSet[MAXBUF];
-   char IdMarkerLeft[MAXBUF];
-   char IdMarkerRight[MAXBUF];
-   char IdRewind[MAXBUF];
-   char IdForward[MAXBUF];
-   char IdStop[MAXBUF];
-   char IdPlay[MAXBUF];
-   char IdRec[MAXBUF];
-   char AddrMidiBar[MAXBUF];
-   char AddrMidiValueBar[MAXBUF];
-   char SysExHdr[MAXBUF];
-   char i_Tap[MAXBUF];
-   char i_Dim[MAXBUF];
-   char i_SnapShotNavUp[MAXBUF];
-   char i_SnapShotNavDown[MAXBUF];
-   char i_StopUI2Mcp[MAXBUF];
-   char i_ConfirmStopUI2Mcp[MAXBUF];
-   char AddrMidiParamButton[MAXBUF];
-   char AddrMuteClear[MAXBUF];
-   char AddrMuteSolo[MAXBUF];
-   char AddrShiftLeft[MAXBUF];
-   char AddrShiftRight[MAXBUF];
-   char NbPanButton[MAXBUF];
+   char MidiPort[MAXBUF];
+   char UiAddr[MAXBUF];
+   char SyncId[MAXBUF];
+   char Lcd[SIZE];
+   char NbMidiFader[SIZE];
+   char AddrMidiMix[SIZE];
+   char AddrMidiEncoder[SIZE];
+   char AddrMidiEncoderPan[SIZE];
+   char AddrMidiEncoderSession[SIZE];
+   char TypePan[SIZE];
+   char AddrMidiButtonLed[SIZE];
+   char AddrMidiRec[SIZE];
+   char NbRecButton[SIZE];
+   char AddrMidiMute[SIZE];
+   char AddrMidiSolo[SIZE];
+   char AddrMidiMaster[SIZE];
+   char AddrMidiSelect[SIZE];
+   char AddrMidiTouch[SIZE];
+   char IdTrackPrev[SIZE];
+   char IdTrackNext[SIZE];
+   char IdLoop[SIZE];
+   char IdMarkerSet[SIZE];
+   char IdMarkerLeft[SIZE];
+   char IdMarkerRight[SIZE];
+   char IdRewind[SIZE];
+   char IdForward[SIZE];
+   char IdStop[SIZE];
+   char IdPlay[SIZE];
+   char IdRec[SIZE];
+   char AddrMidiBar[SIZE];
+   char AddrMidiValueBar[SIZE];
+   char SysExHdr[SIZE];
+   char i_Tap[SIZE];
+   char i_Dim[SIZE];
+   char i_SnapShotNavUp[SIZE];
+   char i_SnapShotNavDown[SIZE];
+   char i_StopUI2Mcp[SIZE];
+   char i_Validation[SIZE];
+   char AddrMidiParamButton[SIZE];
+   char AddrMidiSessionButton[SIZE];
+   char AddrMuteClear[SIZE];
+   char AddrMuteSolo[SIZE];
+   char AddrShiftLeft[SIZE];
+   char AddrShiftRight[SIZE];
+   char NbPanButton[SIZE];
+   char AddrSoundCheck[SIZE];
+   char AddrShowsSelect[SIZE];
+   char AddrSnapShotsSelect[SIZE];
+   char AddrCuesSelect[SIZE];
+   char AddrPanSelect[SIZE];
 };
 
 /**

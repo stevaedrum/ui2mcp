@@ -1,3 +1,22 @@
+30 December 2018
+   released version 1.3.608 of ui2mcp
+
+     Change log:
+        -Cleaned: Clean code
+        -Updated: Log level function
+        -Updated: MTK Player function
+        -Updated: Pan function corrected for the direction
+        -Added: Update LCD when REC change
+        -Fixed: Problem in PAN code for encoder
+        -Updated: MTK Player function
+        -Added: Sound Check function
+        -Fixed: Bug in REC function with MIDI OUT overflow
+        -Added: LCD Pan bar function
+        -Added: LCD text mode for message
+        -Updated: Debug function in arg input
+        -Fixed: Clear array for shows and snapshots list
+        -Added: Master mode strip fader
+
 16 December 2018
    released version 0.9.171 of ui2mcp
 

@@ -51,11 +51,14 @@ struct config get_config(char *filename)
 							} else if (strstr(line, "AddrMidiMix")){
 									memcpy(ControlerConfig.AddrMidiMix,cfline,strlen(cfline)-1);
 									//printf("%s",ControlerConfig.getcmd);
-							} else if (strstr(line, "AddrMidiEncoderPan")){
+							} else if (strstr(line, "AddrMidiEncoder")){
+									memcpy(ControlerConfig.AddrMidiEncoder,cfline,strlen(cfline)-1);
+									//printf("%s",ControlerConfig.getcmd);
+							} else if (strstr(line, "AddrMidiPanEncoder")){
 									memcpy(ControlerConfig.AddrMidiEncoderPan,cfline,strlen(cfline)-1);
 									//printf("%s",ControlerConfig.getcmd);
-							} else if (strstr(line, "AddrMidiPan")){
-									memcpy(ControlerConfig.AddrMidiPan,cfline,strlen(cfline)-1);
+							} else if (strstr(line, "AddrMidiSessionEncoder")){
+									memcpy(ControlerConfig.AddrMidiEncoderSession,cfline,strlen(cfline)-1);
 									//printf("%s",ControlerConfig.getcmd);
 							} else if (strstr(line, "TypePan")){
 									memcpy(ControlerConfig.TypePan,cfline,strlen(cfline)-1);
@@ -78,6 +81,9 @@ struct config get_config(char *filename)
 							} else if (strstr(line, "AddrMidiSolo")){
 									memcpy(ControlerConfig.AddrMidiSolo,cfline,strlen(cfline)-1);
 									//printf("%s",ControlerConfig.getcmd);
+							} else if (strstr(line, "AddrMidiMaster")){
+									memcpy(ControlerConfig.AddrMidiMaster,cfline,strlen(cfline)-1);
+									//printf("%s",ControlerConfig.getcmd);
 							} else if (strstr(line, "AddrShiftLeft")){
 									memcpy(ControlerConfig.AddrShiftLeft,cfline,strlen(cfline)-1);
 									//printf("%s",ControlerConfig.getcmd);
@@ -95,6 +101,9 @@ struct config get_config(char *filename)
 									//printf("%s",ControlerConfig.getcmd);
 							} else if (strstr(line, "AddrMidiParamButton")){
 									memcpy(ControlerConfig.AddrMidiParamButton,cfline,strlen(cfline)-1);
+									//printf("%s",ControlerConfig.getcmd);
+							} else if (strstr(line, "AddrMidiSessionButton")){
+									memcpy(ControlerConfig.AddrMidiSessionButton,cfline,strlen(cfline)-1);
 									//printf("%s",ControlerConfig.getcmd);
 							} else if (strstr(line, "AddrMidiTouch")){
 									memcpy(ControlerConfig.AddrMidiTouch,cfline,strlen(cfline)-1);
@@ -141,23 +150,38 @@ struct config get_config(char *filename)
 							} else if (strstr(line, "SysExHdr")){
 									memcpy(ControlerConfig.SysExHdr,cfline,strlen(cfline)-1);
 									//printf("%s",ControlerConfig.getcmd);
-							} else if (strstr(line, "i_Tap")){
+							} else if (strstr(line, "Tap")){
 									memcpy(ControlerConfig.i_Tap,cfline,strlen(cfline)-1);
 									//printf("%s",ControlerConfig.getcmd);
-							} else if (strstr(line, "i_Dim")){
+							} else if (strstr(line, "Dim")){
 									memcpy(ControlerConfig.i_Dim,cfline,strlen(cfline)-1);
 									//printf("%s",ControlerConfig.getcmd);
-							} else if (strstr(line, "i_SnapShotNavUp")){
+							} else if (strstr(line, "NavUp")){
 									memcpy(ControlerConfig.i_SnapShotNavUp,cfline,strlen(cfline)-1);
 									//printf("%s",ControlerConfig.getcmd);
-							} else if (strstr(line, "i_SnapShotNavDown")){
+							} else if (strstr(line, "NavDown")){
 									memcpy(ControlerConfig.i_SnapShotNavDown,cfline,strlen(cfline)-1);
 									//printf("%s",ControlerConfig.getcmd);
-							} else if (strstr(line, "i_StopUI2Mcp")){
+							} else if (strstr(line, "StopUI2Mcp")){
 									memcpy(ControlerConfig.i_StopUI2Mcp,cfline,strlen(cfline)-1);
 									//printf("%s",ControlerConfig.getcmd);
-							} else if (strstr(line, "i_ConfirmStopUI2Mcp")){
-									memcpy(ControlerConfig.i_ConfirmStopUI2Mcp,cfline,strlen(cfline)-1);
+							} else if (strstr(line, "Validation")){
+									memcpy(ControlerConfig.i_Validation,cfline,strlen(cfline)-1);
+									//printf("%s",ControlerConfig.getcmd);
+							} else if (strstr(line, "SoundCheck")){
+									memcpy(ControlerConfig.AddrSoundCheck,cfline,strlen(cfline)-1);
+									//printf("%s",ControlerConfig.getcmd);
+							} else if (strstr(line, "ShowsSelect")){
+									memcpy(ControlerConfig.AddrShowsSelect,cfline,strlen(cfline)-1);
+									//printf("%s",ControlerConfig.getcmd);
+							} else if (strstr(line, "SnapShotsSelect")){
+									memcpy(ControlerConfig.AddrSnapShotsSelect,cfline,strlen(cfline)-1);
+									//printf("%s",ControlerConfig.getcmd);
+							} else if (strstr(line, "CuesSelect")){
+									memcpy(ControlerConfig.AddrCuesSelect,cfline,strlen(cfline)-1);
+									//printf("%s",ControlerConfig.getcmd);
+							} else if (strstr(line, "PanSelect")){
+									memcpy(ControlerConfig.AddrPanSelect,cfline,strlen(cfline)-1);
 									//printf("%s",ControlerConfig.getcmd);
 							}
                         i++;
@@ -165,8 +189,6 @@ struct config get_config(char *filename)
                 } // End while
                 fclose(file);
         } // End if file
-
-
 
         return ControlerConfig;
 
