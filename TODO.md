@@ -31,18 +31,33 @@ Bug sur Select all Unselect All REC MTK depuis la page web de l'UI --> DONE
 
 Bug Lot of : Midi Out : 90 00 00 !!!!! --> DONE by correction For loop in update mode
 
+Channel AUX & VCA remove PAN control --> DONE
+Bug in Mix on Master in Master mode  --> DONE
+Correct PAN in Master Mode --> DONE
+Master Fader on Midi controler --> DONE
+Pan function: LCD Pan update --> DONE
+Add Value pan in the 3rd line of LCD when move channel --> DONE
+Bug VCA ne fonctionne pas depuis la page web de l'UI --> DONE
+Correct PAN in not Master Mode --> DONE
+Bug with fader update in UI web console for stereo link mode --> DONE
+
 #################################################################
     IN PROGESS
 #################################################################
 
-Channel AUX remove PAN control
-
 Bug received trame not complet sometime !!!  --> Not review !!!!
+Bug Light on Mute Clear & VCA & Shift Right !!!  --> Not review !!!!
 
-Bug VCA ne fonctionne pas depuis la page web de l'UI
-Bug Light on Mute Clear & VCA & Shift Right
+In stereo link mode move left fader don't update right fader
+In stereo update must update the second fader after aftertouch = 00 to improve function
 
-Pan function: LCD Pan update
+#################################################################
+    IDEAS
+#################################################################
+
+Add Value db in the 3rd line of LCD when move channel
+
+Function View with pre-selectionned channel
 
 Light On Write button when UI sent to Midi
 

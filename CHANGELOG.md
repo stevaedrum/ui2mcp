@@ -1,3 +1,15 @@
+01 January 2019
+   released version 1.4.731 of ui2mcp
+
+     Change log:
+        -Fixed: Put log file in /tmp directory
+        -Updated: Path of the config file
+        -Added: Statutp message on LCD controler
+        -Fixed: No Pan for aux and vca
+        -Added: Information on LCD for pan information on 3rd line
+        -Fixed: Bug on VCA action on UI not on controler
+        -Fixed: Stereo update in UI for mix controler
+
 30 December 2018
    released version 1.3.608 of ui2mcp
 

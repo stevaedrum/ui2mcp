@@ -1,0 +1,3 @@
+ACTION=="add", KERNEL=="midiC1D0", ATTRS{product}=="PreSonus FP8", ATTRS{idVendor}=="194f", ATTRS{idProduct}=="0203", RUN+="/home/pi/UI24r-Midi/ui2mcp/bin/Debug/ui2mcp"
+
+ACTION=="remove", SUBSYSTEM=="usb", ATTRS{idVendor}=="0944", ATTRS{idProduct}=="0117", RUN+="sudo shutdown -h now"
