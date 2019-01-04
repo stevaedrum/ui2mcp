@@ -2,34 +2,9 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Debug" />
-	<File name="includes/readconfig.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="main.c" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="616" topLine="8" />
-		</Cursor>
-	</File>
-	<File name="CHANGELOG.md" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="0" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="docs/Helps" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1084" topLine="27" />
-		</Cursor>
-	</File>
-	<File name="config.conf" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="986" topLine="26" />
-		</Cursor>
-	</File>
-	<File name="TODO.md" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="2414" topLine="30" />
-		</Cursor>
-	</File>
-	<File name="main.c" open="1" top="1" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="137934" topLine="731" />
+			<Cursor1 position="15336" topLine="437" />
 		</Cursor>
 		<Folding>
 			<Collapse line="62" />
@@ -80,61 +55,36 @@
 			<Collapse line="429" />
 			<Collapse line="430" />
 			<Collapse line="460" />
-			<Collapse line="520" />
-			<Collapse line="527" />
-			<Collapse line="534" />
-			<Collapse line="541" />
-			<Collapse line="548" />
-			<Collapse line="555" />
-			<Collapse line="562" />
-			<Collapse line="568" />
-			<Collapse line="766" />
-			<Collapse line="770" />
-			<Collapse line="780" />
-			<Collapse line="784" />
-			<Collapse line="800" />
-			<Collapse line="1264" />
-			<Collapse line="1280" />
-			<Collapse line="1389" />
-			<Collapse line="1412" />
-			<Collapse line="1416" />
-			<Collapse line="1420" />
-			<Collapse line="1588" />
-			<Collapse line="1608" />
-			<Collapse line="1622" />
-			<Collapse line="1650" />
-			<Collapse line="1678" />
-			<Collapse line="1694" />
-			<Collapse line="1720" />
-			<Collapse line="1738" />
-			<Collapse line="1816" />
-			<Collapse line="1827" />
-			<Collapse line="1834" />
-			<Collapse line="1845" />
-			<Collapse line="1867" />
-			<Collapse line="1922" />
-			<Collapse line="1964" />
-			<Collapse line="1995" />
-			<Collapse line="2110" />
-			<Collapse line="2200" />
-			<Collapse line="2217" />
-			<Collapse line="2249" />
-			<Collapse line="2306" />
-			<Collapse line="2436" />
-			<Collapse line="2463" />
-			<Collapse line="2507" />
-			<Collapse line="2590" />
-			<Collapse line="2602" />
-			<Collapse line="2766" />
-			<Collapse line="2793" />
-			<Collapse line="2854" />
-			<Collapse line="2908" />
-			<Collapse line="2918" />
 		</Folding>
 	</File>
 	<File name="readconfig.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="3797" topLine="65" />
+		</Cursor>
+	</File>
+	<File name="CHANGELOG.md" open="1" top="1" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="168" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="TODO.md" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2659" topLine="29" />
+		</Cursor>
+	</File>
+	<File name="config.conf" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="255" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="includes/readconfig.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="616" topLine="8" />
+		</Cursor>
+	</File>
+	<File name="docs/Helps" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1803" topLine="16" />
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>

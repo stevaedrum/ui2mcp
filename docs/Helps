@@ -29,6 +29,17 @@ Types of changes
 
 Filtre Chrome on console : ^((?!RTA|2::|ALIVE|3:::SNAP|3:::CUE).)*$
 
+https://sites.google.com/site/patrickmaillot/x32
+
+20*log(2^(( x-128)/10))
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    UDP function
+    Using QLC+ software and the Ui24R to setup a virtual lighting controller.
+
+The command you need for the buttons:
+?v=/bt1,f%00%00?%80%00%00
+Where "bt1" can change as you change the buttons
+
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     UI Messages
 
@@ -44,11 +55,11 @@ Filtre Chrome on console : ^((?!RTA|2::|ALIVE|3:::SNAP|3:::CUE).)*$
 					Client --> 3:::MTK_STOP				// Toggle Play
 					Client --> 3:::MTK_PAUSE			// Toggle Pause
 
-					
+
 					Client --> 3:::MEDIA_GET_PLISTS									// donne la liste des fichiers sur USB
 					Client --> 3:::MEDIA_GET_PLIST_TRACKS^~all~						// Donne la liste des fichiers la le repetoire concerné ici all
 					Client --> 3:::MEDIA_GET_PLIST_TRACKS^Playback					// Donne la liste des fichiers la le repetoire concerné ici Playback
-					
+
 					Client --> 3:::MEDIA_SWITCH_TRACK^~all~^/BrownianNoise.flac		// Switch to track BrownianNoise.flac
 					Client --> 3:::MEDIA_PLAY										// Play media
 					Client --> 3:::MEDIA_PAUSE										// Pause media
@@ -57,7 +68,7 @@ Filtre Chrome on console : ^((?!RTA|2::|ALIVE|3:::SNAP|3:::CUE).)*$
 					Client --> 3:::RECTOGGLE										// Record Master mode
 
 					Statut du player
-					
+
 					Recu 24 [SETD^var.mtk.rec.currentState^1]  // Mode Record
 					Recu 24 [SETD^var.mtk.rec.currentState^0]  // Stop Record
 					Recu 24 [SETD^var.mtk.currentTrackPos^0.0003866768849]	//Curdeur lecture
@@ -68,31 +79,31 @@ Filtre Chrome on console : ^((?!RTA|2::|ALIVE|3:::SNAP|3:::CUE).)*$
 
 
 					SETD^i.0.mtkrec^0			//Mode REC sur une piste
-					
+
 					Client --> 3:::BMSG^SYNC^Stevae^-1								// BSYNC to Master
-					
-					
+
+
 					Client --> 3:::SHOWLIST				/// montre la liste des shows
 					Client --> 3:::RENAMESNAPSHOT^Studio Stephan^Mix répète piano-voi^Studio Stephan^Mix repete piano-voi
-					
+
 					Client --> 3:::CUELIST^Studio Stephan
-					
+
 					Client --> 3:::BMSG^SYNC^Stevae^4		// Sync ID sur la voie 4
 					Client --> 3:::DYN^i.4					// a la suite de  SYNC !! 2 clic sur la voie et sur la vue COMP
-					
+
 					Client --> 3:::UDP^192.168.0.8:6454^Art-NetPG▒▒▒#▒A       ▒▒      // message UDP
-					
+
 					Client --> 3:::PRESETLIST^ch			// Channel Preset
 					UI <-- 3:::PRESETLIST^ch^f:Acoustic 1^f:Acoustic 2^f:BG Vocals^f:Bass Gtr^f:Brass 1^f:Brass 2^f:Drums OH^f:Electric Gtr^f:Female Vocal 1^f:Female Vocal 2^f:Hi Hat^f:Kick Drum^f:Male Vocal 1^f:Male Vocal 2^f:Piano^f:Snare Drum 1^f:Snare Drum 2^f:Synthesizer^f:Tom Tom^f:Vtg Acoustic Gtr^f:Vtg Bass Gtr^f:Vtg Female Vocal^f:Vtg Kick Drum^f:Vtg Male Vocal^f:Vtg Snare Drum
-					
+
 					Client --> 3:::READPRESET^ch^f:Electric Gtr    	// Choix du preset
-					
+
 					Client --> 3:::SETD^i.0.vca^2					// Affectation VCA 3 du cannal 1
 					Client --> 3:::SETD^i.0.subgroup^5				// Affectation subgroup 6 du cannal 1
 					Client --> 3:::SETD^i.0.vca^-1					// Déaffectation VCA du cannal 1
 					Client --> 3:::SETD^i.0.subgroup^-1				// Déaffectation subgroup du cannal 1
-					
-					
+
+
 
 					Recu 24 [SETD^i.23.color^0]  =  Off
 					Recu 24 [SETD^i.23.color^1]  =  Noir  	=> R0V0B0

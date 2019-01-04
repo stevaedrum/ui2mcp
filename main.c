@@ -1181,17 +1181,10 @@ void UpdateMidiControler(){
         usleep(500000);
     }
 
-//    struct hostent *hostinfo = NULL;
-//    const char *hostname = "www.soundcraft.com/ui24-software-demo/mixer.html";
-//
-//    hostinfo = gethostbyname(hostname); /* on récupère les informations de l'hôte auquel on veut se connecter */
-//
-//    serv_addr.sin_addr = *(serv_addr*) hostinfo->h_addr; /* l'adresse se trouve dans le champ h_addr de la structure hostinfo */
-
     if (connect(sock, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) < 0)
     {
         errormessage("\nConnection Failed \n");
-        //exit(1);
+        exit(1);
     }
 
     if ( Lcd == 1 ){
@@ -2582,6 +2575,7 @@ void UpdateMidiControler(){
 
                                 if( ui[Canal].StereoIndex == 0 && ui[Canal+1].StereoIndex == 1 ){
                                     char sendui[256];
+                                    ui[Canal+1].MixMidi = db;
                                     sprintf(sendui,"SETD^%s.%d.mix^%.10f\n", ui[Canal].Type, ui[Canal+1].Numb, db);
                                     send(sock , sendui, strlen(sendui) , 0 );
                                 }
@@ -2617,8 +2611,25 @@ void UpdateMidiControler(){
                                 SendMidiOut(midiout, MidiArrayR);
                             }
                         }
+                        else if (InMidi == AddrMidiButtonLed && MidiCC >= AddrMidiTouch && MidiCC <= AddrMidiTouch + NbMidiFader - 1){                     /*  After Touch  */
+
+                            Canal = MidiCC % AddrMidiTouch +(NbMidiFader*AddrMidiTrack);
+
+                            if(MidiValue == 0x00){
+                                if( ui[Canal].StereoIndex == 0 && ui[Canal+1].StereoIndex == 1 ){
+                                    MidiValue = (127 * ui[Canal].MixMidi);
+                                    char MidiArrayR[3] = {AddrMidiMix+Canal-(NbMidiFader*AddrMidiTrack)+1 , MidiValue, MidiValue};
+                                    SendMidiOut(midiout, MidiArrayR);
+                                }
+                                usleep( 50000 ); /* Sleep 100000 micro seconds = 100 ms, etc. */
+                            }
+                        }
                     }
                 }
+//                if( ui[Canal].StereoIndex == 0 && ui[Canal+1].StereoIndex == 1 ){
+//                    char MidiArrayR[3] = {AddrMidiMix+Canal-(NbMidiFader*AddrMidiTrack)+1 , MidiValue, MidiValue};
+//                    SendMidiOut(midiout, MidiArrayR);
+//                }
             }
             else if (InMidi == AddrMidiEncoder){                                                                                                   /*  Midi command Encoder  */
                 if (MidiCC >= AddrMidiEncoderPan && MidiCC <= AddrMidiEncoderPan + NbMidiFader - 1 && NbPanButton == NbMidiFader){

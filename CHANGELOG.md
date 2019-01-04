@@ -1,3 +1,9 @@
+04 January 2019
+   released version 1.4.753 of ui2mcp
+
+     Change log:
+        -Fixed: Improve Mix fader when stereo channel is untouch the second channel was updated
+
 01 January 2019
    released version 1.4.731 of ui2mcp
 
