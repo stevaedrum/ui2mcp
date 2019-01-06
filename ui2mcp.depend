@@ -1,23 +1,23 @@
 # depslib dependency file v1.0
-1545570939 source:/home/pi/UI24r-Midi/ui2mcp/decode.c
+1546634101 source:/home/pi/UI24r-Midi/ui2mcp/decode.c
 	<stdio.h>
 	<stdlib.h>
 	<ctype.h>
 	"includes/b64.h"
 
-1545570939 /home/pi/UI24r-Midi/ui2mcp/includes/b64.h
+1546634101 /home/pi/UI24r-Midi/ui2mcp/includes/b64.h
 
-1545571736 source:/home/pi/UI24r-Midi/ui2mcp/functions.c
+1546634101 source:/home/pi/UI24r-Midi/ui2mcp/functions.c
 
-1546120510 source:/home/pi/UI24r-Midi/ui2mcp/readconfig.c
+1546634101 source:/home/pi/UI24r-Midi/ui2mcp/readconfig.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"includes/readconfig.h"
 
-1546120478 /home/pi/UI24r-Midi/ui2mcp/includes/readconfig.h
+1546634101 /home/pi/UI24r-Midi/ui2mcp/includes/readconfig.h
 
-1546632584 source:/home/pi/UI24r-Midi/ui2mcp/main.c
+1546782993 source:/home/pi/UI24r-Midi/ui2mcp/main.c
 	<unistd.h>
 	<time.h>
 	<stdio.h>
@@ -37,7 +37,7 @@
 	"includes/b64.h"
 	"includes/readconfig.h"
 
-1546632620 /home/pi/UI24r-Midi/ui2mcp/includes/version.h
+1546783016 /home/pi/UI24r-Midi/ui2mcp/includes/version.h
 
-1545843630 /home/pi/UI24r-Midi/ui2mcp/includes/ui.h
+1546634101 /home/pi/UI24r-Midi/ui2mcp/includes/ui.h
 

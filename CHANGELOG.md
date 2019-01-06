@@ -1,3 +1,15 @@
+06 January 2019
+   released version 1.6.881 of ui2mcp
+
+     Change log:
+        -Added: New function to convert linear value ui[].MidiMix to db
+        -Updated: Improve the fader function when touch left fader
+        -Added: Write db value on LCD when fader is move
+        -Updated: Update LCD test for pan update on midi controler
+        -Fixed: bug in ui[].numb for master channel
+        -Fixed: Correct a bug for VCA mix
+        -Fixed: Correct bugs in mix & pan for master
+
 04 January 2019
    released version 1.4.753 of ui2mcp
 

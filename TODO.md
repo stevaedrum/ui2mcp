@@ -48,16 +48,18 @@ Bug with fader update in UI web console for stereo link mode --> DONE
 Bug received trame not complet sometime !!!  --> Not review !!!!
 Bug Light on Mute Clear & VCA & Shift Right !!!  --> Not review !!!!
 
-In stereo link mode move left fader don't update right fader
-In stereo update must update the second fader after aftertouch = 00 to improve function
+In stereo link mode move left fader don't update right fader --> DONE
+In stereo update must update the second fader after aftertouch = 00 to improve function --> DONE
 
 #################################################################
     IDEAS
 #################################################################
 
-Add Value db in the 3rd line of LCD when move channel
+Add Value db in the 3rd line of LCD when move channel, Improve computing of the value !!!
 
-Function View with pre-selectionned channel
+Improve fader control in stereo case & in general
+
+Function View with pre-selectionned channel like as view mode in UI
 
 Light On Write button when UI sent to Midi
 
