@@ -1,3 +1,10 @@
+08 January 2019
+   released version 1.6.951 of ui2mcp
+
+     Change log:
+        -Fixed: Sometimes LCD information for PAN with change by controler upper 100
+        -Added: Manage fader level for master with pan different to center
+
 06 January 2019
    released version 1.6.881 of ui2mcp
 

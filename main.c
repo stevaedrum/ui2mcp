@@ -386,7 +386,7 @@ void SendLCDTxt(snd_rawmidi_t *hwMidi, char *SysExHdr, int Inv, int i_RowLCD, ch
     char c_Canal[32] = "";
 
     int col = 0;
-    int i_SliceStep = 8;
+    int i_SliceStep = 13;
     //int i_RowLCD = 1;
 
     for (int j = 0; j < strlen(Text); j +=i_SliceStep){
@@ -970,10 +970,38 @@ void UpdateMidiControler(){
         }
 
         // Mix
-        int MidiValue = 0;
-        MidiValue = (127 * ui[Canal].MixMidi);
-        char MidiArray[3] = {AddrMidiMix+Canal-(NbMidiFader*AddrMidiTrack) , MidiValue, MidiValue};
-        SendMidiOut(midiout, MidiArray);
+        printf("Informations Type %s Pan %f\n", ui[Canal].Type, ui[Canal].PanMidi );
+//        if ( strcmp(ui[Canal].Type,"m") == 0 && ( ui[Canal].PanMidi < 0.5 || ui[Canal].PanMidi > 0.5 ) ){
+//        if ( strcmp(ui[Canal].Type,"m") == 0 && ui[Canal].PanMidi != 0.5 ){
+            if( strcmp(ui[Canal].Type,"m") == 0 && ui[Canal].PanMidi < 0.5 && ui[Canal].Numb == 1 ){
+                int MidiValueR = 0;
+                MidiValueR = (127 * (ui[Canal].MixMidi-ui[Canal].MixMidi*(-200*ui[Canal].PanMidi+100)/100));
+
+                char MidiArrayRight[3] = {AddrMidiMix+Canal-(NbMidiFader*AddrMidiTrack) , MidiValueR, MidiValueR};
+                SendMidiOut(midiout, MidiArrayRight);
+            }
+            else if( strcmp(ui[Canal].Type,"m") == 0 && ui[Canal].PanMidi > 0.5 && ui[Canal].Numb == 0 ){
+                int MidiValueL = 0;
+                MidiValueL = (127 * (ui[Canal].MixMidi-ui[Canal].MixMidi*(200*ui[Canal].PanMidi-100)/100));
+
+                char MidiArrayLeft[3] = {AddrMidiMix+Canal-(NbMidiFader*AddrMidiTrack) , MidiValueL, MidiValueL};
+                SendMidiOut(midiout, MidiArrayLeft);
+            }
+            else{
+                int MidiValue = 0;
+                MidiValue = (127 * ui[Canal].MixMidi);
+                char MidiArray[3] = {AddrMidiMix+Canal-(NbMidiFader*AddrMidiTrack) , MidiValue, MidiValue};
+                SendMidiOut(midiout, MidiArray);
+            }
+//        }
+//        else{
+//            int MidiValue = 0;
+//            MidiValue = (127 * ui[Canal].MixMidi);
+//            char MidiArray[3] = {AddrMidiMix+Canal-(NbMidiFader*AddrMidiTrack) , MidiValue, MidiValue};
+//            SendMidiOut(midiout, MidiArray);
+//        }
+
+
 
         // Color to SET button
         if(ui[Canal].Color == 0){
@@ -1157,11 +1185,11 @@ void UpdateMidiControler(){
     if ( Lcd == 1 ){
         ConfigLCDTxtMode();
 
-        SendLCDTxt(midiout, SysExHdr, 0, 0, "#################################################");
+        SendLCDTxt(midiout, SysExHdr, 0, 0, "####################################################");
         usleep(500000);
-        SendLCDTxt(midiout, SysExHdr, 0, 1, "     Read configuration file [DONE]");
+        SendLCDTxt(midiout, SysExHdr, 0, 1, "     Read configuration file               [DONE]");
         usleep(500000);
-        SendLCDTxt(midiout, SysExHdr, 0, 2, "     ID Mapping to Midi controler [DONE]");
+        SendLCDTxt(midiout, SysExHdr, 0, 2, "     ID Mapping to Midi controler          [DONE]");
         usleep(500000);
     }
 
@@ -1203,7 +1231,7 @@ void UpdateMidiControler(){
     }
 
     if ( Lcd == 1 ){
-        SendLCDTxt(midiout, SysExHdr, 0, 3, "     Connecttion to UI' [DONE]");
+        SendLCDTxt(midiout, SysExHdr, 0, 3, "     Connecttion to UI                     [DONE]");
         usleep(500000);
     }
 
@@ -1235,7 +1263,7 @@ void UpdateMidiControler(){
     }
 
     if ( Lcd == 1 ){
-        SendLCDTxt(midiout, SysExHdr, 0, 4, "     Initialization of the software");
+        SendLCDTxt(midiout, SysExHdr, 0, 4, "     Initialization of the software        [DONE]");
         sleep(1);
     }
 
@@ -1246,8 +1274,8 @@ void UpdateMidiControler(){
     }
 
     if ( Lcd == 1 ){
-        SendLCDTxt(midiout, SysExHdr, 0, 5, "     Lauch program....");
-        SendLCDTxt(midiout, SysExHdr, 0, 6, "#################################################");
+        SendLCDTxt(midiout, SysExHdr, 0, 5, "     Lauch   Program        ....");
+        SendLCDTxt(midiout, SysExHdr, 0, 6, "####################################################");
     }
 
     sleep(1);
@@ -1888,6 +1916,13 @@ void UpdateMidiControler(){
                                 if( atof(UIval) == 0.5 ){
 
                                     int MidiValue = 0;
+//                                    if( ui[Canal].MixMidi > ui[Canal+1].MixMidi ){
+//                                        ui[Canal+1].MixMidi=ui[Canal].MixMidi;
+//                                    }
+//                                    else if( ui[Canal].MixMidi < ui[Canal+1].MixMidi ){
+//                                        ui[Canal].MixMidi=ui[Canal+1].MixMidi;
+//                                    }
+
                                     MidiValue = (127 * ui[Canal].MixMidi);
 
                                     if(Canal >= NbMidiFader*AddrMidiTrack && Canal <= (NbMidiFader*AddrMidiTrack)+NbMidiFader-1){
@@ -1899,12 +1934,12 @@ void UpdateMidiControler(){
                                 }
                                 else if( atof(UIval) < 0.5 ){
                                     int MidiValueR = 0;
+                                    MidiValueR = (127 * (ui[Canal].MixMidi-ui[Canal].MixMidi*(-200*ui[Canal+1].PanMidi+100)/100));
+                                    //ui[Canal+1].MixMidi = (ui[Canal].MixMidi-ui[Canal].MixMidi*(-200*ui[Canal+1].PanMidi+100)/100);
+                                    //MidiValueR = (127 * ui[Canal+1].MixMidi);
 
-                                    MidiValueR = (127 * (ui[Canal+1].MixMidi-ui[Canal+1].MixMidi*(-200*ui[Canal].PanMidi+100)/100));
-//                                    MidiValueR = (127 * (atof(UIval) / (ui[Canal+1].MixMidi/2)) );
                                     int MidiValueL = 0;
                                     MidiValueL = (127 * ui[Canal].MixMidi);
-                                    printf("Valeur %f %f --> %f\n", ui[Canal+1].MixMidi, atof(UIval), ( atof(UIval) / ui[Canal+1].MixMidi));
 
                                     if(Canal >= NbMidiFader*AddrMidiTrack && Canal <= (NbMidiFader*AddrMidiTrack)+NbMidiFader-1){
                                         char MidiArrayLeft[3] = {AddrMidiMix+Canal-(NbMidiFader*AddrMidiTrack) , MidiValueL, MidiValueL};
@@ -1916,19 +1951,19 @@ void UpdateMidiControler(){
                                 }
                                 else if( atof(UIval) > 0.5 ){
                                     int MidiValueL = 0;
-
                                     MidiValueL = (127 * (ui[Canal+1].MixMidi-ui[Canal+1].MixMidi*(200*ui[Canal].PanMidi-100)/100));
-//                                    MidiValueL = (127 * ((1 - atof(UIval)) / (ui[Canal].MixMidi/2)) );
+                                    //ui[Canal].MixMidi = (ui[Canal+1].MixMidi-ui[Canal+1].MixMidi*(200*ui[Canal].PanMidi-100)/100);
+                                    //MidiValueL = (127 * ui[Canal].MixMidi);
+
                                     int MidiValueR = 0;
-                                    MidiValueR = (127 * ui[Canal].MixMidi);
-                                    printf("Valeur %f %f --> %f\n", ui[Canal].MixMidi, atof(UIval), ( (1 - atof(UIval)) / ui[Canal].MixMidi));
+                                    MidiValueR = (127 * ui[Canal+1].MixMidi);
 
                                     if(Canal >= NbMidiFader*AddrMidiTrack && Canal <= (NbMidiFader*AddrMidiTrack)+NbMidiFader-1){
-                                        char MidiArrayRight[3] = {AddrMidiMix+Canal+1-(NbMidiFader*AddrMidiTrack) , MidiValueR, MidiValueR};
-                                        SendMidiOut(midiout, MidiArrayRight);
-
                                         char MidiArrayLeft[3] = {AddrMidiMix+Canal-(NbMidiFader*AddrMidiTrack) , MidiValueL, MidiValueL};
                                         SendMidiOut(midiout, MidiArrayLeft);
+
+                                        char MidiArrayRight[3] = {AddrMidiMix+Canal+1-(NbMidiFader*AddrMidiTrack) , MidiValueR, MidiValueR};
+                                        SendMidiOut(midiout, MidiArrayRight);
                                     }
                                 }
 
@@ -2712,6 +2747,7 @@ void UpdateMidiControler(){
 
                     Canal = MidiCC % AddrMidiEncoderPan +(NbMidiFader*AddrMidiTrack);
 
+                    /*  Give information to UI for channel selected  */
                     char sendui[256];
                     sprintf(sendui,"BMSG^SYNC^%s^%i\n", c_SyncId, Canal);
                     send(sock , sendui, strlen(sendui) , 0 );
@@ -2743,7 +2779,9 @@ void UpdateMidiControler(){
                     }
                     printf("Pan (step[%i])%i: %f\n", NbPanStep[Canal], Canal, ui[Canal].PanMidi);
 
+                    /*  Write LCD controler with PAN value  */
                     if ( Lcd == 1 ){
+                        /*  Update LCD BAR controler with PAN value  */
                         char Bar[3] = {0xB0, 0x30+Canal-(NbMidiFader*AddrMidiTrack), ui[Canal].PanMidi*0x7F};
                         SendMidiOut(midiout, Bar);
 
@@ -2751,19 +2789,25 @@ void UpdateMidiControler(){
                         char c_Canal[32] = "";
                         char c_CanalText[32] = "";
 
+                        /*  Compute string with PAN value  */
                         strcpy(Cmd, "12");
                         sprintf(c_Canal, "%02X", Canal);
                         strcat(Cmd, c_Canal);
                         strcat(Cmd, "0200");
 
+                        /*  Translate float value to percent L & R  */
                         if( ui[Canal].PanMidi == 0.5 ){
                             sprintf(c_CanalText, "<C>");
                         }
-                            else if( ui[Canal].PanMidi < 0.5 ){
-                            sprintf(c_CanalText, "L%i", (int)(-200*ui[Canal].PanMidi+100));
+                        else if( ui[Canal].PanMidi < 0.5 ){
+                            int i_Left = (int)(-200*ui[Canal].PanMidi+100);
+                            if( i_Left > 100 ){ i_Left = 100; }
+                            sprintf(c_CanalText, "L%i", i_Left);
                         }
-                            else if( ui[Canal].PanMidi > 0.5 ){
-                            sprintf(c_CanalText, "R%i", (int)(200*ui[Canal].PanMidi-100));
+                        else if( ui[Canal].PanMidi > 0.5 ){
+                            int i_Right = (int)(200*ui[Canal].PanMidi-100);
+                            if( i_Right > 100 ){ i_Right = 100; }
+                            sprintf(c_CanalText, "R%i", i_Right);
                         }
                         SendSysExTextOut(midiout, SysExHdr, Cmd, c_CanalText);
                     }
@@ -2776,6 +2820,7 @@ void UpdateMidiControler(){
                 }
                 else if (MidiCC == AddrMidiEncoderPan && NbPanButton == 1 && SelectButtonPressed != -1){
 
+                    /*  Give information to UI for channel selected  */
                     char sendui[256];
                     sprintf(sendui,"BMSG^SYNC^%s^%i\n", c_SyncId, SelectButtonPressed);
                     send(sock , sendui, strlen(sendui) , 0 );
@@ -2807,7 +2852,9 @@ void UpdateMidiControler(){
                     }
                     printf("Pan (step[%i])%i: %f\n", NbPanStep[AddrMidiEncoderPan], SelectButtonPressed, ui[SelectButtonPressed].PanMidi);
 
+                    /*  Write LCD controler with PAN value  */
                     if ( Lcd == 1 ){
+                        /*  Update LCD BAR controler with PAN value  */
                         char Bar[3] = {0xB0, 0x30+SelectButtonPressed-(NbMidiFader*AddrMidiTrack), ui[SelectButtonPressed].PanMidi*0x7F};
                         SendMidiOut(midiout, Bar);
 
@@ -2815,19 +2862,26 @@ void UpdateMidiControler(){
                         char c_Canal[32] = "";
                         char c_CanalText[32] = "";
 
+                        /*  Compute string with PAN value  */
                         strcpy(Cmd, "12");
                         sprintf(c_Canal, "%02X", SelectButtonPressed-(NbMidiFader*AddrMidiTrack));
                         strcat(Cmd, c_Canal);
                         strcat(Cmd, "0200");
 
+                        /*  Translate float value to percent L & R  */
                         if( ui[SelectButtonPressed].PanMidi == 0.5 ){
                             sprintf(c_CanalText, "<C>");
                         }
-                            else if( ui[SelectButtonPressed].PanMidi < 0.5 ){
-                            sprintf(c_CanalText, "L%i", (int)(-200*ui[SelectButtonPressed].PanMidi+100));
+                        else if( ui[SelectButtonPressed].PanMidi < 0.5 ){
+                            int i_Left = (int)(-200*ui[SelectButtonPressed].PanMidi+100);
+                            if( i_Left > 100 ){ i_Left = 100; }
+                            sprintf(c_CanalText, "L%i", i_Left);
+
                         }
-                            else if( ui[SelectButtonPressed].PanMidi > 0.5 ){
-                            sprintf(c_CanalText, "R%i", (int)(200*ui[SelectButtonPressed].PanMidi-100));
+                        else if( ui[SelectButtonPressed].PanMidi > 0.5 ){
+                            int i_Right = (int)(200*ui[SelectButtonPressed].PanMidi-100);
+                            if( i_Right > 100 ){ i_Right = 100; }
+                            sprintf(c_CanalText, "R%i", i_Right);
                         }
                         SendSysExTextOut(midiout, SysExHdr, Cmd, c_CanalText);
                     }
