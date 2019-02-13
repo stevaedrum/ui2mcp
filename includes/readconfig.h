@@ -1,16 +1,16 @@
 #ifndef READCONFIG_H_INCLUDED
 #define READCONFIG_H_INCLUDED
 
-#define SIZE 1024
-#define MAXBUF 1024
+#define SIZE 32
+#define SIZECHAR 1024
 
 struct config
 {
-   char ControlerName[MAXBUF];
-   char ControlerMode[MAXBUF];
-   char MidiPort[MAXBUF];
-   char UiAddr[MAXBUF];
-   char SyncId[MAXBUF];
+   char ControlerName[SIZECHAR];
+   char ControlerMode[SIZECHAR];
+   char MidiPort[SIZECHAR];
+   char UiAddr[SIZECHAR];
+   char SyncId[SIZECHAR];
    char Lcd[SIZE];
    char NbMidiFader[SIZE];
    char AddrMidiMix[SIZE];

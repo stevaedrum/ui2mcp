@@ -40,6 +40,11 @@ Add Value pan in the 3rd line of LCD when move channel --> DONE
 Bug VCA ne fonctionne pas depuis la page web de l'UI --> DONE
 Correct PAN in not Master Mode --> DONE
 Bug with fader update in UI web console for stereo link mode --> DONE
+In stereo link mode move left fader don't update right fader --> DONE
+In stereo update must update the second fader after aftertouch = 00 to improve function --> DONE
+Improve fader control in stereo case & in general  --> DONE
+
+Vu meter on Master for MasterMode =1 --> DONE
 
 #################################################################
     IN PROGESS
@@ -48,16 +53,13 @@ Bug with fader update in UI web console for stereo link mode --> DONE
 Bug received trame not complet sometime !!!  --> Not review !!!!
 Bug Light on Mute Clear & VCA & Shift Right !!!  --> Not review !!!!
 
-In stereo link mode move left fader don't update right fader --> DONE
-In stereo update must update the second fader after aftertouch = 00 to improve function --> DONE
+Implement Pan fader control for master on midi controler --> DONE for one pot
 
 #################################################################
     IDEAS
 #################################################################
 
-Add Value db in the 3rd line of LCD when move channel, Improve computing of the value !!!
-
-Improve fader control in stereo case & in general
+Add Value db in the 3rd line of LCD when move channel, Improve computing of the value --> Need improve the formula to improve computing
 
 Function View with pre-selectionned channel like as view mode in UI
 

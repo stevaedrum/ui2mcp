@@ -1,9 +1,9 @@
 /*  ###########################################################  */
-// Programmer:    Stephan Allene <stephan.allene@gmail.com>
-//
-// Project:    Ui MPC interface Midi Controler
-//
-/*  ###########################################################  */
+/*  Programmer:    Stephan Allene <stephan.allene@gmail.com>                                                    */
+/*                                                                                                                                                              */
+/*  Project:    Ui MPC interface Midi Controler                                                                                     */
+/*                                                                                                                                                              */
+/*  ###########################################################   */
 
 /*  standard include  */
 
@@ -80,12 +80,6 @@ void errormessage(const char *format, ...){
 
 /*  Function for export message.  */
 void LogTrace(FILE *p_File, int loglevel, int debug, char *p_Trace, ...){
-//void LogTrace(FILE *p_File, int debug, char *p_Trace){
-    //char sa_Buffer[80];
-    //va_list arg;
-    //va_start(arg,pszTrace);
-    //vsprintf(szBuffer,pszTrace,arg);
-    //sprintf(sa_Buffer,p_Trace);
     if( debug == 0 ){
         if( loglevel == 0 ){
             printf("%s",p_Trace);
@@ -105,7 +99,6 @@ void LogTrace(FILE *p_File, int loglevel, int debug, char *p_Trace, ...){
             printf("%s",p_Trace);
         }
     }
-    //va_end(arg);
     return ;
 }
 
@@ -463,6 +456,9 @@ int main(int argc, char *argv[]) {
 	int i_Watchdog_init;
 	int i_Watchdog;
 
+	/*  variable for Update timer function  */
+	int i_UpdateListTimer;
+
 	/*  variable for Vu meter function  */
 	int i_VuMeter_init;
 	int i_VuMeter;
@@ -616,6 +612,18 @@ int main(int argc, char *argv[]) {
 	unsigned GroupMaskMuteAll;
 	unsigned GroupMaskMuteFx;
 
+	//UI  Directories Player
+	char UIDirPlayerList [256][256];
+	int DirPlayerIndex = 0;
+	int DirPlayerMax = 0;
+	char DirPlayerCurrent[256] = "";
+
+	//UI  Files Player
+	char UIFilesPlayerList [2048][256];
+	int FilesPlayerIndex = 0;
+	int FilesPlayerMax = 0;
+	char FilesPlayerCurrent[256] = "";
+
 	//UI Shows
 	char UIShowsList [200][256];
 	int ShowsIndex = 0;
@@ -628,6 +636,12 @@ int main(int argc, char *argv[]) {
 	int SnapShotMax = 0;
 	char SnapShotCurrent[256] = "";
 
+	//UI Cues
+	char UICuesList [200][256];
+	int CuesIndex = 0;
+	int CuesMax = 0;
+	char CuesCurrent[256] = "";
+
 	// Other Setting variable
 	int SoloMode = 0;
 	int UIBpm = 120;
@@ -638,9 +652,12 @@ int main(int argc, char *argv[]) {
 	int Canal;
 
 	int MtkCurrentState = -1;						                     // Value for Mtk STOP/PLAY
-	int MtkRecCurrentState = -1;					                        	// Value for Mtk REC
+	int MediaPlayerCurrentState = -1;		                     // Value for Media Player STOP/PLAY
+	int MtkRecCurrentState = -1;					               	// Value for Mtk REC
+	int MediaRecCurrentState = 0; //-1;			                 	// Value for MEDIA REC
 	int DimMaster;				                    		    // Value for Dim Master
 	int SoundCheck = -1;                                    // varaible for Sound Chack function
+    int PanSet = 0;                                                // Variable activate Pan mode with Select mode
 
 	// Parameter of MIDI device
     //int MidiValueOn = 0x7F;
@@ -657,6 +674,9 @@ int main(int argc, char *argv[]) {
 	int ModeSnapShotsPressed = 0;
 	int ModeCuesPressed = 0;
 	int ModeMasterPressed = 0;
+	int ModeDirPlayerPressed = 0;
+	int ModeFilesPlayerPressed = 0;
+	int ModePlayer = 0;
 
 	//mapping midi controler to UI for fader 0
 
@@ -820,7 +840,7 @@ void UpdateMidiControler(){
 
     // Select
     for( int j=0; j < NbMidiFader; j++ ){
-        if( ui[Canal].Color == 0 ){
+        if( ui[j].Color == 0 ){  // BUG a Verifier Cqnql change par j
             char MidiArray[3] = {AddrMidiButtonLed, AddrMidiSelect+j, 0x00};
             SendMidiOut(midiout, MidiArray);
         }
@@ -859,7 +879,7 @@ void UpdateMidiControler(){
 
             strcpy(Cmd, "12");
             sprintf(c_Canal, "%02X", NbMidiFader);
-            sprintf(c_CanalText, "MR");
+            sprintf(c_CanalText, "R/L");
             strcat(Cmd, c_Canal);
             strcat(Cmd, "0100");
             SendSysExTextOut(midiout, SysExHdr, Cmd, c_CanalText);
@@ -1000,8 +1020,6 @@ void UpdateMidiControler(){
 //            char MidiArray[3] = {AddrMidiMix+Canal-(NbMidiFader*AddrMidiTrack) , MidiValue, MidiValue};
 //            SendMidiOut(midiout, MidiArray);
 //        }
-
-
 
         // Color to SET button
         if(ui[Canal].Color == 0){
@@ -1186,11 +1204,11 @@ void UpdateMidiControler(){
         ConfigLCDTxtMode();
 
         SendLCDTxt(midiout, SysExHdr, 0, 0, "####################################################");
-        usleep(500000);
+        usleep( 250000 ); /* Sleep 100000 micro seconds = 100 ms, etc. */
         SendLCDTxt(midiout, SysExHdr, 0, 1, "     Read configuration file               [DONE]");
-        usleep(500000);
+        usleep( 250000 ); /* Sleep 100000 micro seconds = 100 ms, etc. */
         SendLCDTxt(midiout, SysExHdr, 0, 2, "     ID Mapping to Midi controler          [DONE]");
-        usleep(500000);
+        usleep( 250000 ); /* Sleep 100000 micro seconds = 100 ms, etc. */
     }
 
 
@@ -1221,7 +1239,7 @@ void UpdateMidiControler(){
 
     if ( Lcd == 1 ){
         SendLCDTxt(midiout, SysExHdr, 0, 3, "     Connecttion to UI'");
-        usleep(500000);
+        usleep( 250000 ); /* Sleep 100000 micro seconds = 100 ms, etc. */
     }
 
     if (connect(sock, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) < 0)
@@ -1232,7 +1250,7 @@ void UpdateMidiControler(){
 
     if ( Lcd == 1 ){
         SendLCDTxt(midiout, SysExHdr, 0, 3, "     Connecttion to UI                     [DONE]");
-        usleep(500000);
+        usleep( 250000 ); /* Sleep 100000 micro seconds = 100 ms, etc. */
     }
 
     send(sock , ack , strlen(ack) , 0 );
@@ -1264,7 +1282,7 @@ void UpdateMidiControler(){
 
     if ( Lcd == 1 ){
         SendLCDTxt(midiout, SysExHdr, 0, 4, "     Initialization of the software        [DONE]");
-        sleep(1);
+        usleep( 250000 ); /* Sleep 100000 micro seconds = 100 ms, etc. */
     }
 
     if ( Lcd == 0 ){
@@ -1274,11 +1292,15 @@ void UpdateMidiControler(){
     }
 
     if ( Lcd == 1 ){
-        SendLCDTxt(midiout, SysExHdr, 0, 5, "     Lauch   Program        ....");
+        char Version[256] = "";
+        strcpy(Version, "     Lauch   Program - Version [");
+        strcat(Version, FULLVERSION_STRING);
+        strcat(Version, "]");
+        SendLCDTxt(midiout, SysExHdr, 0, 5, Version);
         SendLCDTxt(midiout, SysExHdr, 0, 6, "####################################################");
     }
 
-    sleep(1);
+    sleep(2);
 
     /*  Configuration mode LCD  */
     if ( Lcd == 1 ){
@@ -1289,6 +1311,8 @@ void UpdateMidiControler(){
     current_time_init = currentTimeMillis();
     i_Watchdog_init = currentTimeMillis();
     i_VuMeter_init = currentTimeMillis();
+
+    i_UpdateListTimer = 0;
 
     /*  -------------------------------------------------------------------------------------------------------------------------  */
     /*  Principal function to receive, put in memories and translate to interface  */
@@ -1306,6 +1330,19 @@ void UpdateMidiControler(){
 
             char c_RunningStatus[3] = {0xA0, 0x00, 0x00};
             SendMidiOut(midiout, c_RunningStatus);
+
+            i_UpdateListTimer++;
+
+            if( init >= 1 && i_UpdateListTimer >= 3 ){
+                char s_Cmd[32];
+                sprintf(s_Cmd,"SNAPSHOTLIST^%s\n", ShowsCurrent);
+                send(sock , s_Cmd, strlen(s_Cmd) , 0 );
+
+                sprintf(s_Cmd,"CUELIST^%s\n", ShowsCurrent);
+                send(sock , s_Cmd, strlen(s_Cmd) , 0 );
+
+                i_UpdateListTimer = 0;
+            }
 
             i_Watchdog_init = currentTimeMillis();
         }
@@ -1448,7 +1485,7 @@ void UpdateMidiControler(){
                     }
                     if(strstr(UIMessage, "UPDATE_PLAYLIST")){
                                                 // First message of UI.
-                        init = -2;       // Initialize the flag for detection of the last message.
+                        //init = -2;       // Initialize the flag for detection of the last message.
                     }
                     if(strstr(UIMessage, "RTA^")){
                         if(init < 0){init++;}       // Initialize the flag for detection of the last message.
@@ -1618,6 +1655,10 @@ void UpdateMidiControler(){
                                     }
                                 }
                             }
+                            if( ModeMasterPressed ==1 ){
+                                        char MidiArray[2] = {0xD0+NbMidiFader, (int)floor((double)127/(double)255*ui[UIChannel+UILineIn+UIMedia+UIFx+UISubGroup+UIAux+UIVca].vuPostFader)};
+                                        SendMidiOut(midiout, MidiArray);
+                            }
                             i_VuMeter_init = currentTimeMillis();
                             //printf("\n");
                         }
@@ -1655,6 +1696,105 @@ void UpdateMidiControler(){
                         sprintf(sa_LogMessage, "UI2MCP  <--  UI : Current SnapShot [%s]\n", SnapShotCurrent);
                         LogTrace(hfErr, 2, debug, sa_LogMessage);
 
+                    }
+                    if(strstr(UIMessage, "currentCue^")){
+                        //3:::SETS^var.currentCue^Snailz
+
+                        UICommand = strtok(strstr(UIMessage,"currentCue^"), "\r\n");
+                        //printf("Recu [%s]\n",UICommand);
+
+                        SplitArrayComa=split(UICommand,"^",1);
+                        strcat(CuesCurrent, SplitArrayComa[1]);
+                        free(SplitArrayComa);
+
+                        sprintf(sa_LogMessage, "UI2MCP  <--  UI : Current Cue [%s]\n", CuesCurrent);
+                        LogTrace(hfErr, 2, debug, sa_LogMessage);
+
+                    }
+                    if(strstr(UIMessage, "PLISTS^")){
+
+                        UICommand = strtok(strstr(UIMessage,"PLISTS^"), "\r\n");
+
+                        sprintf(sa_LogMessage, "UI2MCP  <--  UI : DirPlayerList [%s]\n", UICommand);
+                        LogTrace(hfErr, 2, debug, sa_LogMessage);
+
+                        memset(UIDirPlayerList, 0, sizeof UIDirPlayerList);
+
+                        SplitArrayComa=split(UICommand,"^",1);
+                        //affichage du resultat
+                        for(AdrSplitComa=0; SplitArrayComa[AdrSplitComa]!=NULL; AdrSplitComa++){
+                            if (AdrSplitComa >= 1){
+                                //printf("i=%d : [%s]\n",AdrSplitComa-1,SplitArrayComa[AdrSplitComa]);
+                                strcpy(UIDirPlayerList[AdrSplitComa-1],SplitArrayComa[AdrSplitComa]);
+                                DirPlayerMax = AdrSplitComa-1;
+                            }
+                        }
+                        free(SplitArrayComa);
+
+                        sprintf(sa_LogMessage, "UI2MCP  <--  UI : DirPlayerIndex [%i]\n", DirPlayerIndex);
+                        LogTrace(hfErr, 2, debug, sa_LogMessage);
+
+                        if ( Lcd == 1 && ModeDirPlayerPressed == 1 ){
+                           int Row = 0;
+                           ConfigLCDTxtMode();
+                            for (int c = DirPlayerIndex; c < DirPlayerIndex+6; c++){
+                                if( DirPlayerIndex != c ){
+                                        SendLCDTxt(midiout, SysExHdr, 0, Row, UIDirPlayerList[c]);
+                                        printf("Dir %i [%s]\n",  DirPlayerIndex, UIDirPlayerList[c]);
+                                }
+                                else{
+                                        SendLCDTxt(midiout, SysExHdr, 1, Row, UIDirPlayerList[c]);
+                                        printf("Dir %i [%s]\n",  DirPlayerIndex, UIDirPlayerList[c]);
+
+                                        strcpy(DirPlayerCurrent, UIDirPlayerList[c]);
+                                }
+                                Row++;
+                            }
+                        }
+
+                    }
+                    if(strstr(UIMessage, "PLIST_TRACKS^")){
+
+                        UICommand = strtok(strstr(UIMessage,"PLIST_TRACKS^"), "\r\n");
+
+                        sprintf(sa_LogMessage, "UI2MCP  <--  UI : FilesPlayerList [%s]\n", UICommand);
+                        LogTrace(hfErr, 2, debug, sa_LogMessage);
+
+                        memset(UIFilesPlayerList, 0, sizeof UIFilesPlayerList);
+
+                        SplitArrayComa=split(UICommand,"^",1);
+                        //affichage du resultat
+                        for(AdrSplitComa=0;SplitArrayComa[AdrSplitComa]!=NULL;AdrSplitComa++){
+                            if (AdrSplitComa >= 2){
+                                //printf("i=%d : [%s]\n",AdrSplitComa-2,SplitArrayComa[AdrSplitComa]);
+                                strcpy(UIFilesPlayerList[AdrSplitComa-2],SplitArrayComa[AdrSplitComa]);
+                                FilesPlayerMax = AdrSplitComa-2;
+                            }
+                        }
+                        free(SplitArrayComa);
+
+                        sprintf(sa_LogMessage, "UI2MCP  <--  UI : FilesPlayerIndex [%i]\n", FilesPlayerIndex);
+                        LogTrace(hfErr, 2, debug, sa_LogMessage);
+
+                        if( ModeFilesPlayerPressed == 1 ){
+                            if ( Lcd == 1 ){
+                               int Row = 0;
+                               ConfigLCDTxtMode();
+                               for (int c = FilesPlayerIndex; c < FilesPlayerIndex+6; c++){
+                                    if( FilesPlayerIndex != c ){
+                                            SendLCDTxt(midiout, SysExHdr, 0, Row, UIFilesPlayerList[c]);
+                                            //SendLCDTxt(midiout, SysExHdr, 0, c, UIFilesPlayerList[c]);
+                                            printf("File %i [%s]\n",  FilesPlayerIndex, UIFilesPlayerList[c]);
+                                    }
+                                    else{
+                                            SendLCDTxt(midiout, SysExHdr, 1, Row, UIFilesPlayerList[c]);
+                                            //SendLCDTxt(midiout, SysExHdr, 1, c, UIFilesPlayerList[c]);
+                                            printf("File %i [%s]\n",  FilesPlayerIndex, UIFilesPlayerList[c]);
+                                    }
+                                    Row++;
+                               }
+                            }
+                        }
                     }
                     if(strstr(UIMessage, "SHOWLIST^")){
 
@@ -1709,6 +1849,34 @@ void UpdateMidiControler(){
                         free(SplitArrayComa);
 
                         sprintf(sa_LogMessage, "UI2MCP  <--  UI : SnapShotIndex [%i]\n",SnapShotIndex);
+                        LogTrace(hfErr, 2, debug, sa_LogMessage);
+
+                    }
+                    if(strstr(UIMessage, "CUELIST")){
+
+                        UICommand = strtok(strstr(UIMessage,"CUELIST^"), "\r\n");
+
+                        sprintf(sa_LogMessage, "UI2MCP  <--  UI : CuesList [%s]\n", UICommand);
+                        LogTrace(hfErr, 2, debug, sa_LogMessage);
+
+                        memset(UICuesList, 0, sizeof UICuesList);
+
+                        SplitArrayComa=split(UICommand,"^",1);
+                        //affichage du resultat
+                        for(AdrSplitComa=0;SplitArrayComa[AdrSplitComa]!=NULL;AdrSplitComa++){
+                            if (AdrSplitComa >= 2){
+                                //printf("i=%d : [%s] current [%s]\n",AdrSplitComa-2,SplitArrayComa[AdrSplitComa], CuesCurrent);
+                                strcpy(UICuesList[AdrSplitComa-2],SplitArrayComa[AdrSplitComa]);
+                                CuesMax = AdrSplitComa-2;
+
+                                if(strcmp(SplitArrayComa[AdrSplitComa], CuesCurrent) == 0){
+                                    CuesIndex = AdrSplitComa-2;
+                                }
+                            }
+                        }
+                        free(SplitArrayComa);
+
+                        sprintf(sa_LogMessage, "UI2MCP  <--  UI : CuesIndex [%i]\n",CuesIndex);
                         LogTrace(hfErr, 2, debug, sa_LogMessage);
 
                     }
@@ -1774,21 +1942,93 @@ void UpdateMidiControler(){
 
                         if( strcmp(UIio,"var") == 0 ){
 
+//                            if( strcmp(UIchan,"currentShow") == 0 ){
+//                                strcpy(ShowsCurrent, UIval);
+//                                printf("currentShow %s\n", ShowsCurrent);
+//                            }
+//
+//                            if( strcmp(UIchan,"currentSnapshot") == 0 ){
+//                                strcpy(SnapShotCurrent, UIval);
+//                                printf("currentSnapshot %s\n", SnapShotCurrent);
+//                            }
+//
+                            if( strcmp(UIchan,"currentCue") == 0 ){
+                                strcpy(CuesCurrent, UIval);
+                                printf("currentCue %s\n", CuesCurrent);
+                            }
+
+                            if( strcmp(UIchan,"isRecording") == 0 ){
+                                int Recording = atoi(UIval);
+
+                                printf("State Media %i\n", MediaPlayerCurrentState);
+                                if ( Recording == 1 && ModePlayer == 0 ){
+                                    MediaRecCurrentState = Recording;
+
+                                    char MidiArrayStop[3] = {AddrMidiButtonLed, IdStop, 0x00};
+                                    SendMidiOut(midiout, MidiArrayStop);
+                                    char MidiArrayPlay[3] = {AddrMidiButtonLed, IdPlay, 0x00};
+                                    SendMidiOut(midiout, MidiArrayPlay);
+                                    char MidiArrayRec[3] = {AddrMidiButtonLed, IdRec, 0x7F};
+                                    SendMidiOut(midiout, MidiArrayRec);
+                                }
+                            }
+
+                            if( strcmp(UIchan,"currentState") == 0 ){
+                                MediaPlayerCurrentState = atoi(UIval);
+
+                                printf("State Media %i\n", MediaPlayerCurrentState);
+                                if ( MediaPlayerCurrentState == 0 && ModePlayer == 0 ){
+                                    char MidiArrayStop[3] = {AddrMidiButtonLed, IdStop, 0x7F};
+                                    SendMidiOut(midiout, MidiArrayStop);
+                                    char MidiArrayPlay[3] = {AddrMidiButtonLed, IdPlay, 0x00};
+                                    SendMidiOut(midiout, MidiArrayPlay);
+                                    char MidiArrayRec[3] = {AddrMidiButtonLed, IdRec, 0x00};
+                                    SendMidiOut(midiout, MidiArrayRec);
+                                }
+                                else if ( MediaPlayerCurrentState == 1 && ModePlayer == 0 ){
+                                    //MediaRecCurrentState = MediaPlayerCurrentState;
+
+                                    //char MidiArrayStop[3] = {AddrMidiButtonLed, IdStop, 0x00};
+                                    //SendMidiOut(midiout, MidiArrayStop);
+                                    //char MidiArrayPlay[3] = {AddrMidiButtonLed, IdPlay, 0x00};
+                                    //SendMidiOut(midiout, MidiArrayPlay);
+                                    //char MidiArrayRec[3] = {AddrMidiButtonLed, IdRec, 0x7F};
+                                    //SendMidiOut(midiout, MidiArrayRec);
+                                }
+                                else if ( MediaPlayerCurrentState == 2 && ModePlayer == 0 ){
+                                    char MidiArrayStop[3] = {AddrMidiButtonLed, IdStop, 0x00};
+                                    SendMidiOut(midiout, MidiArrayStop);
+                                    char MidiArrayPlay[3] = {AddrMidiButtonLed, IdPlay, 0x7F};
+                                    SendMidiOut(midiout, MidiArrayPlay);
+                                    char MidiArrayRec[3] = {AddrMidiButtonLed, IdRec, 0x00};
+                                    SendMidiOut(midiout, MidiArrayRec);
+                                }
+                                else if ( MediaPlayerCurrentState == 3 && ModePlayer == 0 ){
+                                    char MidiArrayStop[3] = {AddrMidiButtonLed, IdStop, 0x00};
+                                    SendMidiOut(midiout, MidiArrayStop);
+                                    char MidiArrayPlay[3] = {AddrMidiButtonLed, IdPlay, 0x01};
+                                    SendMidiOut(midiout, MidiArrayPlay);
+                                    char MidiArrayRec[3] = {AddrMidiButtonLed, IdRec, 0x00};
+                                    SendMidiOut(midiout, MidiArrayRec);
+                                }
+                            }
+
                             if( strcmp(UIchan,"mtk") == 0 && strcmp(UIfunc,"currentState") == 0 ){
                                 MtkCurrentState = atoi(UIval);
-                                if ( MtkCurrentState == 0 ){
+
+                                if ( MtkCurrentState == 0  && ModePlayer == 1 ){
                                     char MidiArrayStop[3] = {AddrMidiButtonLed, IdStop, 0x7F};
                                     SendMidiOut(midiout, MidiArrayStop);
                                     char MidiArrayPlay[3] = {AddrMidiButtonLed, IdPlay, 0x00};
                                     SendMidiOut(midiout, MidiArrayPlay);
                                 }
-                                else if ( MtkCurrentState == 1 ){
+                                else if ( MtkCurrentState == 1&& ModePlayer == 1 ){
                                     char MidiArrayStop[3] = {AddrMidiButtonLed, IdStop, 0x00};
                                     SendMidiOut(midiout, MidiArrayStop);
                                     char MidiArrayPlay[3] = {AddrMidiButtonLed, IdPlay, 0x01};
                                     SendMidiOut(midiout, MidiArrayPlay);
                                 }
-                                else if ( MtkCurrentState == 2 ){
+                                else if ( MtkCurrentState == 2 && ModePlayer == 1 ){
                                     char MidiArrayStop[3] = {AddrMidiButtonLed, IdStop, 0x00};
                                     SendMidiOut(midiout, MidiArrayStop);
                                     char MidiArrayPlay[3] = {AddrMidiButtonLed, IdPlay, 0x7F};
@@ -1798,7 +2038,7 @@ void UpdateMidiControler(){
 
                             if( strcmp(UIchan,"mtk") == 0 && strcmp(UIfunc,"rec") == 0 && strcmp(UIsfunc,"currentState") == 0 ){
                                 MtkRecCurrentState = atoi(UIval);
-                                if ( MtkRecCurrentState == 0 ){
+                                if ( MtkRecCurrentState == 0 && ModePlayer == 1 ){
                                     char MidiArrayStop[3] = {AddrMidiButtonLed, IdStop, 0x7F};
                                     SendMidiOut(midiout, MidiArrayStop);
                                     char MidiArrayPlay[3] = {AddrMidiButtonLed, IdPlay, 0x00};
@@ -1806,7 +2046,7 @@ void UpdateMidiControler(){
                                     char MidiArrayRec[3] = {AddrMidiButtonLed, IdRec, 0x00};
                                     SendMidiOut(midiout, MidiArrayRec);
                                 }
-                                else if ( MtkRecCurrentState == 1 ){
+                                else if ( MtkRecCurrentState == 1 && ModePlayer == 1 ){
                                     char MidiArrayStop[3] = {AddrMidiButtonLed, IdStop, 0x00};
                                     SendMidiOut(midiout, MidiArrayStop);
                                     char MidiArrayPlay[3] = {AddrMidiButtonLed, IdPlay, 0x00};
@@ -1828,6 +2068,17 @@ void UpdateMidiControler(){
                                     char MidiArrayB[3] = {AddrMidiButtonLed+3, AddrSoundCheck, 0x00};
                                     SendMidiOut(midiout, MidiArrayB);
 
+                                    ModePlayer = 0;
+
+                                    char MidiArrayM[3] = {AddrMidiButtonLed, 0x4B, 0x7F};
+                                    SendMidiOut(midiout, MidiArrayM);
+                                    char MidiArrayMR[3] = {AddrMidiButtonLed+1, 0x4B, 0x7F};
+                                    SendMidiOut(midiout, MidiArrayMR);
+                                    char MidiArrayMG[3] = {AddrMidiButtonLed+2, 0x4B, 0x0A};
+                                    SendMidiOut(midiout, MidiArrayMG);
+                                    char MidiArrayMB[3] = {AddrMidiButtonLed+3, 0x4B, 0x49};
+                                    SendMidiOut(midiout, MidiArrayMB);
+
                                     sprintf(sa_LogMessage,"UI2MCP <-- UI : Sound Check Desactived\n");
                                     LogTrace(hfErr, 1, debug, sa_LogMessage);
                                 }
@@ -1840,6 +2091,17 @@ void UpdateMidiControler(){
                                     SendMidiOut(midiout, MidiArrayG);
                                     char MidiArrayB[3] = {AddrMidiButtonLed+3, AddrSoundCheck, 0x00};
                                     SendMidiOut(midiout, MidiArrayB);
+
+                                    ModePlayer = 1;
+
+                                    char MidiArrayM[3] = {AddrMidiButtonLed, 0x4B, 0x7F};
+                                    SendMidiOut(midiout, MidiArrayM);
+                                    char MidiArrayMR[3] = {AddrMidiButtonLed+1, 0x4B, 0x00};
+                                    SendMidiOut(midiout, MidiArrayMR);
+                                    char MidiArrayMG[3] = {AddrMidiButtonLed+2, 0x4B, 0x7F};
+                                    SendMidiOut(midiout, MidiArrayMG);
+                                    char MidiArrayMB[3] = {AddrMidiButtonLed+3, 0x4B, 0x00};
+                                    SendMidiOut(midiout, MidiArrayMB);
 
                                     sprintf(sa_LogMessage,"UI2MCP <-- UI : Sound Check Actived\n");
                                     LogTrace(hfErr, 1, debug, sa_LogMessage);
@@ -1874,9 +2136,29 @@ void UpdateMidiControler(){
                             v = atoi(UIval);
                             if (v == 0){
                                 DimMaster = 0;
+
+                                char MidiArray[3] = {AddrMidiButtonLed, i_Dim, 0x00};
+                                SendMidiOut(midiout, MidiArray);
+
+                                char MidiArrayR[3] = {AddrMidiButtonLed+1, i_Dim, (int)floor((double)127/(double)255*0)};
+                                SendMidiOut(midiout, MidiArrayR);
+                                char MidiArrayG[3] = {AddrMidiButtonLed+2, i_Dim, (int)floor((double)127/(double)255*145)};
+                                SendMidiOut(midiout, MidiArrayG);
+                                char MidiArrayB[3] = {AddrMidiButtonLed+3, i_Dim, (int)floor((double)127/(double)255*194)};
+                                SendMidiOut(midiout, MidiArrayB);
                             }
                             else if (v == 1){
                                 DimMaster = 1;
+
+                                char MidiArray[3] = {AddrMidiButtonLed, i_Dim, 0x7F};
+                                SendMidiOut(midiout, MidiArray);
+
+                                char MidiArrayR[3] = {AddrMidiButtonLed+1, i_Dim, (int)floor((double)127/(double)255*0)};
+                                SendMidiOut(midiout, MidiArrayR);
+                                char MidiArrayG[3] = {AddrMidiButtonLed+2, i_Dim, (int)floor((double)127/(double)255*145)};
+                                SendMidiOut(midiout, MidiArrayG);
+                                char MidiArrayB[3] = {AddrMidiButtonLed+3, i_Dim, (int)floor((double)127/(double)255*194)};
+                                SendMidiOut(midiout, MidiArrayB);
                             }
                         }
                         else if( strcmp(UIio,"m") == 0 && strcmp(UIchan,"mix") == 0 ){
@@ -2036,6 +2318,100 @@ void UpdateMidiControler(){
                                     }
                                     SendSysExTextOut(midiout, SysExHdr, Cmd, c_CanalText);
                                 }
+
+                                if( atof(UIval) == 0.5 ){
+
+                                    int MidiValue = 0;
+//                                    if( ui[Canal].MixMidi > ui[Canal+1].MixMidi ){
+//                                        ui[Canal+1].MixMidi=ui[Canal].MixMidi;
+//                                    }
+//                                    else if( ui[Canal].MixMidi < ui[Canal+1].MixMidi ){
+//                                        ui[Canal].MixMidi=ui[Canal+1].MixMidi;
+//                                    }
+
+                                    MidiValue = (127 * ui[Canal].MixMidi);
+
+                                    if(Canal >= NbMidiFader*AddrMidiTrack && Canal <= (NbMidiFader*AddrMidiTrack)+NbMidiFader-1){
+                                        char MidiArrayLeft[3] = {AddrMidiMix+Canal-(NbMidiFader*AddrMidiTrack) , MidiValue, MidiValue};
+                                        SendMidiOut(midiout, MidiArrayLeft);
+                                        char MidiArrayRight[3] = {AddrMidiMix+Canal+1-(NbMidiFader*AddrMidiTrack) , MidiValue, MidiValue};
+                                        SendMidiOut(midiout, MidiArrayRight);
+                                    }
+                                }
+                                else if( atof(UIval) < 0.5 ){
+                                    int MidiValueR = 0;
+                                    MidiValueR = (127 * (ui[Canal].MixMidi-ui[Canal].MixMidi*(-200*ui[Canal+1].PanMidi+100)/100));
+                                    //ui[Canal+1].MixMidi = (ui[Canal].MixMidi-ui[Canal].MixMidi*(-200*ui[Canal+1].PanMidi+100)/100);
+                                    //MidiValueR = (127 * ui[Canal+1].MixMidi);
+
+                                    int MidiValueL = 0;
+                                    MidiValueL = (127 * ui[Canal].MixMidi);
+
+                                    if(Canal >= NbMidiFader*AddrMidiTrack && Canal <= (NbMidiFader*AddrMidiTrack)+NbMidiFader-1){
+                                        char MidiArrayLeft[3] = {AddrMidiMix+Canal-(NbMidiFader*AddrMidiTrack) , MidiValueL, MidiValueL};
+                                        SendMidiOut(midiout, MidiArrayLeft);
+
+                                        char MidiArrayRight[3] = {AddrMidiMix+Canal+1-(NbMidiFader*AddrMidiTrack) , MidiValueR, MidiValueR};
+                                        SendMidiOut(midiout, MidiArrayRight);
+                                    }
+                                }
+                                else if( atof(UIval) > 0.5 ){
+                                    int MidiValueL = 0;
+                                    MidiValueL = (127 * (ui[Canal+1].MixMidi-ui[Canal+1].MixMidi*(200*ui[Canal].PanMidi-100)/100));
+                                    //ui[Canal].MixMidi = (ui[Canal+1].MixMidi-ui[Canal+1].MixMidi*(200*ui[Canal].PanMidi-100)/100);
+                                    //MidiValueL = (127 * ui[Canal].MixMidi);
+
+                                    int MidiValueR = 0;
+                                    MidiValueR = (127 * ui[Canal+1].MixMidi);
+
+                                    if(Canal >= NbMidiFader*AddrMidiTrack && Canal <= (NbMidiFader*AddrMidiTrack)+NbMidiFader-1){
+                                        char MidiArrayLeft[3] = {AddrMidiMix+Canal-(NbMidiFader*AddrMidiTrack) , MidiValueL, MidiValueL};
+                                        SendMidiOut(midiout, MidiArrayLeft);
+
+                                        char MidiArrayRight[3] = {AddrMidiMix+Canal+1-(NbMidiFader*AddrMidiTrack) , MidiValueR, MidiValueR};
+                                        SendMidiOut(midiout, MidiArrayRight);
+                                    }
+                                }
+
+                                if(Canal >= NbMidiFader*AddrMidiTrack && Canal <= (NbMidiFader*AddrMidiTrack)+NbMidiFader-1){
+
+                                    if ( Lcd == 1 ){
+                                        char BarL[3] = {0xB0, 0x30+Canal-(NbMidiFader*AddrMidiTrack), ui[Canal].PanMidi*0x7F};
+                                        SendMidiOut(midiout, BarL);
+                                        char BarR[3] = {0xB0, 0x30+Canal+1-(NbMidiFader*AddrMidiTrack), ui[Canal+1].PanMidi*0x7F};
+                                        SendMidiOut(midiout, BarR);
+
+                                        char CmdL[32] = "";
+                                        char c_CanalL[32] = "";
+                                        char CmdR[32] = "";
+                                        char c_CanalR[32] = "";
+                                        char c_CanalText[32] = "";
+
+                                        strcpy(CmdL, "12");
+                                        sprintf(c_CanalL, "%02X", Canal-(NbMidiFader*AddrMidiTrack));
+                                        strcat(CmdL, c_CanalL);
+                                        strcat(CmdL, "0200");
+
+                                        strcpy(CmdR, "12");
+                                        sprintf(c_CanalR, "%02X", Canal-(NbMidiFader*AddrMidiTrack)+1);
+                                        strcat(CmdR, c_CanalR);
+                                        strcat(CmdR, "0200");
+
+                                        if( ui[Canal].PanMidi == 0.5 ){
+                                            sprintf(c_CanalText, "<C>");
+                                        }
+                                        else if( ui[Canal].PanMidi < 0.5 ){
+                                            sprintf(c_CanalText, "L%i", (int)(-200*ui[Canal].PanMidi+100));
+                                        }
+                                        else if( ui[Canal].PanMidi > 0.5 ){
+                                            sprintf(c_CanalText, "R%i", (int)(200*ui[Canal].PanMidi-100));
+                                        }
+
+                                        SendSysExTextOut(midiout, SysExHdr, CmdL, c_CanalText);
+                                        SendSysExTextOut(midiout, SysExHdr, CmdR, c_CanalText);
+                                    }
+                                }
+
                                 sprintf(sa_LogMessage, "UI2MCP <-> MEM : Pan %i: %f\n", Canal, ui[Canal].PanMidi);
                                 LogTrace(hfErr, 0, debug, sa_LogMessage);
                             }
@@ -2743,7 +3119,7 @@ void UpdateMidiControler(){
                 }
             }
             else if (InMidi == AddrMidiEncoder){                                                                                                   /*  Midi command Encoder  */
-                if (MidiCC >= AddrMidiEncoderPan && MidiCC <= AddrMidiEncoderPan + NbMidiFader - 1 && NbPanButton == NbMidiFader){
+                if (MidiCC >= AddrMidiEncoderPan && MidiCC <= AddrMidiEncoderPan + NbMidiFader - 1 && NbPanButton == NbMidiFader && PanPressed == 1 ){
 
                     Canal = MidiCC % AddrMidiEncoderPan +(NbMidiFader*AddrMidiTrack);
 
@@ -2818,81 +3194,242 @@ void UpdateMidiControler(){
                     sprintf(sendui,"SETD^%s.%d.pan^%.10f\n", ui[Canal].Type, ui[Canal].Numb, ui[Canal].PanMidi);
                     send(sock , sendui, strlen(sendui) , 0 );
                 }
-                else if (MidiCC == AddrMidiEncoderPan && NbPanButton == 1 && SelectButtonPressed != -1){
+                else if (MidiCC == AddrMidiEncoderPan && NbPanButton == 1 && PanPressed == 1 && SelectButtonPressed != -1){
 
                     /*  Give information to UI for channel selected  */
                     char sendui[256];
                     sprintf(sendui,"BMSG^SYNC^%s^%i\n", c_SyncId, SelectButtonPressed);
                     send(sock , sendui, strlen(sendui) , 0 );
 
-                    if ( strcmp(ControlerConfig.TypePan,"POT") == 0 ){
-                        if(MidiValue == 0x41 && ui[SelectButtonPressed].PanMidi >= 0){
-                            ui[SelectButtonPressed].PanMidi =  fabs (ui[SelectButtonPressed].PanMidi+.0003*NbPanStep[AddrMidiEncoderPan]);
+                    if( strcmp( ui[SelectButtonPressed].Type, "m" ) != 0 ){
+                        if ( strcmp(ControlerConfig.TypePan,"POT") == 0 ){
+                            if(MidiValue == 0x41 && ui[SelectButtonPressed].PanMidi >= 0){
+                                ui[SelectButtonPressed].PanMidi =  fabs (ui[SelectButtonPressed].PanMidi+.0003*NbPanStep[AddrMidiEncoderPan]);
+                            }
+                            else if(MidiValue == 0x01 && ui[SelectButtonPressed].PanMidi <= 1){
+                                ui[SelectButtonPressed].PanMidi = fabs (ui[SelectButtonPressed].PanMidi-.0003*NbPanStep[AddrMidiEncoderPan]);
+                            }
+                            else if(MidiValue == 0x3F){
+                                NbPanStep[AddrMidiEncoderPan] = 0;
+                                ui[SelectButtonPressed].PanMidi =  1;
+                            }
+                            else if(MidiValue == 0x7F){
+                                NbPanStep[AddrMidiEncoderPan] = 0;
+                                ui[SelectButtonPressed].PanMidi =  0;
+                            }
+                            NbPanStep[AddrMidiEncoderPan]++;
                         }
-                        else if(MidiValue == 0x01 && ui[SelectButtonPressed].PanMidi <= 1){
-                            ui[SelectButtonPressed].PanMidi = fabs (ui[SelectButtonPressed].PanMidi-.0003*NbPanStep[AddrMidiEncoderPan]);
+                        else if ( strcmp(ControlerConfig.TypePan,"ENC") == 0 ){
+                            if(( MidiValue >= 0x41 && MidiValue <= 0x45 ) && ui[SelectButtonPressed].PanMidi > 0 && ui[SelectButtonPressed].PanMidi != 0 ){
+                                ui[SelectButtonPressed].PanMidi =  ui[SelectButtonPressed].PanMidi - (.01*(MidiValue % 0x40));
+                            }
+                            else if(( MidiValue >= 0x01 && MidiValue <= 0x05 ) && ui[SelectButtonPressed].PanMidi < 1 && ui[SelectButtonPressed].PanMidi != 1 ){
+                                ui[SelectButtonPressed].PanMidi = ui[SelectButtonPressed].PanMidi + (.01*MidiValue);
+                            }
                         }
-                        else if(MidiValue == 0x3F){
-                            NbPanStep[AddrMidiEncoderPan] = 0;
-                            ui[SelectButtonPressed].PanMidi =  1;
+                        printf("Pan (step[%i])%i: %f\n", NbPanStep[AddrMidiEncoderPan], SelectButtonPressed, ui[SelectButtonPressed].PanMidi);
+
+                        /*  Write LCD controler with PAN value  */
+                        if ( Lcd == 1 ){
+                            /*  Update LCD BAR controler with PAN value  */
+                            char Bar[3] = {0xB0, 0x30+SelectButtonPressed-(NbMidiFader*AddrMidiTrack), ui[SelectButtonPressed].PanMidi*0x7F};
+                            SendMidiOut(midiout, Bar);
+
+                            char Cmd[32] = "";
+                            char c_Canal[32] = "";
+                            char c_CanalText[32] = "";
+
+                            /*  Compute string with PAN value  */
+                            strcpy(Cmd, "12");
+                            sprintf(c_Canal, "%02X", SelectButtonPressed-(NbMidiFader*AddrMidiTrack));
+                            strcat(Cmd, c_Canal);
+                            strcat(Cmd, "0200");
+
+                            /*  Translate float value to percent L & R  */
+                            if( ui[SelectButtonPressed].PanMidi == 0.5 ){
+                                sprintf(c_CanalText, "<C>");
+                            }
+                            else if( ui[SelectButtonPressed].PanMidi < 0.5 ){
+                                int i_Left = (int)(-200*ui[SelectButtonPressed].PanMidi+100);
+                                if( i_Left > 100 ){ i_Left = 100; }
+                                sprintf(c_CanalText, "L%i", i_Left);
+
+                            }
+                            else if( ui[SelectButtonPressed].PanMidi > 0.5 ){
+                                int i_Right = (int)(200*ui[SelectButtonPressed].PanMidi-100);
+                                if( i_Right > 100 ){ i_Right = 100; }
+                                sprintf(c_CanalText, "R%i", i_Right);
+                            }
+                            SendSysExTextOut(midiout, SysExHdr, Cmd, c_CanalText);
                         }
-                        else if(MidiValue == 0x7F){
-                            NbPanStep[AddrMidiEncoderPan] = 0;
-                            ui[SelectButtonPressed].PanMidi =  0;
+
+                        if(SelectButtonPressed >= NbMidiFader*AddrMidiTrack && SelectButtonPressed <= (NbMidiFader*AddrMidiTrack)+NbMidiFader-1){
+                            char Bar[3] = {0xB0, 0x30+SelectButtonPressed-(NbMidiFader*AddrMidiTrack), ui[SelectButtonPressed].PanMidi*0x7F};
+                            SendMidiOut(midiout, Bar);
                         }
-                        NbPanStep[AddrMidiEncoderPan]++;
+
+                        sprintf(sendui,"SETD^%s.%d.pan^%.10f\n", ui[SelectButtonPressed].Type, ui[SelectButtonPressed].Numb, ui[SelectButtonPressed].PanMidi);
+                        send(sock , sendui, strlen(sendui) , 0 );
                     }
-                    else if ( strcmp(ControlerConfig.TypePan,"ENC") == 0 ){
-                        if(( MidiValue >= 0x41 && MidiValue <= 0x45 ) && ui[SelectButtonPressed].PanMidi > 0 && ui[SelectButtonPressed].PanMidi != 0 ){
-                            ui[SelectButtonPressed].PanMidi =  ui[SelectButtonPressed].PanMidi - (.01*(MidiValue % 0x40));
+                    else if( strcmp( ui[SelectButtonPressed].Type, "m" ) == 0 ){
+                        if ( strcmp(ControlerConfig.TypePan,"POT") == 0 ){
+                            if(MidiValue == 0x41 && ui[SelectButtonPressed].PanMidi >= 0){
+                                ui[SelectButtonPressed].PanMidi =  fabs (ui[SelectButtonPressed].PanMidi+.0003*NbPanStep[AddrMidiEncoderPan]);
+                            }
+                            else if(MidiValue == 0x01 && ui[SelectButtonPressed].PanMidi <= 1){
+                                ui[SelectButtonPressed].PanMidi = fabs (ui[SelectButtonPressed].PanMidi-.0003*NbPanStep[AddrMidiEncoderPan]);
+                            }
+                            else if(MidiValue == 0x3F){
+                                NbPanStep[AddrMidiEncoderPan] = 0;
+                                ui[SelectButtonPressed].PanMidi =  1;
+                            }
+                            else if(MidiValue == 0x7F){
+                                NbPanStep[AddrMidiEncoderPan] = 0;
+                                ui[SelectButtonPressed].PanMidi =  0;
+                            }
+                            NbPanStep[AddrMidiEncoderPan]++;
                         }
-                        else if(( MidiValue >= 0x01 && MidiValue <= 0x05 ) && ui[SelectButtonPressed].PanMidi < 1 && ui[SelectButtonPressed].PanMidi != 1 ){
-                            ui[SelectButtonPressed].PanMidi = ui[SelectButtonPressed].PanMidi + (.01*MidiValue);
+                        else if ( strcmp(ControlerConfig.TypePan,"ENC") == 0 ){
+                            if(( MidiValue >= 0x41 && MidiValue <= 0x45 ) && ui[SelectButtonPressed].PanMidi > 0 && ui[SelectButtonPressed].PanMidi != 0 ){
+                                ui[SelectButtonPressed].PanMidi =  ui[SelectButtonPressed].PanMidi - (.005*(MidiValue % 0x40));
+                            }
+                            else if(( MidiValue >= 0x01 && MidiValue <= 0x05 ) && ui[SelectButtonPressed].PanMidi < 1 && ui[SelectButtonPressed].PanMidi != 1 ){
+                                ui[SelectButtonPressed].PanMidi = ui[SelectButtonPressed].PanMidi + (.005*MidiValue);
+                            }
                         }
-                    }
-                    printf("Pan (step[%i])%i: %f\n", NbPanStep[AddrMidiEncoderPan], SelectButtonPressed, ui[SelectButtonPressed].PanMidi);
+                        printf("Pan (step[%i])%i: %f\n", NbPanStep[AddrMidiEncoderPan], SelectButtonPressed, ui[SelectButtonPressed].PanMidi);
 
-                    /*  Write LCD controler with PAN value  */
-                    if ( Lcd == 1 ){
-                        /*  Update LCD BAR controler with PAN value  */
-                        char Bar[3] = {0xB0, 0x30+SelectButtonPressed-(NbMidiFader*AddrMidiTrack), ui[SelectButtonPressed].PanMidi*0x7F};
-                        SendMidiOut(midiout, Bar);
+                        int Canal = 0;
+                        if( ui[SelectButtonPressed].Numb == 0 ){
+                            ui[SelectButtonPressed+1].PanMidi = ui[SelectButtonPressed].PanMidi;
+                            Canal = SelectButtonPressed;
+                        }
+                        if( ui[SelectButtonPressed].Numb == 1 ){
+                            ui[SelectButtonPressed-1].PanMidi = ui[SelectButtonPressed].PanMidi;
+                            Canal = SelectButtonPressed-1;
+                        }
 
-                        char Cmd[32] = "";
-                        char c_Canal[32] = "";
-                        char c_CanalText[32] = "";
-
-                        /*  Compute string with PAN value  */
-                        strcpy(Cmd, "12");
-                        sprintf(c_Canal, "%02X", SelectButtonPressed-(NbMidiFader*AddrMidiTrack));
-                        strcat(Cmd, c_Canal);
-                        strcat(Cmd, "0200");
-
-                        /*  Translate float value to percent L & R  */
                         if( ui[SelectButtonPressed].PanMidi == 0.5 ){
-                            sprintf(c_CanalText, "<C>");
+                            int MidiValue = 0;
+                            MidiValue = (127 * ui[Canal].MixMidi);
+
+                            if(Canal >= NbMidiFader*AddrMidiTrack && Canal <= (NbMidiFader*AddrMidiTrack)+NbMidiFader-1){
+                                char MidiArrayLeft[3] = {AddrMidiMix+Canal-(NbMidiFader*AddrMidiTrack) , MidiValue, MidiValue};
+                                SendMidiOut(midiout, MidiArrayLeft);
+
+                                char MidiArrayRight[3] = {AddrMidiMix+Canal+1-(NbMidiFader*AddrMidiTrack) , MidiValue, MidiValue};
+                                SendMidiOut(midiout, MidiArrayRight);
+                            }
                         }
                         else if( ui[SelectButtonPressed].PanMidi < 0.5 ){
-                            int i_Left = (int)(-200*ui[SelectButtonPressed].PanMidi+100);
-                            if( i_Left > 100 ){ i_Left = 100; }
-                            sprintf(c_CanalText, "L%i", i_Left);
+                            int MidiValueR = 0;
+                            MidiValueR = (127 * (ui[Canal].MixMidi-ui[Canal].MixMidi*(-200*ui[Canal+1].PanMidi+100)/100));
 
+                            int MidiValueL = 0;
+                            MidiValueL = (127 * ui[Canal].MixMidi);
+
+                            if(Canal >= NbMidiFader*AddrMidiTrack && Canal <= (NbMidiFader*AddrMidiTrack)+NbMidiFader-1){
+                                char MidiArrayLeft[3] = {AddrMidiMix+Canal-(NbMidiFader*AddrMidiTrack) , MidiValueL, MidiValueL};
+                                SendMidiOut(midiout, MidiArrayLeft);
+
+                                char MidiArrayRight[3] = {AddrMidiMix+Canal+1-(NbMidiFader*AddrMidiTrack) , MidiValueR, MidiValueR};
+                                SendMidiOut(midiout, MidiArrayRight);
+                            }
                         }
                         else if( ui[SelectButtonPressed].PanMidi > 0.5 ){
-                            int i_Right = (int)(200*ui[SelectButtonPressed].PanMidi-100);
-                            if( i_Right > 100 ){ i_Right = 100; }
-                            sprintf(c_CanalText, "R%i", i_Right);
+                            int MidiValueL = 0;
+                            MidiValueL = (127 * (ui[Canal+1].MixMidi-ui[Canal+1].MixMidi*(200*ui[Canal].PanMidi-100)/100));
+
+                            int MidiValueR = 0;
+                            MidiValueR = (127 * ui[Canal+1].MixMidi);
+
+                            if(Canal >= NbMidiFader*AddrMidiTrack && Canal <= (NbMidiFader*AddrMidiTrack)+NbMidiFader-1){
+                                char MidiArrayLeft[3] = {AddrMidiMix+Canal-(NbMidiFader*AddrMidiTrack) , MidiValueL, MidiValueL};
+                                SendMidiOut(midiout, MidiArrayLeft);
+
+                                char MidiArrayRight[3] = {AddrMidiMix+Canal+1-(NbMidiFader*AddrMidiTrack) , MidiValueR, MidiValueR};
+                                SendMidiOut(midiout, MidiArrayRight);
+                            }
                         }
-                        SendSysExTextOut(midiout, SysExHdr, Cmd, c_CanalText);
-                    }
 
-                    if(SelectButtonPressed >= NbMidiFader*AddrMidiTrack && SelectButtonPressed <= (NbMidiFader*AddrMidiTrack)+NbMidiFader-1){
-                        char Bar[3] = {0xB0, 0x30+SelectButtonPressed-(NbMidiFader*AddrMidiTrack), ui[SelectButtonPressed].PanMidi*0x7F};
-                        SendMidiOut(midiout, Bar);
-                    }
+                        /*  Write LCD controler with PAN value  */
+                        if ( Lcd == 1 ){
+                            /*  Update LCD BAR controler with PAN value  */
+                            char Bar[3] = {0xB0, 0x30+SelectButtonPressed-(NbMidiFader*AddrMidiTrack), ui[SelectButtonPressed].PanMidi*0x7F};
+                            SendMidiOut(midiout, Bar);
 
-                    sprintf(sendui,"SETD^%s.%d.pan^%.10f\n", ui[SelectButtonPressed].Type, ui[SelectButtonPressed].Numb, ui[SelectButtonPressed].PanMidi);
-                    send(sock , sendui, strlen(sendui) , 0 );
+                            char Cmd[32] = "";
+                            char c_Canal[32] = "";
+                            char c_CanalText[32] = "";
+
+                            /*  Translate float value to percent L & R  */
+                            if( ui[SelectButtonPressed].PanMidi == 0.5 ){
+                                sprintf(c_CanalText, "<C>");
+                            }
+                            else if( ui[SelectButtonPressed].PanMidi < 0.5 ){
+                                int i_Left = (int)(-200*ui[SelectButtonPressed].PanMidi+100);
+                                if( i_Left > 100 ){ i_Left = 100; }
+                                sprintf(c_CanalText, "L%i", i_Left);
+                            }
+                            else if( ui[SelectButtonPressed].PanMidi > 0.5 ){
+                                int i_Right = (int)(200*ui[SelectButtonPressed].PanMidi-100);
+                                if( i_Right > 100 ){ i_Right = 100; }
+                                sprintf(c_CanalText, "R%i", i_Right);
+                            }
+
+                            /*  Compute string with PAN value  */
+                            if( ModeMasterPressed == 1 ){
+                                strcpy(Cmd, "12");
+                                sprintf(c_Canal, "%02X", SelectButtonPressed-(NbMidiFader*AddrMidiTrack));
+                                strcat(Cmd, c_Canal);
+                                strcat(Cmd, "0200");
+                                SendSysExTextOut(midiout, SysExHdr, Cmd, c_CanalText);
+                            }
+                            if( ModeMasterPressed == 0 ){
+                                if( ui[SelectButtonPressed].Numb == 0 ){
+                                    strcpy(Cmd, "12");
+                                    sprintf(c_Canal, "%02X", SelectButtonPressed-(NbMidiFader*AddrMidiTrack));
+                                    strcat(Cmd, c_Canal);
+                                    strcat(Cmd, "0200");
+                                    SendSysExTextOut(midiout, SysExHdr, Cmd, c_CanalText);
+
+                                    strcpy(Cmd, "12");
+                                    sprintf(c_Canal, "%02X", SelectButtonPressed+1-(NbMidiFader*AddrMidiTrack));
+                                    strcat(Cmd, c_Canal);
+                                    strcat(Cmd, "0200");
+                                    SendSysExTextOut(midiout, SysExHdr, Cmd, c_CanalText);
+                                }
+                                if( ui[SelectButtonPressed].Numb == 1 ){
+                                    strcpy(Cmd, "12");
+                                    sprintf(c_Canal, "%02X", SelectButtonPressed-1-(NbMidiFader*AddrMidiTrack));
+                                    strcat(Cmd, c_Canal);
+                                    strcat(Cmd, "0200");
+                                    SendSysExTextOut(midiout, SysExHdr, Cmd, c_CanalText);
+
+                                    strcpy(Cmd, "12");
+                                    sprintf(c_Canal, "%02X", SelectButtonPressed-(NbMidiFader*AddrMidiTrack));
+                                    strcat(Cmd, c_Canal);
+                                    strcat(Cmd, "0200");
+                                    SendSysExTextOut(midiout, SysExHdr, Cmd, c_CanalText);
+                                }
+                            }
+                        }
+
+                        if(SelectButtonPressed >= NbMidiFader*AddrMidiTrack && SelectButtonPressed <= (NbMidiFader*AddrMidiTrack)+NbMidiFader-1){
+                            if( ModeMasterPressed == 0 ){
+                                char BarL[3] = {0xB0, 0x30+SelectButtonPressed-(NbMidiFader*AddrMidiTrack), ui[SelectButtonPressed].PanMidi*0x7F};
+                                SendMidiOut(midiout, BarL);
+                                char BarR[3] = {0xB0, 0x30+SelectButtonPressed+1-(NbMidiFader*AddrMidiTrack), ui[SelectButtonPressed].PanMidi*0x7F};
+                                SendMidiOut(midiout, BarR);
+                            }
+                            if( ModeMasterPressed == 1 ){
+                                char Bar[3] = {0xB0, 0x30+SelectButtonPressed-(NbMidiFader*AddrMidiTrack), ui[SelectButtonPressed].PanMidi*0x7F};
+                                SendMidiOut(midiout, Bar);
+                            }
+                        }
+                        sprintf(sendui,"SETD^m.pan^%.10f\n",  ui[SelectButtonPressed].PanMidi);
+                        send(sock , sendui, strlen(sendui) , 0 );
+                    }
                 }
                 else if ( MidiCC == AddrMidiEncoderSession ){
 
@@ -2930,6 +3467,28 @@ void UpdateMidiControler(){
                             Row++;
                         }
                     }
+                    else if( ModeCuesPressed == 1){
+                        // Function for move in the current mode
+                        if( MidiValue >= 0x41 && MidiValue <= 0x45 && CuesIndex > 0 ){
+                            CuesIndex--;
+                        }
+                        else if( MidiValue >= 0x01 && MidiValue <= 0x05 && CuesIndex < CuesMax ){
+                            CuesIndex++;
+                        }
+                       int Row = 0;
+                       ConfigLCDTxtMode();
+                        for (int c = CuesIndex; c < CuesIndex+6; c++){
+                            if( CuesIndex != c ){
+                                    SendLCDTxt(midiout, SysExHdr, 0, Row, UICuesList[c]);
+                                    printf("Cue %i [%s]\n",  CuesIndex, UICuesList[c]);
+                            }
+                            else{
+                                    SendLCDTxt(midiout, SysExHdr, 1, Row, UICuesList[c]);
+                                    printf("Cue %i [%s]\n",  CuesIndex, UICuesList[c]);
+                            }
+                            Row++;
+                        }
+                    }
                     else if( ModeShowsPressed == 1){
                         // Function for move in the current mode
                         if( MidiValue >= 0x41 && MidiValue <= 0x45 && ShowsIndex > 0 ){
@@ -2948,6 +3507,50 @@ void UpdateMidiControler(){
                             else{
                                     SendLCDTxt(midiout, SysExHdr, 1, Row, UIShowsList[c]);
                                     printf("Snap %i [%s]\n",  ShowsIndex, UIShowsList[c]);
+                            }
+                            Row++;
+                        }
+                    }
+                    else if( ModeDirPlayerPressed == 1){
+                        // Function for move in the current mode
+                        if( MidiValue >= 0x41 && MidiValue <= 0x45 && DirPlayerIndex > 0 ){
+                            DirPlayerIndex--;
+                        }
+                        else if( MidiValue >= 0x01 && MidiValue <= 0x05 && DirPlayerIndex < DirPlayerMax ){
+                            DirPlayerIndex++;
+                        }
+                       int Row = 0;
+                       ConfigLCDTxtMode();
+                        for (int c = DirPlayerIndex; c < DirPlayerIndex+6; c++){
+                            if( DirPlayerIndex != c ){
+                                    SendLCDTxt(midiout, SysExHdr, 0, Row, UIDirPlayerList[c]);
+                                    printf("Snap %i [%s]\n",  DirPlayerIndex, UIDirPlayerList[c]);
+                            }
+                            else{
+                                    SendLCDTxt(midiout, SysExHdr, 1, Row, UIDirPlayerList[c]);
+                                    printf("Snap %i [%s]\n",  DirPlayerIndex, UIDirPlayerList[c]);
+                            }
+                            Row++;
+                        }
+                    }
+                    else if( ModeFilesPlayerPressed == 1){
+                        // Function for move in the current mode
+                        if( MidiValue >= 0x41 && MidiValue <= 0x45 && FilesPlayerIndex > 0 ){
+                            FilesPlayerIndex--;
+                        }
+                        else if( MidiValue >= 0x01 && MidiValue <= 0x05 && FilesPlayerIndex < FilesPlayerMax ){
+                            FilesPlayerIndex++;
+                        }
+                       int Row = 0;
+                       ConfigLCDTxtMode();
+                        for (int c = FilesPlayerIndex; c < FilesPlayerIndex+6; c++){
+                            if( FilesPlayerIndex != c ){
+                                    SendLCDTxt(midiout, SysExHdr, 0, Row, UIFilesPlayerList[c]);
+                                    printf("Snap %i [%s]\n",  FilesPlayerIndex, UIFilesPlayerList[c]);
+                            }
+                            else{
+                                    SendLCDTxt(midiout, SysExHdr, 1, Row, UIFilesPlayerList[c]);
+                                    printf("Snap %i [%s]\n",  FilesPlayerIndex, UIFilesPlayerList[c]);
                             }
                             Row++;
                         }
@@ -3241,6 +3844,14 @@ void UpdateMidiControler(){
                                     ui[SelectButtonPressed].PanMidi = 1;
                                 }
                             }
+                            else if( strcmp( ui[SelectButtonPressed].Type, "m" ) == 0 ){
+                                char sendui[256];
+                                sprintf(sendui,"SETD^m.pan^0.5\n");
+                                send(sock , sendui, strlen(sendui) , 0 );
+                                ui[SelectButtonPressed].PanMidi = 0.5;
+                                if( ui[SelectButtonPressed].Numb == 0 ){ ui[SelectButtonPressed+1].PanMidi = ui[SelectButtonPressed].PanMidi; }
+                                if( ui[SelectButtonPressed].Numb == 1 ){ ui[SelectButtonPressed-1].PanMidi = ui[SelectButtonPressed].PanMidi; }
+                            }
                         }
                         UpdateMidiControler();
                     }
@@ -3266,7 +3877,14 @@ void UpdateMidiControler(){
                        sprintf(sendui,"SETD^mgmask^0\n");
                        send(sock , sendui, strlen(sendui) , 0 );
 
+                        char MidiArray[3] = {AddrMidiButtonLed, AddrMuteClear, 0x7F};
+                        SendMidiOut(midiout, MidiArray);
+
                         UpdateMidiControler();
+                    }
+                    else if(MidiValue == 0x00){
+                        char MidiArray[3] = {AddrMidiButtonLed, AddrMuteClear, 0x00};
+                        SendMidiOut(midiout, MidiArray);
                     }
                     usleep( 250000 ); /* Sleep 100000 micro seconds = 100 ms, etc. */
                 }
@@ -3280,7 +3898,14 @@ void UpdateMidiControler(){
                             sprintf(sendui,"SETD^%s.%d.solo^0\n", ui[j].Type, ui[j].Numb);
                             send(sock , sendui, strlen(sendui) , 0 );
                         }
+                        char MidiArray[3] = {AddrMidiButtonLed, AddrMuteSolo, 0x7F};
+                        SendMidiOut(midiout, MidiArray);
+
                         UpdateMidiControler();
+                    }
+                    else if(MidiValue == 0x00){
+                        char MidiArray[3] = {AddrMidiButtonLed, AddrMuteSolo, 0x00};
+                        SendMidiOut(midiout, MidiArray);
                     }
                     usleep( 250000 ); /* Sleep 100000 micro seconds = 100 ms, etc. */
                 }
@@ -3341,23 +3966,33 @@ void UpdateMidiControler(){
                 }
                 else if (MidiCC == AddrShiftLeft){                                                                                                                     /*  TRANSPORT STOP button for Track view with Led  */
 
-                    if(MidiValue == 0x7F){
+                    if( MidiValue == 0x7F && ShiftLeftPressed == 0){
+                        ShiftLeftPressed = 1;
 
                         char ShiftLeftLedOn[3] = {AddrMidiButtonLed, AddrShiftLeft, 0x7F};
                         SendMidiOut(midiout, ShiftLeftLedOn);
+                    }
+                    else if( MidiValue == 0x7F && ShiftLeftPressed == 1){
+                        ShiftLeftPressed = 0;
 
-                        ShiftLeftPressed = 1;
+                        char ShiftLeftLedOn[3] = {AddrMidiButtonLed, AddrShiftLeft, 0x00};
+                        SendMidiOut(midiout, ShiftLeftLedOn);
                     }
                     usleep( 250000 ); /* Sleep 100000 micro seconds = 100 ms, etc. */
                 }
                 else if (MidiCC == AddrShiftRight){                                                                                                                     /*  TRANSPORT STOP button for Track view with Led  */
 
-                    if(MidiValue == 0x7F){
+                    if( MidiValue == 0x7F && ShiftRightPressed == 0){
+                        ShiftRightPressed = 1;
 
                         char ShiftRightLedOn[3] = {AddrMidiButtonLed, AddrShiftRight, 0x7F};
                         SendMidiOut(midiout, ShiftRightLedOn);
+                    }
+                    else if( MidiValue == 0x7F && ShiftRightPressed == 1){
+                        ShiftRightPressed = 0;
 
-                        ShiftRightPressed = 1;
+                        char ShiftRightLedOn[3] = {AddrMidiButtonLed, AddrShiftRight, 0x00};
+                        SendMidiOut(midiout, ShiftRightLedOn);
                     }
                     usleep( 250000 ); /* Sleep 100000 micro seconds = 100 ms, etc. */
                 }
@@ -3473,7 +4108,7 @@ void UpdateMidiControler(){
                 }
                 else if (MidiCC == IdStop){                                                                                                                     /*  TRANSPORT STOP button for Track view with Led  */
 
-                    if(MidiValue == 0x7F && MtkRecCurrentState == 0 ){
+                    if(MidiValue == 0x7F && MtkRecCurrentState == 0 && ModePlayer == 1 ){
                             MtkCurrentState = 0;
 
                             char sendui[256];
@@ -3486,11 +4121,24 @@ void UpdateMidiControler(){
                             char MidiArray[3] = {AddrMidiButtonLed, IdStop, 0x7F};
                             SendMidiOut(midiout, MidiArray);
                     }
+                    else if(MidiValue == 0x7F && MediaRecCurrentState == 0 && ModePlayer == 0 ){
+                            MediaPlayerCurrentState = 0;
+
+                            char sendui[256];
+                            sprintf(sendui,"MEDIA_STOP\n");
+                            send(sock , sendui, strlen(sendui) , 0 );
+
+                            sprintf(sa_LogMessage,"UI2MCP <-- MIDI : Media Stop\n");
+                            LogTrace(hfErr, 1, debug, sa_LogMessage);
+
+                            char MidiArray[3] = {AddrMidiButtonLed, IdStop, 0x7F};
+                            SendMidiOut(midiout, MidiArray);
+                    }
                     usleep( 250000 ); /* Sleep 100000 micro seconds = 100 ms, etc. */
                 }
                 else if (MidiCC == IdPlay){                                                                                                                     /*  TRANSPORT PLAY button for Track view with Led  */
 
-                    if( MidiValue == 0x7F && MtkRecCurrentState == 0 ){
+                    if( MidiValue == 0x7F && MtkRecCurrentState == 0 && ModePlayer == 1 ){
                         if(MtkCurrentState == 0){
                             MtkCurrentState = 2;
 
@@ -3537,11 +4185,58 @@ void UpdateMidiControler(){
                             SendMidiOut(midiout, MidiArrayPlay);
                         }
                     }
+                    else if( MidiValue == 0x7F && MediaRecCurrentState == 0 && ModePlayer == 0 ){
+                        if(MediaPlayerCurrentState == 0 ){
+                            MediaPlayerCurrentState = 2;
+
+                            char sendui[256];
+                            sprintf(sendui,"MEDIA_PLAY\n");
+                            send(sock , sendui, strlen(sendui) , 0 );
+
+                            sprintf(sa_LogMessage,"UI2MCP <-- MIDI : MEDIA Player Play\n");
+                            LogTrace(hfErr, 1, debug, sa_LogMessage);
+
+                            char MidiArrayStop[3] = {AddrMidiButtonLed, IdStop, 0x00};
+                            SendMidiOut(midiout, MidiArrayStop);
+                            char MidiArrayPlay[3] = {AddrMidiButtonLed, IdPlay, 0x7F};
+                            SendMidiOut(midiout, MidiArrayPlay);
+                        }
+                        else if(MediaPlayerCurrentState == 3){
+                            MediaPlayerCurrentState = 2;
+
+                            char sendui[256];
+                            sprintf(sendui,"MEDIA_PLAY\n");
+                            send(sock , sendui, strlen(sendui) , 0 );
+
+                            sprintf(sa_LogMessage,"UI2MCP <-- MIDI : MEDIA Player Play\n");
+                            LogTrace(hfErr, 1, debug, sa_LogMessage);
+
+                            char MidiArrayStop[3] = {AddrMidiButtonLed, IdStop, 0x00};
+                            SendMidiOut(midiout, MidiArrayStop);
+                            char MidiArrayPlay[3] = {AddrMidiButtonLed, IdPlay, 0x7F};
+                            SendMidiOut(midiout, MidiArrayPlay);
+                        }
+                        else if(MediaPlayerCurrentState == 2){
+                            MediaPlayerCurrentState = 3;
+
+                            char sendui[256];
+                            sprintf(sendui,"MEDIA_PAUSE\n");
+                            send(sock , sendui, strlen(sendui) , 0 );
+
+                            sprintf(sa_LogMessage,"UI2MCP <-- MIDI : MEDIA Player Pause\n");
+                            LogTrace(hfErr, 1, debug, sa_LogMessage);
+
+                            char MidiArrayStop[3] = {AddrMidiButtonLed, IdStop, 0x00};
+                            SendMidiOut(midiout, MidiArrayStop);
+                            char MidiArrayPlay[3] = {AddrMidiButtonLed, IdPlay, 0x01};
+                            SendMidiOut(midiout, MidiArrayPlay);
+                        }
+                    }
                     usleep( 250000 ); /* Sleep 100000 micro seconds = 100 ms, etc. */
                 }
                 else if (MidiCC == IdRec){                                                                                                                     /*  TRANSPORT REC button for Track view with Led  */
 
-                    if( MidiValue == 0x7F && MtkRecCurrentState == 0 && MtkCurrentState == 0 ){
+                    if( MidiValue == 0x7F && MtkRecCurrentState == 0 && MtkCurrentState == 0 && ModePlayer == 1 ){
                         MtkRecCurrentState = 1;
                         char sendui[256];
                         sprintf(sendui,"MTK_REC_TOGGLE\n");
@@ -3554,7 +4249,7 @@ void UpdateMidiControler(){
                         SendMidiOut(midiout, MidiArray);
 
                     }
-                    else if( MidiValue == 0x7F && MtkRecCurrentState == 1 ){
+                    else if( MidiValue == 0x7F && MtkRecCurrentState == 1 && ModePlayer == 1 ){
                         MtkRecCurrentState = 0;
                         char sendui[256];
                         sprintf(sendui,"MTK_REC_TOGGLE\n");
@@ -3566,6 +4261,36 @@ void UpdateMidiControler(){
                         char MidiArray[3] = {AddrMidiButtonLed, MidiCC, 0x00};
                         SendMidiOut(midiout, MidiArray);
                     }
+
+                    if( MidiValue == 0x7F && MediaRecCurrentState == 0 && MediaPlayerCurrentState == 0 && ModePlayer == 0 ){
+                        MediaRecCurrentState = 1;
+                        char sendui[256];
+                        sprintf(sendui,"RECTOGGLE\n");
+                        send(sock , sendui, strlen(sendui) , 0 );
+
+                        sprintf(sa_LogMessage,"UI2MCP <-- MIDI : MEDIA Record ON\n");
+                        LogTrace(hfErr, 1, debug, sa_LogMessage);
+
+                        char MidiArrayStop[3] = {AddrMidiButtonLed, IdStop, 0x00};
+                        SendMidiOut(midiout, MidiArrayStop);
+                        char MidiArrayRec[3] = {AddrMidiButtonLed, MidiCC, 0x7F};
+                        SendMidiOut(midiout, MidiArrayRec);
+
+                    }
+                    else if( MidiValue == 0x7F && MediaRecCurrentState == 1 && ModePlayer == 0 ){
+                        MediaRecCurrentState = 0;
+                        char sendui[256];
+                        sprintf(sendui,"RECTOGGLE\n");
+                        send(sock , sendui, strlen(sendui) , 0 );
+
+                        sprintf(sa_LogMessage,"UI2MCP <-- MIDI : MEDIA Record OFF\n");
+                        LogTrace(hfErr, 1, debug, sa_LogMessage);
+
+                        char MidiArrayStop[3] = {AddrMidiButtonLed, IdStop, 0x7F};
+                        SendMidiOut(midiout, MidiArrayStop);
+                        char MidiArrayRec[3] = {AddrMidiButtonLed, MidiCC, 0x00};
+                        SendMidiOut(midiout, MidiArrayRec);
+                    }
                     usleep( 250000 ); /* Sleep 100000 micro seconds = 100 ms, etc. */
                 }
                 else if (MidiCC == i_Dim){                                                                                                                     /*  DIM Master  */
@@ -3575,17 +4300,26 @@ void UpdateMidiControler(){
                         char sendui[256];
                         sprintf(sendui,"SETD^m.dim^1\n");
                         send(sock , sendui, strlen(sendui) , 0 );
-                        printf("Dim ON\n");
+
+                        LogTrace(hfErr, 2, debug, "UI2MCP --> UI : DIM On\n");
 
                         char MidiArray[3] = {AddrMidiButtonLed, MidiCC, 0x7F};
                         SendMidiOut(midiout, MidiArray);
+
+                        char MidiArrayR[3] = {AddrMidiButtonLed+1, MidiCC, (int)floor((double)127/(double)255*0)};
+                        SendMidiOut(midiout, MidiArrayR);
+                        char MidiArrayG[3] = {AddrMidiButtonLed+2, MidiCC, (int)floor((double)127/(double)255*145)};
+                        SendMidiOut(midiout, MidiArrayG);
+                        char MidiArrayB[3] = {AddrMidiButtonLed+3, MidiCC, (int)floor((double)127/(double)255*194)};
+                        SendMidiOut(midiout, MidiArrayB);
                     }
                     else if(MidiValue == 0x7F && DimMaster ==1){
                         DimMaster = 0;
                         char sendui[256];
                         sprintf(sendui,"SETD^m.dim^0\n");
                         send(sock , sendui, strlen(sendui) , 0 );
-                        printf("Dim OFF\n");
+
+                        LogTrace(hfErr, 2, debug, "UI2MCP --> UI : DIM Off\n");
 
                         char MidiArray[3] = {AddrMidiButtonLed, MidiCC, 0x00};
                         SendMidiOut(midiout, MidiArray);
@@ -3677,6 +4411,188 @@ void UpdateMidiControler(){
                             sprintf(sa_LogMessage,"UI2MCP <-- MIDI : Shows load : %s\n", UIShowsList[ShowsIndex]);
                             LogTrace(hfErr, 1, debug, sa_LogMessage);
                         }
+                        else if( ModeDirPlayerPressed == 1){
+
+                            strcpy(DirPlayerCurrent, UIDirPlayerList[DirPlayerIndex]);
+                            printf("Current Selected Directory : %s\n", DirPlayerCurrent);
+
+                            char sendui[256];
+                            sprintf(sendui,"MEDIA_GET_PLIST_TRACKS^%s\n", DirPlayerCurrent);
+                            send(sock , sendui, strlen(sendui) , 0 );
+
+                            ModeDirPlayerPressed = 0;
+
+                            sprintf(sa_LogMessage,"UI2MCP <-- MIDI : Dir Player load : %s\n", UIDirPlayerList[DirPlayerIndex]);
+                            LogTrace(hfErr, 1, debug, sa_LogMessage);
+
+                            sprintf(sendui,"PLIST_TRACKS^%s\n", FilesPlayerCurrent);
+                            send(sock , sendui, strlen(sendui) , 0 );
+
+                            ModeFilesPlayerPressed = 1;
+
+                        }
+                        else if( ModeFilesPlayerPressed == 1){
+
+                            strcpy(FilesPlayerCurrent, UIFilesPlayerList[FilesPlayerIndex]);
+                            printf("Current Selected File : %s\n", FilesPlayerCurrent);
+
+                            char sendui[256];
+                            sprintf(sendui,"MEDIA_SWITCH_TRACK^%s^%s\n", DirPlayerCurrent, FilesPlayerCurrent);
+                            send(sock , sendui, strlen(sendui) , 0 );
+                            sprintf(sendui,"MEDIA_STOP\n");
+                            send(sock , sendui, strlen(sendui) , 0 );
+
+                            ModeFilesPlayerPressed  = 0;
+
+                            if ( Lcd == 1 ){
+                                ConfigLCDMixerMode();
+
+                                UpdateMidiControler();
+                            }
+
+                            char MidiArray[3] = {AddrMidiButtonLed, 0x39, 0x00};
+                            SendMidiOut(midiout, MidiArray);
+
+                            sprintf(sa_LogMessage,"UI2MCP <-- MIDI : File Player load : %s\n", UIFilesPlayerList[FilesPlayerIndex]);
+                            LogTrace(hfErr, 1, debug, sa_LogMessage);
+                        }
+                    }
+                    usleep( 250000 ); /* Sleep 100000 micro seconds = 100 ms, etc. */
+                }
+                else if (MidiCC == 0x39){                                                                                                                     /*  TRANSPORT STOP button for Track view with Led  */
+
+                    if( MidiValue == 0x7F && ModeDirPlayerPressed == 0 && ModeFilesPlayerPressed == 0){
+                        ModeDirPlayerPressed = 1;
+
+                        sprintf(sa_LogMessage,"UI2MCP <-- MIDI : Player Dir Mode Actived\n");
+                        LogTrace(hfErr, 1, debug, sa_LogMessage);
+
+                        char MidiArrayPlayer[3] = {AddrMidiButtonLed, 0x39, 0x7F};
+                        SendMidiOut(midiout, MidiArrayPlayer);
+                        // char MidiArrayR[3] = {AddrMidiButtonLed+1, MidiCC, 0x00};
+                        // SendMidiOut(midiout, MidiArrayR);
+                        // char MidiArrayG[3] = {AddrMidiButtonLed+2, MidiCC, 0x7F};
+                        // SendMidiOut(midiout, MidiArrayG);
+                        // char MidiArrayB[3] = {AddrMidiButtonLed+3, MidiCC, 0x00};
+                        // SendMidiOut(midiout, MidiArrayB);
+                        char sendui[256];
+                        sprintf(sendui,"MEDIA_GET_PLISTS\n");
+                        send(sock , sendui, strlen(sendui) , 0 );
+
+                        if ( Lcd == 1 ){
+                           int Row = 0;
+                           ConfigLCDTxtMode();
+                            for (int c = DirPlayerIndex; c < DirPlayerIndex+6; c++){
+                                if( DirPlayerIndex != c ){
+                                        SendLCDTxt(midiout, SysExHdr, 0, Row, UIDirPlayerList[c]);
+                                        printf("Snap %i [%s]\n",  DirPlayerIndex, UIDirPlayerList[c]);
+                                }
+                                else{
+                                        SendLCDTxt(midiout, SysExHdr, 1, Row, UIDirPlayerList[c]);
+                                        printf("Snap %i [%s]\n",  DirPlayerIndex, UIDirPlayerList[c]);
+                                }
+                                Row++;
+                            }
+                        }
+                    }
+                    else if(MidiValue == 0x7F && ModeDirPlayerPressed == 1 && ModeFilesPlayerPressed == 0){
+                        ModeDirPlayerPressed = 0;
+                        ModeFilesPlayerPressed = 0;
+
+                        sprintf(sa_LogMessage,"UI2MCP <-- MIDI : Player Dir Mode Desactived\n");
+                        LogTrace(hfErr, 1, debug, sa_LogMessage);
+
+                        char MidiArray[3] = {AddrMidiButtonLed, 0x39, 0x00};
+                        SendMidiOut(midiout, MidiArray);
+                        // char MidiArrayR[3] = {AddrMidiButtonLed+1, MidiCC, 0x00};
+                        // SendMidiOut(midiout, MidiArrayR);
+                        // char MidiArrayG[3] = {AddrMidiButtonLed+2, MidiCC, 0x7F};
+                        // SendMidiOut(midiout, MidiArrayG);
+                        // char MidiArrayB[3] = {AddrMidiButtonLed+3, MidiCC, 0x00};
+                        // SendMidiOut(midiout, MidiArrayB);
+                        if ( Lcd == 1 ){
+                            ConfigLCDMixerMode();
+
+                            UpdateMidiControler();
+                        }
+                    }
+                    else if(MidiValue == 0x7F && ModeDirPlayerPressed == 0 && ModeFilesPlayerPressed == 1){
+                        ModeDirPlayerPressed = 0;
+                        ModeFilesPlayerPressed = 0;
+
+                        sprintf(sa_LogMessage,"UI2MCP <-- MIDI : Player Dir Mode Desactived\n");
+                        LogTrace(hfErr, 1, debug, sa_LogMessage);
+
+                        char MidiArray[3] = {AddrMidiButtonLed, 0x39, 0x00};
+                        SendMidiOut(midiout, MidiArray);
+                        // char MidiArrayR[3] = {AddrMidiButtonLed+1, MidiCC, 0x00};
+                        // SendMidiOut(midiout, MidiArrayR);
+                        // char MidiArrayG[3] = {AddrMidiButtonLed+2, MidiCC, 0x7F};
+                        // SendMidiOut(midiout, MidiArrayG);
+                        // char MidiArrayB[3] = {AddrMidiButtonLed+3, MidiCC, 0x00};
+                        // SendMidiOut(midiout, MidiArrayB);
+                        if ( Lcd == 1 ){
+                            ConfigLCDMixerMode();
+
+                            UpdateMidiControler();
+                        }
+                    }
+                    usleep( 250000 ); /* Sleep 100000 micro seconds = 100 ms, etc. */
+                }
+                else if (MidiCC == 0x4B){                                                                                                                     /*  TRANSPORT STOP button for Track view with Led  */
+
+                    if( MidiValue == 0x7F && ModePlayer == 0 ){
+                        ModePlayer = 1;
+
+                        sprintf(sa_LogMessage,"UI2MCP <-- MIDI : Player Mode %i\n", ModePlayer);
+                        LogTrace(hfErr, 1, debug, sa_LogMessage);
+
+                        char MidiArrayPlayer[3] = {AddrMidiButtonLed, 0x4B, 0x7F};
+                        SendMidiOut(midiout, MidiArrayPlayer);
+                        char MidiArrayR[3] = {AddrMidiButtonLed+1, 0x4B, 0x7F};
+                        SendMidiOut(midiout, MidiArrayR);
+                        char MidiArrayG[3] = {AddrMidiButtonLed+2, 0x4B, 0x0A};
+                        SendMidiOut(midiout, MidiArrayG);
+                        char MidiArrayB[3] = {AddrMidiButtonLed+3, 0x4B, 0x49};
+                        SendMidiOut(midiout, MidiArrayB);
+
+                    }
+                    else if(MidiValue == 0x7F && ModePlayer == 1){
+                        ModePlayer = 0;
+
+                        sprintf(sa_LogMessage,"UI2MCP <-- MIDI : Player Mode %i\n", ModePlayer);
+                        LogTrace(hfErr, 1, debug, sa_LogMessage);
+
+                        char MidiArray[3] = {AddrMidiButtonLed, 0x4B, 0x7F};
+                        SendMidiOut(midiout, MidiArray);
+                        char MidiArrayR[3] = {AddrMidiButtonLed+1, 0x4B, 0x00};
+                        SendMidiOut(midiout, MidiArrayR);
+                        char MidiArrayG[3] = {AddrMidiButtonLed+2, 0x4B, 0x7F};
+                        SendMidiOut(midiout, MidiArrayG);
+                        char MidiArrayB[3] = {AddrMidiButtonLed+3, 0x4B, 0x00};
+                        SendMidiOut(midiout, MidiArrayB);
+                    }
+                    usleep( 250000 ); /* Sleep 100000 micro seconds = 100 ms, etc. */
+                }
+                else if (MidiCC == 0x2A){                                                                                                                     /*  TRANSPORT STOP button for Track view with Led  */
+
+                    if( MidiValue == 0x7F && PanSet == 0 ){
+                        PanSet = 1;
+
+                        sprintf(sa_LogMessage,"UI2MCP <-- MIDI : Pan Set Mode %i\n", PanSet);
+                        LogTrace(hfErr, 1, debug, sa_LogMessage);
+
+                        char MidiArray[3] = {AddrMidiButtonLed, 0x2A, 0x7F};
+                        SendMidiOut(midiout, MidiArray);
+                    }
+                    else if(MidiValue == 0x7F && PanSet == 1){
+                        PanSet = 0;
+
+                        sprintf(sa_LogMessage,"UI2MCP <-- MIDI : Pan Set Mode %i\n", PanSet);
+                        LogTrace(hfErr, 1, debug, sa_LogMessage);
+
+                        char MidiArray[3] = {AddrMidiButtonLed, 0x2A, 0x00};
+                        SendMidiOut(midiout, MidiArray);
                     }
                     usleep( 250000 ); /* Sleep 100000 micro seconds = 100 ms, etc. */
                 }
@@ -3684,12 +4600,18 @@ void UpdateMidiControler(){
 
                     if( MidiValue == 0x7F && ModeShowsPressed == 0 ){
                         ModeShowsPressed = 1;
+                        ModeSnapShotsPressed = 0;
+                        ModeCuesPressed = 0;
 
                         sprintf(sa_LogMessage,"UI2MCP <-- MIDI : Shows Mode Actived\n");
                         LogTrace(hfErr, 1, debug, sa_LogMessage);
 
-                        char MidiArray[3] = {AddrMidiButtonLed, MidiCC, 0x7F};
-                        SendMidiOut(midiout, MidiArray);
+                        char MidiArrayShows[3] = {AddrMidiButtonLed, AddrShowsSelect, 0x7F};
+                        SendMidiOut(midiout, MidiArrayShows);
+                        char MidiArraySnaps[3] = {AddrMidiButtonLed, AddrSnapShotsSelect, 0x00};
+                        SendMidiOut(midiout, MidiArraySnaps);
+                        char MidiArrayCues[3] = {AddrMidiButtonLed, AddrCuesSelect, 0x00};
+                        SendMidiOut(midiout, MidiArrayCues);
                         // char MidiArrayR[3] = {AddrMidiButtonLed+1, MidiCC, 0x00};
                         // SendMidiOut(midiout, MidiArrayR);
                         // char MidiArrayG[3] = {AddrMidiButtonLed+2, MidiCC, 0x7F};
@@ -3738,12 +4660,18 @@ void UpdateMidiControler(){
 
                     if( MidiValue == 0x7F && ModeSnapShotsPressed == 0 ){
                         ModeSnapShotsPressed = 1;
+                        ModeShowsPressed = 0;
+                        ModeCuesPressed = 0;
 
                         sprintf(sa_LogMessage,"UI2MCP <-- MIDI : SnapShots Mode Actived\n");
                         LogTrace(hfErr, 1, debug, sa_LogMessage);
 
-                        char MidiArray[3] = {AddrMidiButtonLed, MidiCC, 0x7F};
-                        SendMidiOut(midiout, MidiArray);
+                        char MidiArrayShows[3] = {AddrMidiButtonLed, AddrShowsSelect, 0x00};
+                        SendMidiOut(midiout, MidiArrayShows);
+                        char MidiArraySnaps[3] = {AddrMidiButtonLed, AddrSnapShotsSelect, 0x7F};
+                        SendMidiOut(midiout, MidiArraySnaps);
+                        char MidiArrayCues[3] = {AddrMidiButtonLed, AddrCuesSelect, 0x00};
+                        SendMidiOut(midiout, MidiArrayCues);
                         //char MidiArrayR[3] = {AddrMidiButtonLed+1, MidiCC, 0x00};
                         //SendMidiOut(midiout, MidiArrayR);
                         //char MidiArrayG[3] = {AddrMidiButtonLed+2, MidiCC, 0x7F};
@@ -3793,18 +4721,39 @@ void UpdateMidiControler(){
 
                     if( MidiValue == 0x7F && ModeCuesPressed == 0 ){
                         ModeCuesPressed = 1;
+                        ModeShowsPressed = 0;
+                        ModeSnapShotsPressed = 0;
 
                         sprintf(sa_LogMessage,"UI2MCP <-- MIDI : Cues Mode Actived\n");
                         LogTrace(hfErr, 1, debug, sa_LogMessage);
 
-                        char MidiArray[3] = {AddrMidiButtonLed, MidiCC, 0x7F};
-                        SendMidiOut(midiout, MidiArray);
+                        char MidiArrayShows[3] = {AddrMidiButtonLed, AddrShowsSelect, 0x00};
+                        SendMidiOut(midiout, MidiArrayShows);
+                        char MidiArraySnaps[3] = {AddrMidiButtonLed, AddrSnapShotsSelect, 0x00};
+                        SendMidiOut(midiout, MidiArraySnaps);
+                        char MidiArrayCues[3] = {AddrMidiButtonLed, AddrCuesSelect, 0x7F};
+                        SendMidiOut(midiout, MidiArrayCues);
 //                        char MidiArrayR[3] = {AddrMidiButtonLed+1, MidiCC, 0x00};
 //                        SendMidiOut(midiout, MidiArrayR);
 //                        char MidiArrayG[3] = {AddrMidiButtonLed+2, MidiCC, 0x7F};
 //                        SendMidiOut(midiout, MidiArrayG);
 //                        char MidiArrayB[3] = {AddrMidiButtonLed+3, MidiCC, 0x00};
 //                        SendMidiOut(midiout, MidiArrayB);
+                        if ( Lcd == 1 ){
+                           int Row = 0;
+                           ConfigLCDTxtMode();
+                            for (int c = CuesIndex; c < CuesIndex+6; c++){
+                                if( CuesIndex != c ){
+                                        SendLCDTxt(midiout, SysExHdr, 0, Row, UICuesList[c]);
+                                        printf("Cue %i [%s]\n",  CuesIndex, UICuesList[c]);
+                                }
+                                else{
+                                        SendLCDTxt(midiout, SysExHdr, 1, Row, UICuesList[c]);
+                                        printf("Cue %i [%s]\n",  CuesIndex, UICuesList[c]);
+                                }
+                                Row++;
+                            }
+                        }
                     }
                     else if(MidiValue == 0x7F && ModeCuesPressed ==1){
                         ModeCuesPressed = 0;
@@ -3820,6 +4769,12 @@ void UpdateMidiControler(){
 //                        SendMidiOut(midiout, MidiArrayG);
 //                        char MidiArrayB[3] = {AddrMidiButtonLed+3, MidiCC, 0x00};
 //                        SendMidiOut(midiout, MidiArrayB);
+
+                        if ( Lcd == 1 ){
+                            ConfigLCDMixerMode();
+
+                            UpdateMidiControler();
+                        }
                     }
                     usleep( 250000 ); /* Sleep 100000 micro seconds = 100 ms, etc. */
                 }
@@ -3910,6 +4865,18 @@ void UpdateMidiControler(){
                         SendMidiOut(midiout, MidiArrayG);
                         char MidiArrayB[3] = {AddrMidiButtonLed+3, MidiCC, 0x00};
                         SendMidiOut(midiout, MidiArrayB);
+
+                        ModePlayer = 1;
+
+                        char MidiArrayM[3] = {AddrMidiButtonLed, 0x4B, 0x7F};
+                        SendMidiOut(midiout, MidiArrayM);
+                        char MidiArrayMR[3] = {AddrMidiButtonLed+1, 0x4B, 0x00};
+                        SendMidiOut(midiout, MidiArrayMR);
+                        char MidiArrayMG[3] = {AddrMidiButtonLed+2, 0x4B, 0x7F};
+                        SendMidiOut(midiout, MidiArrayMG);
+                        char MidiArrayMB[3] = {AddrMidiButtonLed+3, 0x4B, 0x00};
+                        SendMidiOut(midiout, MidiArrayMB);
+
                     }
                     else if(MidiValue == 0x7F && SoundCheck ==1){
                         SoundCheck = 0;
@@ -3929,6 +4896,17 @@ void UpdateMidiControler(){
                         SendMidiOut(midiout, MidiArrayG);
                         char MidiArrayB[3] = {AddrMidiButtonLed+3, MidiCC, 0x00};
                         SendMidiOut(midiout, MidiArrayB);
+
+                        ModePlayer = 0;
+
+                        char MidiArrayM[3] = {AddrMidiButtonLed, 0x4B, 0x7F};
+                        SendMidiOut(midiout, MidiArrayM);
+                        char MidiArrayMR[3] = {AddrMidiButtonLed+1, 0x4B, 0x7F};
+                        SendMidiOut(midiout, MidiArrayMR);
+                        char MidiArrayMG[3] = {AddrMidiButtonLed+2, 0x4B, 0x0A};
+                        SendMidiOut(midiout, MidiArrayMG);
+                        char MidiArrayMB[3] = {AddrMidiButtonLed+3, 0x4B, 0x49};
+                        SendMidiOut(midiout, MidiArrayMB);
                     }
                     usleep( 250000 ); /* Sleep 100000 micro seconds = 100 ms, etc. */
                 }

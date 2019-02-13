@@ -29,6 +29,8 @@ Types of changes
 
 Filtre Chrome on console : ^((?!RTA|2::|ALIVE|3:::SNAP|3:::CUE).)*$
 
+^((?!RTA|2::|ALIVE).)*$
+
 https://sites.google.com/site/patrickmaillot/x32
 
 20*log(2^(( x-128)/10))
@@ -59,6 +61,19 @@ Where "bt1" can change as you change the buttons
 					Client --> 3:::MEDIA_GET_PLISTS									// donne la liste des fichiers sur USB
 					Client --> 3:::MEDIA_GET_PLIST_TRACKS^~all~						// Donne la liste des fichiers la le repetoire concerné ici all
 					Client --> 3:::MEDIA_GET_PLIST_TRACKS^Playback					// Donne la liste des fichiers la le repetoire concerné ici Playback
+                    Client --> 3:::MEDIA_SWITCH_TRACK^~all~^/WhiteNoise.flac    //Switch de fichier
+                    Client --> 3:::MEDIA_SWITCH_TRACK^~all~^/Strauss  Ainsi parlait Zarathustra - part1.flac
+
+                    Client --> 3:::MEDIA_STOP
+                    Client --> 3:::MEDIA_PLAY
+                    Client --> 3:::MEDIA_PAUSE
+                    Client --> 3:::MEDIA_NEXT
+                    Client --> 3:::MEDIA_PREV
+                    Client --> 3:::RECTOGGLE
+
+                    SETS^var.currentTrack^Cash_ Johnny - Hurt.flac
+                    SETD^var.currentState^2     //Media player play
+                    SETD^var.currentState^0     //Media player stop
 
 					Client --> 3:::MEDIA_SWITCH_TRACK^~all~^/BrownianNoise.flac		// Switch to track BrownianNoise.flac
 					Client --> 3:::MEDIA_PLAY										// Play media

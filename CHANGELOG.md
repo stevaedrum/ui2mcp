@@ -1,3 +1,25 @@
+13 February 2019
+   released version 1.9.1206 of ui2mcp
+
+     Change log:
+        -Added: Manage Pan Master with encoder
+        -Added: Read directory for the player
+        -Updated: State for recording
+        -Updated: Read filer for player
+        -Added: Vu Meter for ModeMaster
+        -Added: Add version on LCD at boot
+        -Added: Cues function
+        -Added: Pan selection for Select mode
+        -Updated: Shift button management
+
+13 January 2019
+   released version 1.6.969 of ui2mcp
+
+     Change log:
+        -Fixed: Shows, Snaps explorer improve
+        -Added: Improvement for DIM function
+        -Added: Button Solo Clear & Mute Clear light add
+
 08 January 2019
    released version 1.6.951 of ui2mcp
 
