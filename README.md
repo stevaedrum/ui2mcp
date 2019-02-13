@@ -17,24 +17,27 @@ The user can configure the rules to transform.
 * Connect to console using IP or address.
 * Connect to MIDI devices.
 * Read all UI parameters and create UI variables struture.
-   UI ----- i ------- mix
-     |        |-------- stereoindex
-     |        |-------- mute
-     |        |-------- solo
-     |        |-------- pan
-    ~
-     |------- a ------ mix
-     |        |-------- stereoindex
-     |        |-------- mute
-     |        |-------- solo
-     |        |-------- pan
-    ~
+UI ----- i ------- mix
+|        |-------- stereoindex
+|        |-------- mute
+|        |-------- solo
+|        |-------- pan
+~
+|------- a ------ mix
+|        |-------- stereoindex
+|        |-------- mute
+|        |-------- solo
+|        |-------- pan
+~
 * Allow mapping incoming MIDI commands to native commands for the console.
 * Allow listening to the console parameters and map them to outgoing MIDI commands.
-* Allow configuration sets - settings for each device
+* Allow configuration sets - settings for each device.
+* Control Media Player with LCD and rotary encoder.
+* Control Show, SnapsShot and Cues with LCD and rotary encoder.
 
 ## Future goals
 * Develop XML config format will creating setting for various common devices.
+* Preconfigured view like view mode in UI.
 
 ## Technical details
 * nanoKONTROL 2 (Korg) - [Tested device](https://www.korg.com/us/products/computergear/nanokontrol2/)
