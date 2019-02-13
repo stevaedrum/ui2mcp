@@ -183,6 +183,15 @@ struct config get_config(char *filename)
 							} else if (strstr(line, "PanSelect")){
 									memcpy(ControlerConfig.AddrPanSelect,cfline,strlen(cfline)-1);
 									//printf("%s",ControlerConfig.getcmd);
+							} else if (strstr(line, "MediaSelect")){
+									memcpy(ControlerConfig.AddrMediaSelect,cfline,strlen(cfline)-1);
+									//printf("%s",ControlerConfig.getcmd);
+							} else if (strstr(line, "SessionSelect")){
+									memcpy(ControlerConfig.AddrSessionSelect,cfline,strlen(cfline)-1);
+									//printf("%s",ControlerConfig.getcmd);
+							} else if (strstr(line, "TransportModeSelect")){
+									memcpy(ControlerConfig.AddrTransportModeSelect,cfline,strlen(cfline)-1);
+									//printf("%s",ControlerConfig.getcmd);
 							}
                         i++;
 						}

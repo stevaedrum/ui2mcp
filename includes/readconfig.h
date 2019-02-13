@@ -58,6 +58,9 @@ struct config
    char AddrSnapShotsSelect[SIZE];
    char AddrCuesSelect[SIZE];
    char AddrPanSelect[SIZE];
+   char AddrMediaSelect[SIZE];
+   char AddrSessionSelect[SIZE];
+   char AddrTransportModeSelect[SIZE];
 };
 
 /**
