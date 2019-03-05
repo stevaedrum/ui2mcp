@@ -48,6 +48,15 @@ Where "bt1" can change as you change the buttons
 					Client --> 3:::MTK_GET_SESSIONS   								// Récuperation de la liste des sessions de record
 					UI <-- 3:::MTK_GET_SESSIONS^0001^0002^0003^0004^0005^0006^0007^0008^0009^0010^0011^0012^0013^0014^0015^0016^0017^0018^0019^0020^0021^0022^0023^0024^0025^0026^0027^0028^0029^0030^0031^0032^0033^0034^0035^0036^0037^0038^0039^0040^0041^0042^0043^0044^0045^0046^0047^0048^0049^0050^0051^0052^0053^0054^0055^0056^0057^0058^0059^0062^0063^0064^0065^0066^0067^0068^0069^0070^0071^0072^0073^0074^0075^0076^0077^0078^0079^0080^0081^0082^0083^0084^0085^0086^0087^0088^0089^0090^0091^0092^0093^0094^0095^0096^0097^0098^0099^0100^0101^0102^0103^0104^0105^0106^0107^0108^Audition pierre0^Audition pierre1
 
+
+					Information envoyé pendant REc via MTK
+					UI <-- 3:::SETD^var.mtk.bufferfill^0.002197265625
+                    UI <-- 3:::SETD^var.mtk.rec.time^13
+
+					Fin de session REc via MTK
+					UI <-- 3:::SETD^var.mtk.rec.busy^0
+					UI <-- 3:::SETD^var.mtk.rec.time^0
+
 					Client --> 3:::MTK_GET_FILES									// Récupération de la liste des fichiers de la session
 					UI <-- 3:::MTK_GET_FILES^01 GUITARE.flac^11 BD.flac^12 SNARE.flac^13 OH.flac^14 OH.flac^15 TOM 8.flac^16 TOM 10.flac^17 TOM 12.flac^18 TOM 14.flac^19 TOM 16.flac^20 HI HAT.flac^LineL Track.flac^LineR Track.flac
 
@@ -71,6 +80,18 @@ Where "bt1" can change as you change the buttons
                     Client --> 3:::MEDIA_PREV
                     Client --> 3:::RECTOGGLE
 
+
+                    Boutton play
+                    SETD^var.mtk.currentState^2
+
+                    Boutton stop
+                    SETD^var.mtk.currentState^0
+
+                    Boutton pause
+                    SETD^var.mtk.currentState^1
+                    SETD^var.mtk.currentTrackPos^0.0769922648
+
+
                     SETS^var.currentTrack^Cash_ Johnny - Hurt.flac
                     SETD^var.currentState^2     //Media player play
                     SETD^var.currentState^0     //Media player stop
@@ -81,6 +102,11 @@ Where "bt1" can change as you change the buttons
 					Client --> 3:::MEDIA_NEXT										// Media next
 					Client --> 3:::MEDIA_PREV										// Media previous
 					Client --> 3:::RECTOGGLE										// Record Master mode
+
+                    During record media
+                    SETD^var.usbfill^0.0001831054688
+                    SETD^var.recBusy^1
+
 
 					Statut du player
 

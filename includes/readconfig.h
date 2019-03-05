@@ -1,7 +1,7 @@
 #ifndef READCONFIG_H_INCLUDED
 #define READCONFIG_H_INCLUDED
 
-#define SIZE 32
+#define SIZE 128
 #define SIZECHAR 1024
 
 struct config
@@ -17,7 +17,7 @@ struct config
    char AddrMidiEncoder[SIZE];
    char AddrMidiEncoderPan[SIZE];
    char AddrMidiEncoderSession[SIZE];
-   char TypePan[SIZE];
+   char TypePan[SIZECHAR];
    char AddrMidiButtonLed[SIZE];
    char AddrMidiRec[SIZE];
    char NbRecButton[SIZE];

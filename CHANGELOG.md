@@ -1,3 +1,13 @@
+05 March 2019
+   released version 2.0.1389 of ui2mcp
+
+     Change log:
+        -Added: Add support of Media next and prev
+        -Added: MTK Session List  on LCD
+        -Updated: LCD function for explorer
+        -Fixed: Some bug on LCD explorer and SanpShot Cue function
+        -Updated: Modification for management of Transport (MTK&Media)
+
 13 February 2019
    released version 1.9.1206 of ui2mcp
 

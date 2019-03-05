@@ -46,6 +46,8 @@ Improve fader control in stereo case & in general  --> DONE
 
 Vu meter on Master for MasterMode =1 --> DONE
 
+MTK Recording not detected when software start --> DONE
+
 #################################################################
     IN PROGESS
 #################################################################
