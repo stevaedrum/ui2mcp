@@ -180,9 +180,6 @@ struct config get_config(char *filename)
 							} else if (strstr(line, "CuesSelect")){
 									memcpy(ControlerConfig.AddrCuesSelect,cfline,strlen(cfline)-1);
 									//printf("%s",ControlerConfig.getcmd);
-							} else if (strstr(line, "PanSelect")){
-									memcpy(ControlerConfig.AddrPanSelect,cfline,strlen(cfline)-1);
-									//printf("%s",ControlerConfig.getcmd);
 							} else if (strstr(line, "MediaSelect")){
 									memcpy(ControlerConfig.AddrMediaSelect,cfline,strlen(cfline)-1);
 									//printf("%s",ControlerConfig.getcmd);
@@ -191,6 +188,21 @@ struct config get_config(char *filename)
 									//printf("%s",ControlerConfig.getcmd);
 							} else if (strstr(line, "TransportModeSelect")){
 									memcpy(ControlerConfig.AddrTransportModeSelect,cfline,strlen(cfline)-1);
+									//printf("%s",ControlerConfig.getcmd);
+							} else if (strstr(line, "AllSelect")){
+									memcpy(ControlerConfig.AddrMixSelect,cfline,strlen(cfline)-1);
+									//printf("%s",ControlerConfig.getcmd);
+							} else if (strstr(line, "PanSelect")){
+									memcpy(ControlerConfig.AddrPanSelect,cfline,strlen(cfline)-1);
+									//printf("%s",ControlerConfig.getcmd);
+							} else if (strstr(line, "BusSelect")){
+									memcpy(ControlerConfig.AddrAuxSelect,cfline,strlen(cfline)-1);
+									//printf("%s",ControlerConfig.getcmd);
+							} else if (strstr(line, "FxSelect")){
+									memcpy(ControlerConfig.AddrFxSelect,cfline,strlen(cfline)-1);
+									//printf("%s",ControlerConfig.getcmd);
+							} else if (strstr(line, "InputsSelect")){
+									memcpy(ControlerConfig.AddrGainSelect,cfline,strlen(cfline)-1);
 									//printf("%s",ControlerConfig.getcmd);
 							}
                         i++;

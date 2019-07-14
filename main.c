@@ -42,6 +42,7 @@
 #define DELIM "="
 
 int debug = 0;
+int autoshutdown = 0;
 
 unsigned short stop = 0;                                                        // Flag of program stop, default value is 0.
 FILE *hfErr;                                                                            // Declaration for log file.
@@ -443,7 +444,8 @@ int main(int argc, char *argv[]) {
             printf ("Usage: ui2mcp options\n\n");
             printf ("-h, --help                             this help\n");
             printf ("-v, --version                         print current version\n");
-            printf ("-d, --debug  [level]             debug information in the ui2mcp.log filen\n");
+            printf ("-s, --shutdown                    shutdown hardware after shutdown softwaren\n");
+            printf ("-d, --debug  [level]             debug information in the ui2mcp.log file\n");
             printf ("                                           - 1  Action information\n");
             printf ("                                           - 2  Translated information\n");
             printf ("                                           - 3  Transmit message information\n");
@@ -453,6 +455,9 @@ int main(int argc, char *argv[]) {
         }else if (strcmp(argv[x],"-v") == 0 || strcmp(argv[x],"--version") == 0){
             printf ("Version %s\n", FULLVERSION_STRING);
             exit(0);
+        }else if (strcmp(argv[x],"-s") == 0 || strcmp(argv[x],"--shutdown") == 0){
+            printf ("Shutdown actived\n");
+            autoshutdown++;
         }else if(strcmp(argv[x],"-d") == 0 || strcmp(argv[x],"--debug") == 0){
             printf ("Debug actived\n");
             debug++;
@@ -536,17 +541,20 @@ int main(int argc, char *argv[]) {
 	/*  UI device variable for number per type of channel  */
     // TODO (pi#1#12/28/18): Improve automaticly with UI model
 	int UIChannel = 24;
-	int UIMedia = 2;
-	int UISubGroup = 6;
-	int UIFx = 4;
-	int UIAux = 10;
-	int UIMaster = 2;
 	int UILineIn = 2;
+	int UIMedia = 2;
+	int UIFx = 4;
+	int UISubGroup = 6;
+	int UIAux = 10;
 	int UIVca = 6;
+	int UIMaster = 2;
 	int UIAllStrip = 56;
 
 	/* structure variable for UI  */
 	struct Ui ui[UIAllStrip];
+
+	// Test ui[0].Aux[0].Mute = 1;
+	// Test ui[0].Fx[3].MixMidi = 0.341;
 
     /*  Configuration of default color for UI channel  */
     int Numb = 0;
@@ -611,7 +619,8 @@ int main(int argc, char *argv[]) {
 	char UImsg[64] = "";
 	char UIio[64] = "";
 	char UIfunc[64] = "";
-	char UIsfunc[64] = "";
+	char UI1func[64] = "";
+	char UI2func[64] = "";
 	char UIval[64] = "";
 	char UIchan[24] = "";
 
@@ -693,7 +702,11 @@ int main(int argc, char *argv[]) {
 	// Parameter of MIDI device
 	int NbMidiFader = atoi(ControlerConfig.NbMidiFader);
 	int NbMidiTrack = UIAllStrip/NbMidiFader;             // Number by modulo of number of Midi channel
-	int PanPressed = 0;                                                    // Variable activate Pan mode with Select mode
+	int MixPressed = 1;                                                    // Variable activate All mode
+	int PanPressed = 0;                                                    // Variable activate Pan mode
+	int AuxPressed = 0;                                                   // Variable activate Aux mode
+	int FxPressed = 0;                                                      // Variable activate Fx mode
+	int InputsPressed = 0;                                                // Variable activate Inputs mode
 	int ShiftLeftPressed = 0;
 	int ShiftRightPressed = 0;
 	int SelectButtonPressed = -1;
@@ -824,14 +837,23 @@ int main(int argc, char *argv[]) {
     sscanf(ControlerConfig.AddrSnapShotsSelect, "%x", &AddrSnapShotsSelect);
     int AddrCuesSelect = 0;
     sscanf(ControlerConfig.AddrCuesSelect, "%x", &AddrCuesSelect);
-    int AddrPanSelect = 0;
-    sscanf(ControlerConfig.AddrPanSelect, "%x", &AddrPanSelect);
     int AddrMediaSelect = 0;
     sscanf(ControlerConfig.AddrMediaSelect, "%x", &AddrMediaSelect);
     int AddrSessionSelect = 0;
     sscanf(ControlerConfig.AddrSessionSelect, "%x", &AddrSessionSelect);
     int AddrTransportModeSelect = 0;
     sscanf(ControlerConfig.AddrTransportModeSelect, "%x", &AddrTransportModeSelect);
+
+    int AddrPanSelect = 0;
+    sscanf(ControlerConfig.AddrPanSelect, "%x", &AddrPanSelect);
+    int AddrMixSelect = 0;
+    sscanf(ControlerConfig.AddrMixSelect, "%x", &AddrMixSelect);
+    int AddrAuxSelect = 0;
+    sscanf(ControlerConfig.AddrAuxSelect, "%x", &AddrAuxSelect);
+    int AddrFxSelect = 0;
+    sscanf(ControlerConfig.AddrFxSelect, "%x", &AddrFxSelect);
+    int AddrGainSelect = 0;
+    sscanf(ControlerConfig.AddrGainSelect, "%x", &AddrGainSelect);
 
     /*  Configure LCD in text mode.  */
     void ConfigLCDTxtMode(){
@@ -1347,6 +1369,43 @@ void UpdateMidiControler(){
     i_VuMeter_init = currentTimeMillis();
 
     i_UpdateListTimer = 0;
+
+    /*  Intilialization of track mode  */
+    /*  MIX  */
+    char MidiArrayR1[3] = {AddrMidiButtonLed+1, AddrMixSelect, 0x7F};
+    SendMidiOut(midiout, MidiArrayR1);
+    char MidiArrayG1[3] = {AddrMidiButtonLed+2, AddrMixSelect, 0x7F};
+    SendMidiOut(midiout, MidiArrayG1);
+    char MidiArrayB1[3] = {AddrMidiButtonLed+3, AddrMixSelect, 0x7F};
+    SendMidiOut(midiout, MidiArrayB1);
+
+    /*  FX  */
+    char MidiArrayR2[3] = {AddrMidiButtonLed+1, AddrFxSelect, 0x00};
+    SendMidiOut(midiout, MidiArrayR2);
+    char MidiArrayG2[3] = {AddrMidiButtonLed+2, AddrFxSelect, 0x00};
+    SendMidiOut(midiout, MidiArrayG2);
+    char MidiArrayB2[3] = {AddrMidiButtonLed+3, AddrFxSelect, 0x7F};
+    SendMidiOut(midiout, MidiArrayB2);
+
+    /*  GAIN  */
+    char MidiArrayR3[3] = {AddrMidiButtonLed+1, AddrGainSelect, 0x7F};
+    SendMidiOut(midiout, MidiArrayR3);
+    char MidiArrayG3[3] = {AddrMidiButtonLed+2, AddrGainSelect, 0x00};
+    SendMidiOut(midiout, MidiArrayG3);
+    char MidiArrayB3[3] = {AddrMidiButtonLed+3, AddrGainSelect, 0x00};
+    SendMidiOut(midiout, MidiArrayB3);
+
+    /*  Aux  */
+    char MidiArrayR4[3] = {AddrMidiButtonLed+1, AddrAuxSelect, 0x7F};
+    SendMidiOut(midiout, MidiArrayR4);
+    char MidiArrayG4[3] = {AddrMidiButtonLed+2, AddrAuxSelect, 0x7F};
+    SendMidiOut(midiout, MidiArrayG4);
+    char MidiArrayB4[3] = {AddrMidiButtonLed+3, AddrAuxSelect, 0x00};
+    SendMidiOut(midiout, MidiArrayB4);
+
+    /*  Default is Mix mode on startup  */
+    char MidiArray1[3] = {AddrMidiButtonLed, AddrMixSelect, 0x7F};
+    SendMidiOut(midiout, MidiArray1);
 
     /*  -------------------------------------------------------------------------------------------------------------------------  */
     /*  Principal function to receive, put in memories and translate to interface  */
@@ -1956,7 +2015,8 @@ void UpdateMidiControler(){
 
                         memset(UIchan,0,strlen(UIchan));
                         memset(UIfunc,0,strlen(UIfunc));
-                        memset(UIsfunc,0,strlen(UIsfunc));
+                        memset(UI1func,0,strlen(UI1func));
+                        memset(UI2func,0,strlen(UI2func));
                         memset(UIval,0,strlen(UIval));
 
                         SplitArrayComa=split(UIMessage,"^",1);
@@ -1967,7 +2027,8 @@ void UpdateMidiControler(){
                                     if (ArraySplitDot == 0){ sprintf(UIio,"%s",SplitArrayDot[ArraySplitDot]); }
                                     if (ArraySplitDot == 1){ sprintf(UIchan,"%s",SplitArrayDot[ArraySplitDot]);}
                                     if (ArraySplitDot == 2){ sprintf(UIfunc,"%s",SplitArrayDot[ArraySplitDot]);}
-                                    if (ArraySplitDot == 3){ sprintf(UIsfunc,"%s",SplitArrayDot[ArraySplitDot]);}
+                                    if (ArraySplitDot == 3){ sprintf(UI1func,"%s",SplitArrayDot[ArraySplitDot]);}
+                                    if (ArraySplitDot == 4){ sprintf(UI2func,"%s",SplitArrayDot[ArraySplitDot]);}
                                     free(SplitArrayDot[ArraySplitDot]);
                                 }
                             }else if(AdrSplitComa!=1){
@@ -2264,7 +2325,7 @@ void UpdateMidiControler(){
 //                                }
                             }
 
-                            if( strcmp(UIchan,"mtk") == 0 && strcmp(UIfunc,"rec") == 0 && strcmp(UIsfunc,"busy") == 0 ){
+                            if( strcmp(UIchan,"mtk") == 0 && strcmp(UIfunc,"rec") == 0 && strcmp(UI1func,"busy") == 0 ){
 
                                 MtkRecCurrentState = atoi(UIval);
 
@@ -2412,12 +2473,12 @@ void UpdateMidiControler(){
                                 }
                             }
 
-                            sprintf(sa_LogMessage, "UI2MCP <-> Variable = %s %s %s %s\n", UIchan, UIfunc, UIsfunc, UIval);
+                            sprintf(sa_LogMessage, "UI2MCP <-> Variable = %s %s %s %s\n", UIchan, UIfunc, UI1func, UIval);
                             LogTrace(hfErr, 2, debug, sa_LogMessage);
 
                         }
                         else if( strcmp(UIio,"settings") == 0 ){
-                            sprintf(sa_LogMessage, "UI2MCP <-> Setting = %s %s %s %s\n", UIchan, UIfunc, UIsfunc, UIval);
+                            sprintf(sa_LogMessage, "UI2MCP <-> Setting = %s %s %s %s\n", UIchan, UIfunc, UI1func, UIval);
                             LogTrace(hfErr, 2, debug, sa_LogMessage);
 
                             if( strcmp(UIchan,"multiplesolo") == 0 ){
@@ -3256,7 +3317,7 @@ void UpdateMidiControler(){
                             sprintf(sa_LogMessage, "UI2MCP <-> MEM : ADD %i NB %i Ste %i, Fader %i: %f %i\n", AddrMidiTrack, NbMidiFader, ui[Canal].StereoIndex, Canal, ui[Canal].MixMidi, MidiValue);
                             LogTrace(hfErr, 2, debug, sa_LogMessage);
 
-                            if(Canal >= NbMidiFader*AddrMidiTrack && Canal <= (NbMidiFader*AddrMidiTrack)+NbMidiFader-1){
+                            if(Canal >= NbMidiFader*AddrMidiTrack && Canal <= (NbMidiFader*AddrMidiTrack)+NbMidiFader-1 && MixPressed == 1 ){
                                 if( ui[Canal].StereoIndex == -1 || strcmp(ui[Canal].Type,"v") == 0 ){
 //                                if( ui[Canal].StereoIndex == -1 || ( strcmp(ui[Canal].Type,"v") == 0 && ui[Canal].StereoIndex == 0 )){ // Possible bug on UI --> stereoindex for VCA = 0 !!!
                                     char MidiArray[3] = {AddrMidiMix+Canal-(NbMidiFader*AddrMidiTrack) , MidiValue, MidiValue};
@@ -3269,6 +3330,60 @@ void UpdateMidiControler(){
                                     SendMidiOut(midiout, MidiArrayR);
                                 }
                             }
+                        }
+                        else if( (strcmp(UIio,"i") == 0 || strcmp(UIio,"l") == 0 || strcmp(UIio,"p") == 0 || strcmp(UIio,"f") == 0 )
+                                        && strcmp(UIfunc,"aux") == 0 ){
+
+                            Canal = atoi(UIchan);
+                            if( strcmp(UIio,"i") == 0){ /*  Nothing  */}
+                            if( strcmp(UIio,"l") == 0){ Canal = Canal+UIChannel;}
+                            if( strcmp(UIio,"p") == 0){ Canal = Canal+UIChannel+UILineIn;}
+                            if( strcmp(UIio,"f") == 0){ Canal = Canal+UIChannel+UILineIn+UIMedia;}
+//                            if( strcmp(UIio,"s") == 0){ Canal = Canal+UIChannel+UILineIn+UIMedia+UIFx;}
+//                            if( strcmp(UIio,"a") == 0){ Canal = Canal+UIChannel+UILineIn+UIMedia+UIFx+UISubGroup;}
+//                            if( strcmp(UIio,"v") == 0){ Canal = Canal+UIChannel+UILineIn+UIMedia+UIFx+UISubGroup+UIAux;}
+
+                            int AuxCanal = atoi(UI1func);
+                            if ( strcmp(UI2func,"value") == 0 ){
+                                ui[Canal].Aux[AuxCanal].MixMidi = atof(UIval);
+                                printf("Aux Value %i %i %f\n", Canal, AuxCanal, ui[Canal].Aux[AuxCanal].MixMidi);
+                            }
+                            else if ( strcmp(UI2func,"pan") == 0 ){
+                                ui[Canal].Aux[AuxCanal].PanMidi = atof(UIval);
+                                printf("Aux Pan %i %i %f\n", Canal, AuxCanal, ui[Canal].Aux[AuxCanal].PanMidi);
+                            }
+                            else if ( strcmp(UI2func,"mute") == 0 ){
+                                ui[Canal].Aux[AuxCanal].Mute = atoi(UIval);
+                                printf("Aux Mute %i %i %i\n", Canal, AuxCanal, ui[Canal].Aux[AuxCanal].Mute);
+                            }
+
+// *************************************************************************************************************************
+// Code in Progress for Aux fader
+// *************************************************************************************************************************
+
+//                            int MidiValue = 0;
+//                            //float unit = 0.0078740157480315;
+//                            //MidiValue = (127 * MixMidi[Canal]);
+//                            MidiValue = (127 * ui[Canal].MixMidi);
+//
+//                            sprintf(sa_LogMessage, "UI2MCP <-> MEM : Fader %i: %f %i\n", Canal, ui[Canal].MixMidi, MidiValue);
+//                            LogTrace(hfErr, 2, debug, sa_LogMessage);
+//
+//                            sprintf(sa_LogMessage, "UI2MCP <-> MEM : ADD %i NB %i Ste %i, Fader %i: %f %i\n", AddrMidiTrack, NbMidiFader, ui[Canal].StereoIndex, Canal, ui[Canal].MixMidi, MidiValue);
+//                            LogTrace(hfErr, 2, debug, sa_LogMessage);
+//
+//                            if(Canal >= NbMidiFader*AddrMidiTrack && Canal <= (NbMidiFader*AddrMidiTrack)+NbMidiFader-1){
+//                                if( ui[Canal].StereoIndex == -1 || strcmp(ui[Canal].Type,"v") == 0 ){
+//                                    char MidiArray[3] = {AddrMidiMix+Canal-(NbMidiFader*AddrMidiTrack) , MidiValue, MidiValue};
+//                                    SendMidiOut(midiout, MidiArray);
+//                                }
+//                                else if( ui[Canal].StereoIndex == 0 && ui[Canal+1].StereoIndex == 1 ){
+//                                    char MidiArrayL[3] = {AddrMidiMix+Canal-(NbMidiFader*AddrMidiTrack) , MidiValue, MidiValue};
+//                                    SendMidiOut(midiout, MidiArrayL);
+//                                    char MidiArrayR[3] = {AddrMidiMix+Canal-(NbMidiFader*AddrMidiTrack)+1 , MidiValue, MidiValue};
+//                                    SendMidiOut(midiout, MidiArrayR);
+//                                }
+//                            }
                         }
                     free(UIMessage);
                     }
@@ -5131,6 +5246,130 @@ void UpdateMidiControler(){
                     }
                     usleep( 250000 ); /* Sleep 100000 micro seconds = 100 ms, etc. */
                 }
+                else if (MidiCC == AddrMixSelect){                                                                                                                     /*  TRANSPORT STOP button for Track view with Led  */
+
+                    if( MidiValue == 0x7F && MixPressed == 0 ){
+                        MixPressed = 1;
+
+                        sprintf(sa_LogMessage,"UI2MCP <-- MIDI : Mix Mode Actived\n");
+                        LogTrace(hfErr, 1, debug, sa_LogMessage);
+
+                        char MidiArray[3] = {AddrMidiButtonLed, MidiCC, 0x7F};
+                        SendMidiOut(midiout, MidiArray);
+                        char MidiArrayR[3] = {AddrMidiButtonLed+1, MidiCC, 0x7F};
+                        SendMidiOut(midiout, MidiArrayR);
+                        char MidiArrayG[3] = {AddrMidiButtonLed+2, MidiCC, 0x7F};
+                        SendMidiOut(midiout, MidiArrayG);
+                        char MidiArrayB[3] = {AddrMidiButtonLed+3, MidiCC, 0x7F};
+                        SendMidiOut(midiout, MidiArrayB);
+
+                        FxPressed = 0;
+                        char MidiArrayFx[3] = {AddrMidiButtonLed, AddrFxSelect, 0x00};
+                        SendMidiOut(midiout, MidiArrayFx);
+
+                        AuxPressed = 0;
+                        char MidiArrayAux[3] = {AddrMidiButtonLed, AddrAuxSelect, 0x00};
+                        SendMidiOut(midiout, MidiArrayAux);
+
+                        InputsPressed = 0;
+                        char MidiArrayGain[3] = {AddrMidiButtonLed, AddrGainSelect, 0x00};
+                        SendMidiOut(midiout, MidiArrayGain);
+                    }
+                    usleep( 250000 ); /* Sleep 100000 micro seconds = 100 ms, etc. */
+                }
+                else if (MidiCC == AddrFxSelect){                                                                                                                     /*  TRANSPORT STOP button for Track view with Led  */
+
+                    if( MidiValue == 0x7F && FxPressed == 0 ){
+                        FxPressed = 1;
+
+                        sprintf(sa_LogMessage,"UI2MCP <-- MIDI : Fx Mode Actived\n");
+                        LogTrace(hfErr, 1, debug, sa_LogMessage);
+
+                        char MidiArray[3] = {AddrMidiButtonLed, MidiCC, 0x7F};
+                        SendMidiOut(midiout, MidiArray);
+                        char MidiArrayR[3] = {AddrMidiButtonLed+1, MidiCC, 0x00};
+                        SendMidiOut(midiout, MidiArrayR);
+                        char MidiArrayG[3] = {AddrMidiButtonLed+2, MidiCC, 0x00};
+                        SendMidiOut(midiout, MidiArrayG);
+                        char MidiArrayB[3] = {AddrMidiButtonLed+3, MidiCC, 0x7F};
+                        SendMidiOut(midiout, MidiArrayB);
+
+                        MixPressed = 0;
+                        char MidiArrayMix[3] = {AddrMidiButtonLed, AddrMixSelect, 0x00};
+                        SendMidiOut(midiout, MidiArrayMix);
+
+                        AuxPressed = 0;
+                        char MidiArrayAux[3] = {AddrMidiButtonLed, AddrAuxSelect, 0x00};
+                        SendMidiOut(midiout, MidiArrayAux);
+
+                        InputsPressed = 0;
+                        char MidiArrayGain[3] = {AddrMidiButtonLed, AddrGainSelect, 0x00};
+                        SendMidiOut(midiout, MidiArrayGain);
+                    }
+                    usleep( 250000 ); /* Sleep 100000 micro seconds = 100 ms, etc. */
+                }
+                else if (MidiCC == AddrGainSelect){                                                                                                                     /*  TRANSPORT STOP button for Track view with Led  */
+
+                    if( MidiValue == 0x7F && InputsPressed == 0 ){
+                        InputsPressed = 1;
+
+                        sprintf(sa_LogMessage,"UI2MCP <-- MIDI : Inputs Mode Actived\n");
+                        LogTrace(hfErr, 1, debug, sa_LogMessage);
+
+                        char MidiArray[3] = {AddrMidiButtonLed, MidiCC, 0x7F};
+                        SendMidiOut(midiout, MidiArray);
+                        char MidiArrayR[3] = {AddrMidiButtonLed+1, MidiCC, 0x7F};
+                        SendMidiOut(midiout, MidiArrayR);
+                        char MidiArrayG[3] = {AddrMidiButtonLed+2, MidiCC, 0x00};
+                        SendMidiOut(midiout, MidiArrayG);
+                        char MidiArrayB[3] = {AddrMidiButtonLed+3, MidiCC, 0x00};
+                        SendMidiOut(midiout, MidiArrayB);
+
+                        MixPressed = 0;
+                        char MidiArrayMix[3] = {AddrMidiButtonLed, AddrMixSelect, 0x00};
+                        SendMidiOut(midiout, MidiArrayMix);
+
+                        FxPressed = 0;
+                        char MidiArrayFx[3] = {AddrMidiButtonLed, AddrFxSelect, 0x00};
+                        SendMidiOut(midiout, MidiArrayFx);
+
+                        AuxPressed = 0;
+                        char MidiArrayAux[3] = {AddrMidiButtonLed, AddrAuxSelect, 0x00};
+                        SendMidiOut(midiout, MidiArrayAux);
+                    }
+                    usleep( 250000 ); /* Sleep 100000 micro seconds = 100 ms, etc. */
+                }
+                else if (MidiCC == AddrAuxSelect){                                                                                                                     /*  TRANSPORT STOP button for Track view with Led  */
+
+                    if( MidiValue == 0x7F && AuxPressed == 0 ){
+                        AuxPressed = 1;
+
+                        sprintf(sa_LogMessage,"UI2MCP <-- MIDI : Aux Mode Actived\n");
+                        LogTrace(hfErr, 1, debug, sa_LogMessage);
+
+                        char MidiArray[3] = {AddrMidiButtonLed, MidiCC, 0x7F};
+                        SendMidiOut(midiout, MidiArray);
+                        char MidiArrayR[3] = {AddrMidiButtonLed+1, MidiCC, 0x7F};
+                        SendMidiOut(midiout, MidiArrayR);
+                        char MidiArrayG[3] = {AddrMidiButtonLed+2, MidiCC, 0x7F};
+                        SendMidiOut(midiout, MidiArrayG);
+                        char MidiArrayB[3] = {AddrMidiButtonLed+3, MidiCC, 0x00};
+                        SendMidiOut(midiout, MidiArrayB);
+
+                        MixPressed = 0;
+                        char MidiArrayMix[3] = {AddrMidiButtonLed, AddrMixSelect, 0x00};
+                        SendMidiOut(midiout, MidiArrayMix);
+
+                        FxPressed = 0;
+                        char MidiArrayFx[3] = {AddrMidiButtonLed, AddrFxSelect, 0x00};
+                        SendMidiOut(midiout, MidiArrayFx);
+
+                        InputsPressed = 0;
+                        char MidiArrayGain[3] = {AddrMidiButtonLed, AddrGainSelect, 0x00};
+                        SendMidiOut(midiout, MidiArrayGain);
+                    }
+                    usleep( 250000 ); /* Sleep 100000 micro seconds = 100 ms, etc. */
+                }
                 else if (MidiCC == AddrMidiMaster){                                                                                                                     /*  TRANSPORT STOP button for Track view with Led  */
 
                     if( MidiValue == 0x7F && ModeMasterPressed == 0 ){
@@ -5292,6 +5531,11 @@ void UpdateMidiControler(){
 
      /*  End of the program  */
      LogTrace(hfErr, 0, debug, "UI2MCP <-> End\n");
+
+     if ( autoshutdown == 1 ){
+        system("shutdown -P now");
+     }
+
      return EXIT_SUCCESS;
 
 }
