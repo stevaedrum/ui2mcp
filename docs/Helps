@@ -123,6 +123,8 @@ Where "bt1" can change as you change the buttons
 
 					Client --> 3:::BMSG^SYNC^Stevae^-1								// BSYNC to Master
 
+					Client --> 3:::LOADCUE^Snailz Std (LTJJCS)^Master Off     //Charge le CUE "Master Off" issu du snapshot ""Snailz Std (LTJJCS) ""
+					Client --> 3:::LOADSNAPSHOT^MonShow^MonSnapshot     //Charge le sanapshot "MonSnapShot" issu du show "MonShow"
 
 					Client --> 3:::SHOWLIST				/// montre la liste des shows
 					Client --> 3:::RENAMESNAPSHOT^Studio Stephan^Mix répète piano-voi^Studio Stephan^Mix repete piano-voi

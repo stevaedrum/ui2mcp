@@ -1,7 +1,7 @@
 #ifndef READCONFIG_H_INCLUDED
 #define READCONFIG_H_INCLUDED
 
-#define SIZE 128
+#define SIZE 512
 #define SIZECHAR 1024
 
 struct config
@@ -57,10 +57,15 @@ struct config
    char AddrShowsSelect[SIZE];
    char AddrSnapShotsSelect[SIZE];
    char AddrCuesSelect[SIZE];
-   char AddrPanSelect[SIZE];
    char AddrMediaSelect[SIZE];
    char AddrSessionSelect[SIZE];
    char AddrTransportModeSelect[SIZE];
+   char AddrAllSelect[SIZE];
+   char AddrPanSelect[SIZE];
+   char AddrMixSelect[SIZE];
+   char AddrAuxSelect[SIZE];
+   char AddrFxSelect[SIZE];
+   char AddrGainSelect[SIZE];
 };
 
 /**

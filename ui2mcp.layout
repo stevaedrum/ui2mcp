@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_layout_file>
+	<FileVersion major="1" minor="0" />
+	<ActiveTarget name="Release" />
+	<File name="config.conf" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1682" topLine="49" />
+		</Cursor>
+	</File>
+	<File name="includes/readconfig.h" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="77" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="TODO.md" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2918" topLine="40" />
+		</Cursor>
+	</File>
+	<File name="CHANGELOG.md" open="1" top="1" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="278" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="docs/Helps" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="5837" topLine="111" />
+		</Cursor>
+	</File>
+	<File name="includes/ui.h" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="109" topLine="2" />
+		</Cursor>
+	</File>
+	<File name="main.c" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="266987" topLine="3666" />
+		</Cursor>
+		<Folding>
+			<Collapse line="63" />
+			<Collapse line="64" />
+			<Collapse line="73" />
+			<Collapse line="82" />
+			<Collapse line="83" />
+			<Collapse line="84" />
+			<Collapse line="88" />
+			<Collapse line="89" />
+			<Collapse line="97" />
+			<Collapse line="106" />
+			<Collapse line="114" />
+			<Collapse line="129" />
+			<Collapse line="133" />
+			<Collapse line="150" />
+			<Collapse line="158" />
+			<Collapse line="930" />
+			<Collapse line="974" />
+			<Collapse line="1417" />
+			<Collapse line="1446" />
+			<Collapse line="1578" />
+			<Collapse line="1582" />
+			<Collapse line="1586" />
+			<Collapse line="4217" />
+			<Collapse line="4255" />
+			<Collapse line="4286" />
+			<Collapse line="4307" />
+			<Collapse line="4342" />
+			<Collapse line="4362" />
+			<Collapse line="4378" />
+			<Collapse line="4394" />
+			<Collapse line="4449" />
+			<Collapse line="4504" />
+			<Collapse line="4534" />
+			<Collapse line="4632" />
+			<Collapse line="4695" />
+		</Folding>
+	</File>
+	<File name="readconfig.c" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="10349" topLine="172" />
+		</Cursor>
+	</File>
+</CodeBlocks_layout_file>

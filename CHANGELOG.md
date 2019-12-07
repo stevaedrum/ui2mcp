@@ -1,3 +1,12 @@
+07 December 2019
+   released version 2.0.1431 of ui2mcp
+
+     Change log:
+        -Added: Shutdown Raspberry after shutdown software with option
+        -Added: New Value for Aux, Fx, Gain....
+        -Added: Management mode for view Aux, FX, Gain ...
+        -Added: CUE load 
+
 05 March 2019
    released version 2.0.1389 of ui2mcp
 

@@ -22,6 +22,7 @@
 				<Option object_output="obj/Release/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
+				<Option parameters="-d 3" />
 				<Compiler>
 					<Add option="-Wall" />
 					<Add option="-lasound" />

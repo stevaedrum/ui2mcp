@@ -57,6 +57,22 @@ Bug Light on Mute Clear & VCA & Shift Right !!!  --> Not review !!!!
 
 Implement Pan fader control for master on midi controler --> DONE for one pot
 
+Different view for Aux, Fx, Gain
+AUX:
+	int UIChannel = 24;
+	int UILineIn = 2;
+	int UIMedia = 2;
+	int UIFx = 4;
+Fx:
+	int UIChannel = 24;
+	int UILineIn = 2;
+	int UIMedia = 2;
+	int UISubGroup = 6;
+Gain:
+	int UIChannel = 24;
+	int UILineIn = 2;
+
+
 #################################################################
     IDEAS
 #################################################################
